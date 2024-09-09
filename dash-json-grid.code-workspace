@@ -1,0 +1,43 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.languageServer": "Pylance",
+    "python.analysis.typeCheckingMode": "standard"
+  },
+  "extensions": {
+    "recommendations": [
+      "bierner.github-markdown-preview",
+      "bierner.markdown-checkbox",
+      "bierner.markdown-emoji",
+      "bierner.markdown-footnotes",
+      "bierner.markdown-mermaid",
+      "bierner.markdown-preview-github-styles",
+      "bierner.markdown-yaml-preamble",
+      "codezombiech.gitignore",
+      "dutchigor.json-viewer",
+      "ecmel.vscode-html-css",
+      "magicstack.magicpython",
+      "mhutchie.git-graph",
+      "ms-python.black-formatter",
+      "ms-python.debugpy",
+      "ms-python.flake8",
+      "ms-python.isort",
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "tamasfe.even-better-toml",
+      "yzhang.markdown-all-in-one",
+      "zainchen.json",
+      "mohsen1.prettify-json",
+      "syler.sass-indented",
+      "sibiraj-s.vscode-scss-formatter",
+      "redhat.vscode-yaml"
+    ]
+  }
+}
