@@ -9,3 +9,4 @@ include dash_json_grid/package-info.json
 include README.md
 include LICENSE
 include package.json
+include version/__init__.py

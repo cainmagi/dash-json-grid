@@ -41,8 +41,6 @@
 
 # Marked by dev.
 /alpha*
-/data*
-!/data/*.py
 /logs
 /outputs
 

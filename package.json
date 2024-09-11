@@ -1,8 +1,9 @@
 {
   "name": "dash_json_grid",
-  "version": "0.0.1",
+  "packageManager": "yarn@4.4.1",
+  "version": "0.1.0",
   "description": "Dash porting version of the react project React JSON Grid. Provide structured and nested grid table view of complicated JSON objects/arrays.",
-"repository": {
+  "repository": {
     "type": "git",
     "url": "git://github.com/aschrc-ait-team/dash-json-grid.git"
   },
@@ -24,6 +25,7 @@
   "author": "Yuchen Jin (cainmagi) <cainmagi@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@redheadphone/react-json-grid": "^0.7.0",
     "ramda": "^0.26.1"
   },
   "devDependencies": {
@@ -42,11 +44,11 @@
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-react": "^7.14.2",
     "prop-types": "^15.8.1",
-    "react": "^16.8.6",
-    "react-docgen": "^5.4.3",
-    "react-dom": "^16.8.6",
+    "react": "^17.0.2",
+    "react-docgen": "^5.4.0",
+    "react-dom": "^17.0.2",
     "style-loader": "^3.3.3",
-    "styled-jsx": "^3.2.1",
+    "styled-jsx": "^4.0.1",
     "webpack": "^5.84.1",
     "webpack-cli": "^5.1.1",
     "webpack-dev-server": "^4.15.0"

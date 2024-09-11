@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dash-json-grid"
+authors = [{ name = "Yuchen Jin", email = "cainmagi@gmail.com" }]
+maintainers = [{ name = "Yuchen Jin", email = "cainmagi@gmail.com" }]
+dynamic = [
+  "version",
+  "readme",
+  "description",
+  "classifiers",
+  "dependencies",
+  "optional-dependencies",
+]
+keywords = [
+  "python",
+  "python3",
+  "python-library",
+  "dash",
+  "plotly-dash",
+  "python-dash",
+  "json",
+  "data-visualization",
+]
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+
+[project.urls]
+Homepage = "https://github.com/cainmagi/dash-json-grid"
+Repository = "https://github.com/cainmagi/dash-json-grid"
+Issues = "https://github.com/cainmagi/dash-json-grid/issues"
+Changelog = "https://github.com/cainmagi/dash-json-grid/blob/main/Changelog.md"
+
+[tool.setuptools]
+zip-safe = false
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = { attr = "version.__version__" }
+description = { file = "py-description.txt" }
+readme = { file = ["README.md"], content-type = "text/markdown" }
+classifiers = { file = "classifiers.txt" }
+dependencies = { file = ["requirements.txt"] }
+
+[tool.setuptools.dynamic.optional-dependencies]
+dev = { file = ["requirements-dev.txt"] }
+test = { file = ["tests/requirements.txt"] }
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dash_json_grid"]
+exclude = ["src", "version", "docker", "tests*", "examples*", "docs*"]
+namespaces = false
+
+[tool.black]
+line-length = 88
+include = '\.pyi?$'
+# 'extend-exclude' excludes files or directories in addition to the defaults
+extend-exclude = '''
+# A regex preceded with ^/ will apply only to files and directories
+# in the root of the project.
+(
+  ^/dash_json_grid/_imports_.py
+  |^/dash_json_grid/DashJsonGrid.py
+  |^/_validate_init.py
+)
+'''
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = "tests/"
+addopts = "-rsxX -vv"
+log_format = "%(asctime)s | %(levelname)s | %(name)s:%(lineno)d | %(message)s"
+log_cli_level = "ERROR"

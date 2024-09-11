@@ -1,0 +1,1 @@
+Dash porting version of the react project React JSON Grid. Provide structured and nested grid table view of complicated JSON objects/arrays.

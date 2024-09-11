@@ -1,61 +1,120 @@
+/**
+ * DashJsonGrid (Implementation)
+ *
+ * The implementation of the real component.
+ *
+ * Author: Yuchen Jin (cainmagi)
+ * GitHub: https://github.com/cainmagi/dash-json-grid
+ * License: MIT
+ *
+ * Thanks the base project:
+ * https://github.com/RedHeadphone/react-json-grid
+ */
+
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+
+import JSONGrid from '@redheadphone/react-json-grid';
+
+import {propTypes, defaultProps} from '../components/DashJsonGrid.react';
+import {isArray} from '../utils';
 
 /**
- * ExampleComponent is an example component.
- * It takes a property, `label`, and
- * displays it.
- * It renders an input with the property `value`
- * which is editable by the user.
+ * DashJsonGrid is a Dash porting version for the React component:
+ * `react-json-grid/JSONGrid`
+ * 
+ * This component provides a JSON Grid viewer used for viewing complicated and
+ * unstructured serializable JSON data.
  */
 export default class DashJsonGrid extends Component {
-    render() {
-        const {id, label, setProps, value} = this.props;
+  constructor(props) {
+    super(props);
+    this.handleOnSelect = this.handleOnSelect.bind(this);
+  }
 
-        return (
-            <div id={id}>
-                ExampleComponent: {label}&nbsp;
-                <input
-                    value={value}
-                    onChange={
-                        /*
-                         * Send the new value to the parent component.
-                         * setProps is a prop that is automatically supplied
-                         * by dash's front-end ("dash-renderer").
-                         * In a Dash app, this will update the component's
-                         * props and send the data back to the Python Dash
-                         * app server if a callback uses the modified prop as
-                         * Input or State.
-                         */
-                        e => setProps({ value: e.target.value })
-                    }
-                />
-            </div>
-        );
+  /**
+   * (Deprecated) get the child data from a specified route.
+   * @param {object} data - The whole data maintained by this component.
+   * @param {array} route - The route used for locating a small part of the data.
+   * @returns {object} The data chosen by route.
+   */
+  routeData(data, route) {
+    if (!isArray(route) || route.length == 0) {
+      return data;
     }
+    let cur_data = data;
+    for (let cur_idx of route.values()) {
+      if (isArray(cur_idx)) {
+        if (isArray(cur_data)) {
+          cur_idx = cur_idx[0];
+          return cur_data.map((element) => {
+            return element[cur_idx];
+          });
+        } else {
+          return cur_data[cur_idx[0]];
+        }
+      } else {
+        cur_data = cur_data[cur_idx];
+      }
+    }
+    return cur_data;
+  }
+
+  /**
+   * Handle the onSelect() event of `<JSONGrid/>`
+   * @param {array} keyPath - A flattened sequence of indicies used for locating
+   * (routing) the selected part of the data.
+   */
+  handleOnSelect(keyPath) {
+    const selectable = this.props.highlight_selected;
+    if (selectable) {
+      this.props.setProps({
+        selected_path: keyPath,
+        // selected_value: this.routeData(this.props.data, keyPath),
+      });
+    }
+  }
+
+  render() {
+    const {
+      id,
+      class_name,
+      data,
+      default_expand_depth,
+      default_expand_key_tree,
+      highlight_selected,
+      search_text,
+      theme,
+      loading_state,
+    } = this.props;
+    console.log(this.props);
+
+    return (
+      <div
+        id={id}
+        className={class_name}
+        data-dash-is-loading={
+          (loading_state && loading_state.is_loading) || undefined
+        }
+      >
+        <JSONGrid
+          data={data}
+          defaultExpandDepth={default_expand_depth}
+          defaultExpandKeyTree={default_expand_key_tree}
+          onSelect={this.handleOnSelect}
+          highlightSelected={highlight_selected}
+          searchText={search_text}
+          theme={
+            typeof theme === 'string' && theme.trim().length > 0
+              ? theme
+              : undefined
+          }
+          customTheme={typeof theme === 'object' ? theme : undefined}
+        />
+      </div>
+    );
+  }
 }
 
-DashJsonGrid.defaultProps = {};
+DashJsonGrid.defaultProps = defaultProps;
 
-DashJsonGrid.propTypes = {
-    /**
-     * The ID used to identify this component in Dash callbacks.
-     */
-    id: PropTypes.string,
-
-    /**
-     * A label that will be printed when this component is rendered.
-     */
-    label: PropTypes.string.isRequired,
-
-    /**
-     * The value displayed in the input.
-     */
-    value: PropTypes.string,
-
-    /**
-     * Dash-assigned callback that should be called to report property changes
-     * to Dash, to make them available for callbacks.
-     */
-    setProps: PropTypes.func
-};
+DashJsonGrid.propTypes = propTypes;
