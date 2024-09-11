@@ -24,4 +24,4 @@ __all__ = ("__version__",)
 _basepath = "."
 _filepath = os.path.abspath(os.path.join(_basepath, "package.json"))
 with open(_filepath) as f:
-    __version__ = json.load(f)["version"]
+    __version__ = str(json.load(f)["version"])

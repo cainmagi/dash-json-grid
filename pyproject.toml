@@ -29,7 +29,7 @@ requires-python = ">=3.8"
 
 [project.urls]
 Homepage = "https://github.com/cainmagi/dash-json-grid"
-Repository = "https://github.com/cainmagi/dash-json-grid"
+Repository = "https://github.com/cainmagi/dash-json-grid.git"
 Issues = "https://github.com/cainmagi/dash-json-grid/issues"
 Changelog = "https://github.com/cainmagi/dash-json-grid/blob/main/Changelog.md"
 
@@ -74,3 +74,42 @@ testpaths = "tests/"
 addopts = "-rsxX -vv"
 log_format = "%(asctime)s | %(levelname)s | %(name)s:%(lineno)d | %(message)s"
 log_cli_level = "ERROR"
+
+[tool.pyright]
+include = ["./usage.py", "dash_json_grid", "tests"]
+exclude = [
+  "**/node_modules",
+  "**/__pycache__",
+  "src",
+  "alpha-*",
+  "data-*",
+  "logs",
+  "outputs",
+  ".VSCodeCounter",
+  ".github",
+  ".git",
+  ".yarn",
+  "deps",
+  "inst/deps",
+  "man",
+  "R",
+  "src",
+  "env",
+  "ENV",
+  "venv",
+  "VENV",
+  ".env",
+  ".venv",
+  "database",
+  "**/.yarn",
+  "**/node_modules",
+  "**/__pycache__",
+  "typestubs",
+  "setup.py",
+  "version",
+  "_validate_init.py",
+]
+ignore = ["version", "setup.py", "_validate_init.py"]
+defineConstant = { DEBUG = true }
+reportMissingImports = "error"
+reportMissingTypeStubs = false

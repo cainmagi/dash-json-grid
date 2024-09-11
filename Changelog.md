@@ -4,6 +4,17 @@
 
 ## CHANGELOG
 
+### 0.2.0 @ 09/11/2024
+
+#### :mega: New
+
+1. Add `mixins` to the component `DashJsonGrid`. Now it supports more functionalities.
+
+#### :floppy_disk: Change
+
+1. Move some methods from `usage.py` to the package `dash_json_grid`.
+2. Merge the configurations of `pyright` to `pyproject.toml`.
+
 ### 0.1.0 @ 09/11/2024
 
 #### :mega: New

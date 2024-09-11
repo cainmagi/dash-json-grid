@@ -17,8 +17,6 @@ python usage.py
 ```
 """
 
-import collections.abc
-
 import dash_json_grid
 import dash
 from dash import Dash, dcc, callback, html, Input, Output, State
@@ -128,9 +126,10 @@ app.layout = html.Div(
                 data=test_data,
                 highlight_selected=True,
                 theme="defaultLight",
-            )
+            ),
         ),
-        html.Div((html.P("Selected:"), html.P(id="selected"))),
+        html.Div((html.P("Selected Path:"), html.P(id="selected-path"))),
+        html.Div((html.P("Selected Value:"), html.P(id="selected-val"))),
         html.Div(id="placeholder"),
     ]
 )
@@ -150,65 +149,24 @@ def update_search(value):
     return value
 
 
-def compare_route(route_1, route_2) -> bool:
-    if (not isinstance(route_1, collections.abc.Sequence)) or (
-        not isinstance(route_2, collections.abc.Sequence)
-    ):
-        return False
-    if len(route_1) != len(route_2):
-        return False
-    return all((val1 == val2 for val1, val2 in zip(route_1, route_2)))
-
-
-def route_data(data, route):
-    cur_data = data
-    for idx in route:
-        if (not isinstance(idx, str)) and isinstance(idx, collections.abc.Sequence):
-            if isinstance(cur_data, collections.abc.Sequence):
-                return tuple(item[idx[0]] for item in cur_data)
-            else:
-                return cur_data[idx[0]]
-        cur_data = cur_data[idx]
-    return cur_data
-
-
-def update_data(data, route, val):
-    if not route:
-        return data
-    cur_data = data
-    for idx in route[:-1]:
-        if (not isinstance(idx, str)) and isinstance(idx, collections.abc.Sequence):
-            break
-    idx_last = route[-1]
-    if (not isinstance(idx_last, str)) and isinstance(
-        idx_last, collections.abc.Sequence
-    ):
-        if isinstance(cur_data, collections.abc.Sequence):
-            for item, vitem in zip(cur_data, val):
-                item[idx_last[0]] = vitem
-        else:
-            cur_data[idx_last[0]] = val
-    else:
-        cur_data[idx_last] = val
-    return data
-
-
 @callback(
-    Output("selected", "children"),
+    Output("selected-path", "children"),
+    Output("selected-val", "children"),
     Output("viewer", "data"),
     Input("viewer", "selected_path"),
     State("viewer", "data"),
 )
 def display_output(route, data):
     if not route:
-        return None, dash.no_update
+        return None, None, dash.no_update
 
-    sel_data = route_data(data, route)
+    sel_data = dash_json_grid.DashJsonGrid.get_data_by_route(data, route)
     if isinstance(sel_data, (int, float)):
-        update_data(data, route, sel_data + 1)
-        return str(route), data
+        sel_data_new = sel_data + 1
+        dash_json_grid.DashJsonGrid.update_data_by_route(data, route, sel_data_new)
+        return str(route), str(sel_data_new), data
 
-    return str(route), dash.no_update
+    return str(route), str(sel_data), dash.no_update
 
 
 if __name__ == "__main__":

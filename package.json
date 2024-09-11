@@ -1,7 +1,7 @@
 {
   "name": "dash_json_grid",
   "packageManager": "yarn@4.4.1",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Dash porting version of the react project React JSON Grid. Provide structured and nested grid table view of complicated JSON objects/arrays.",
   "repository": {
     "type": "git",
