@@ -4,3 +4,6 @@ dash[dev]>=2.7.0
 # Required for building pacakges.
 build
 wheel
+
+# Required for code formatting.
+black

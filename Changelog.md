@@ -1,4 +1,4 @@
-# RESTful Dash (R-dash)
+# Dash JSON Grid
 
 {:toc}
 
@@ -13,6 +13,7 @@
    2. Add 4 tests in "test_data".
    3. Add 3 tests in "test_usage".
 2. Add `conftest.py` for `pytest`.
+3. Rewrite and move the guideline for the developers from `readme.md` to `contributing.md`.
 
 #### :wrench: Fix
 
