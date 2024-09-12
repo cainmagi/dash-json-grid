@@ -31,6 +31,10 @@ function nvm_has {
 msg "Developer's environment for Dash JSON Grid Viewer."
 
 BASH=false
+RUN_REACT=false
+RUN_PYTHON=false
+RUN_DEMO=false
+WITH_DASH=false
 
 # Pass options from command line
 for ARGUMENT in "$@"
@@ -42,12 +46,17 @@ do
     fi
     case "$KEY" in
         --bash)         BASH=true ;;
+        --python)       RUN_PYTHON=true ;;
+        --react)        RUN_REACT=true ;;
+        --demo)         RUN_DEMO=true ;;
+        --with-dash)    WITH_DASH=true ;;
         *)
     esac
 done
 
 if $BASH
 then
+    # Run bash
     exec bash
     exit 0
 fi
@@ -63,6 +72,44 @@ else
     fi
 fi
 
-# Run Python.
-msg "Run Python."
-${PYTHON} || fail
+if $RUN_REACT
+then
+    # Run React.
+    msg "Run React demo app."
+    yarn install || fail
+    yarn run start || fail
+    exit 0
+fi
+
+# Compile the module if it has not been compiled yet.
+# This step ensures dash-json-grid to be available when entering the following modes.
+if [ ! -s "dash_json_grid/DashJsonGrid.py" ]; then
+    msg "Compile the dash component from the React codes."
+    yarn install || fail
+    yarn run build || fail
+fi
+
+if $RUN_PYTHON
+then
+    # Run Python.
+    msg "Run Python."
+    exec ${PYTHON}
+    exit 0
+fi
+
+if $RUN_DEMO
+then
+    # Run python demo.
+    msg "Run Python Plotly-Dash demo app."
+    ${PYTHON} usage.py || fail
+    exit 0
+fi
+
+# Run pytests.
+msg "Run unit tests."
+if $WITH_DASH
+then
+    ${PYTHON} -m pytest --headless --with-dash || fail
+else
+    ${PYTHON} -m pytest  || fail
+fi

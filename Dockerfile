@@ -16,12 +16,18 @@ ARG DEBIAN_FRONTEND=noninteractive
 USER root
 
 WORKDIR /app
-COPY ./*.* /app/
 COPY ./docker/*.txt /app/
 
 # Install dependencies
 COPY ./docker/install.sh /app/
 RUN bash /app/install.sh $INSTALL_MODE
+
+# Copy codes
+COPY ./dash_json_grid /app/dash_json_grid
+COPY ./src /app/src
+COPY ./tests /app/tests
+COPY ./version /app/version
+COPY ./*.* /app/
 
 # Finalize
 COPY ./docker/entrypoint.sh /app/

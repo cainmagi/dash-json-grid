@@ -92,7 +92,9 @@ class MixinDataRoute:
         ):
             return cur_data
         for idx in route:
-            if (not isinstance(idx, str)) and isinstance(idx, collections.abc.Sequence):
+            if (not isinstance(idx, (str, bytes))) and isinstance(
+                idx, collections.abc.Sequence
+            ):
                 if isinstance(cur_data, collections.abc.Sequence):
                     return tuple(item[idx[0]] for item in cur_data)
                 else:
@@ -143,7 +145,9 @@ class MixinDataRoute:
         cur_data = data
         idx_last = route[-1]
         for idx in route[:-1]:
-            if (not isinstance(idx, str)) and isinstance(idx, collections.abc.Sequence):
+            if (not isinstance(idx, (str, bytes))) and isinstance(
+                idx, collections.abc.Sequence
+            ):
                 idx_last = idx
                 break
             if isinstance(cur_data, collections.abc.Mapping):
@@ -155,13 +159,13 @@ class MixinDataRoute:
                         "{1}".format(idx, cur_data)
                     )
                 cur_data = cur_data[idx]
-        if (not isinstance(idx_last, str)) and isinstance(
+        if (not isinstance(idx_last, (str, bytes))) and isinstance(
             idx_last, collections.abc.Sequence
         ):
-            if (not isinstance(cur_data, str)) and isinstance(
+            if (not isinstance(cur_data, (str, bytes))) and isinstance(
                 cur_data, collections.abc.Sequence
             ):
-                if isinstance(val, str) or (
+                if isinstance(val, (str, bytes)) or (
                     not isinstance(val, collections.abc.Sequence)
                 ):
                     for item in cur_data:
@@ -242,12 +246,14 @@ class MixinDataRoute:
             )
         idx_last = route[-1]
         for idx in route[:-1]:
-            if (not isinstance(idx, str)) and isinstance(idx, collections.abc.Sequence):
+            if (not isinstance(idx, (str, bytes))) and isinstance(
+                idx, collections.abc.Sequence
+            ):
                 idx_last = idx
                 break
             if isinstance(cur_data, collections.abc.Mapping):
                 cur_data = cur_data[idx]
-            elif (not isinstance(cur_data, str)) and isinstance(
+            elif (not isinstance(cur_data, (str, bytes))) and isinstance(
                 cur_data, collections.abc.Sequence
             ):
                 if not isinstance(idx, int):
@@ -256,10 +262,10 @@ class MixinDataRoute:
                         "{1}".format(idx, cur_data)
                     )
                 cur_data = cur_data[idx]
-        if (not isinstance(idx_last, str)) and isinstance(
+        if (not isinstance(idx_last, (str, bytes))) and isinstance(
             idx_last, collections.abc.Sequence
         ):
-            if (not isinstance(cur_data, str)) and isinstance(
+            if (not isinstance(cur_data, (str, bytes))) and isinstance(
                 cur_data, collections.abc.Sequence
             ):
                 return tuple(item.pop(idx_last[0]) for item in cur_data)

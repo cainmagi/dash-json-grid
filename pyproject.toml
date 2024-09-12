@@ -72,8 +72,13 @@ extend-exclude = '''
 minversion = "6.0"
 testpaths = "tests/"
 addopts = "-rsxX -vv"
-log_format = "%(asctime)s | %(levelname)s | %(name)s:%(lineno)d | %(message)s"
-log_cli_level = "ERROR"
+log_level = "INFO"
+log_format = "%(name)s | %(filename)s - %(funcName)s @ %(asctime)s: %(levelname)s %(message)s"
+log_date_format = "%Y-%m-%d %H:%M:%S"
+log_cli = true
+log_cli_level = "INFO"
+selenium_exclude_debug = "html:logs:screenshot"
+filterwarnings = ["ignore::DeprecationWarning:selenium"]
 
 [tool.pyright]
 include = ["./usage.py", "dash_json_grid", "tests"]

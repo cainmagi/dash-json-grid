@@ -3,9 +3,10 @@
 # pip install -r requirements.txt
 
 dash[dev,testing]>=2.0.0
+werkzeug
 
 # Required by testing
-chromedriver-binary-auto
+chromedriver-binary-auto  # Needs to be installed after installing the browser.
 pytest
 pytest-base-url
 pytest-flask

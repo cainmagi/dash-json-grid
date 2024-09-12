@@ -4,6 +4,28 @@
 
 ## CHANGELOG
 
+### 0.3.0 @ 09/12/2024
+
+#### :mega: New
+
+1. Finish the first version of unit tests:
+   1. Add 2 tests in "test_init_from".
+   2. Add 4 tests in "test_data".
+   3. Add 3 tests in "test_usage".
+2. Add `conftest.py` for `pytest`.
+
+#### :wrench: Fix
+
+1. Fix: The mixins needs to exclude the type `bytes` from `Sequence`.
+2. Fix: Running unit tests for `Dash` needs to installl the browser. The `chrome`/`chromium` has been added to the docker file dependencies.
+3. Fix: `apt` may suffer occassional failure when accessing the packages. Improve the stability by configuring the `retry` option.
+
+#### :floppy_disk: Change
+
+1. Adjust the optional dependency: `test`.
+2. Chage the default application from `python` to `pytest` when using the docker image.
+3. Add `--python`, `--react`, and `--demo` modes for launching the docker image.
+
 ### 0.2.0 @ 09/11/2024
 
 #### :mega: New

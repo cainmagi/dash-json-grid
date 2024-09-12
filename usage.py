@@ -17,9 +17,9 @@ python usage.py
 ```
 """
 
-import dash_json_grid
 import dash
 from dash import Dash, dcc, callback, html, Input, Output, State
+import dash_json_grid
 
 app = Dash(__name__)
 

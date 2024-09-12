@@ -44,10 +44,12 @@ if ! nvm_has "python3"; then
 	fi
 fi
 
+APT_OPTIONS="-o Acquire::Retries=5 -o Acquire::http::timeout=20 -o Acquire::https::timeout=20"
+
 # Required packages
-apt-get -y update || fail && apt-get -y install \
+apt-get -y update || fail && apt-get $APT_OPTIONS -y install \
     apt-utils apt-transport-https git-core wget jq \
-    gnupg2 lsb-release ${EXTRA_PY} || fail
+    gnupg2 lsb-release xz-utils ${EXTRA_PY} || fail
 
 if ! nvm_has "lsb_release"; then
     msg_err "lsb_release does not exist. This should not happen. Please contact the author for technical supports."
@@ -73,10 +75,22 @@ else
 	msg_err "The base image is an unknown OS, this dockerfile does not support it: ${NAME_OS}."
 fi
 
+# Install browser according to the OS
+if [ "x${NAME_OS}" = "xUbuntu" ]; then
+  # Need to use the downloaded version because Ubuntu only provides snap version.
+  wget -O google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb || fail
+  apt-get install $APT_OPTIONS -y ./google-chrome.deb || fail
+  rm -f google-chrome.deb || fail
+else
+  if [ "x${NAME_OS}" = "xDebian" ]; then
+    apt-get $APT_OPTIONS -y install chromium || fail
+  fi
+fi
+
 # Install Node.js and Yarn.
 mcd /app || fail
 wget -O- https://gist.githubusercontent.com/cainmagi/f028e8ac4b06c3deefaf8ec38d5a7d8f/raw/install-nodejs.sh | bash -s -- --all
 ${PYTHON} -m pip install --compile --no-cache-dir pip wheel setuptools --upgrade || fail
-${PYTHON} -m pip install --compile --no-cache-dir -r ./requirements.txt 
+${PYTHON} -m pip install --compile --no-cache-dir -r ./requirements-docker.txt 
 
 msg "Successfully install the python dependencies."
