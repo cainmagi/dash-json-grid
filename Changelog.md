@@ -25,6 +25,7 @@
 1. Adjust the optional dependency: `test`.
 2. Chage the default application from `python` to `pytest` when using the docker image.
 3. Add `--python`, `--react`, and `--demo` modes for launching the docker image.
+4. Adjust the dependency `dash` from `>=2.0.0` to `>=2.7.0` to prevent the issue caused by `flask`.
 
 ### 0.2.0 @ 09/11/2024
 
