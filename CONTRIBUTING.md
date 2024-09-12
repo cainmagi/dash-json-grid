@@ -10,11 +10,15 @@ This guide shows how to compile and test this project. Anyone who want to contri
 
 ### 1. Explanations for the source codes
 
-* Review our code of conduct before contributing to this project.
+* Review our [code of conduct:memo:](./CODE_OF_CONDUCT.md) before contributing to this project.
 
 * The metadata of the project is defined in `pyproject.toml` and `package.json`. Modifying `package.json` will not automatically update `pyproject.toml`. Therefore, users need to ensure changes for both files if any part of the metadata needs to be changed.
 
-* The React demo app is in `src/demo`. It does not influence the Dash component because it is purely written by React.
+* The React source files are in the `src/lib/` folder. These codes are formatted by [`pretteir`:hammer:][tool-prettier].
+
+* The Python codes are in the package `dash_json_grid/` folder. These codes are formatted by [`black`:hammer:][tool-black]. Note that the automatically generated files like `_imports_.py` and `DashJsonGrid.py` will not be formatted.
+
+* The React demo app is in `src/demo/`. It does not influence the Dash component because it is purely written by React.
 
 * The Dash demo app is `usage.py`. It shows an example of rending the JSON grid viewer and interact with it. Clicking a number on the table will let that value increase by 1.
 
@@ -28,7 +32,7 @@ This guide shows how to compile and test this project. Anyone who want to contri
     * Make sure that they are referenced in `MANIFEST.in` so that they get properly included when you're ready to publish your component.
     * Make sure the stylesheets are added to the `_css_dist` dict in `dash_json_grid/__init__.py` so dash will serve them automatically when the component suite is requested.
 
-* [Review your code](./review_checklist.md)
+* Remember to use [`black`:hammer:][tool-black] and [`pretteir`:hammer:][tool-prettier] to format any modified Python and React codes, respectively. [Review your code:memo:](./review_checklist.md) before sending the pull request.
 
 ### 2. Work with Docker
 
@@ -268,3 +272,6 @@ You can do the following things to test the codes.
     ```
 
 Before submitting a pull request, please ensure that all unit tests (`pytest`) get passed and the codes are formatted by `black`.
+
+[tool-black]:https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter
+[tool-prettier]:https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter
