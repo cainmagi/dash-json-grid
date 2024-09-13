@@ -17,6 +17,7 @@
 4. Add the "code of conduct" file.
 5. Finalize the readme file (including the usage documentation).
 6. Add the typehints `dash_json_grid.ThemeConfigs` for providing the `theme` property easily.
+7. Configure the python test workflow.
 
 #### :wrench: Fix
 
