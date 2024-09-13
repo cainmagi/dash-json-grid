@@ -2,15 +2,15 @@
 
 ## CONTRIBUTING
 
-This guide shows how to compile and test this project. Anyone who want to contribute to these codes can follow this guide and submit the pull request. [Section 2:bookmark:](#2-work-with-docker) and [Section 3:bookmark:](#3-work-with-conda) suggests how to work with Docker or Conda, respectively. Please choose either of these tools to deploy the environment and develop this project.
+This guide shows how to compile and test this project. Anyone who want to contribute to these codes can follow this guide and submit the pull request. [Section 2 :bookmark:](#2-work-with-docker) and [Section 3 :bookmark:](#3-work-with-conda) suggests how to work with Docker or Conda, respectively. Please choose either of these tools to deploy the environment and develop this project.
 
 > [!CAUTION]
-> We strongly suggest users to prepare the environment by Docker (see [2.1.:bookmark:](#21-install-by-docker)).
+> We strongly suggest users to prepare the environment by Docker (see [2.1. :bookmark:](#21-install-by-docker)).
 > Docker is supported by both Linux and Windows. Using Docker can save a lot of steps and mitigate issues caused by the path.
 
 ### 1. Explanations for the source codes
 
-* Review our [code of conduct:memo:](./CODE_OF_CONDUCT.md) before contributing to this project.
+* Review our [code of conduct :memo:](./CODE_OF_CONDUCT.md) before contributing to this project.
 
 * The metadata of the project is defined in `pyproject.toml` and `package.json`. Modifying `package.json` will not automatically update `pyproject.toml`. Therefore, users need to ensure changes for both files if any part of the metadata needs to be changed.
 
@@ -32,7 +32,7 @@ This guide shows how to compile and test this project. Anyone who want to contri
     * Make sure that they are referenced in `MANIFEST.in` so that they get properly included when you're ready to publish your component.
     * Make sure the stylesheets are added to the `_css_dist` dict in `dash_json_grid/__init__.py` so dash will serve them automatically when the component suite is requested.
 
-* Remember to use [`black`:hammer:][tool-black] and [`pretteir`:hammer:][tool-prettier] to format any modified Python and React codes, respectively. [Review your code:memo:](./review_checklist.md) before sending the pull request.
+* Remember to use [`black`:hammer:][tool-black] and [`pretteir`:hammer:][tool-prettier] to format any modified Python and React codes, respectively. [Review your code :memo:](./review_checklist.md) before sending the pull request.
 
 ### 2. Work with Docker
 
