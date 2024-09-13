@@ -34,5 +34,5 @@ COPY ./docker/entrypoint.sh /app/
 
 EXPOSE 8080
 
-ENTRYPOINT ["/bin/bash", "--login", "/app/entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "--login", "-i", "/app/entrypoint.sh"]
 CMD [""]

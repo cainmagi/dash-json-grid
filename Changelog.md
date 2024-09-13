@@ -4,7 +4,7 @@
 
 ## CHANGELOG
 
-### 0.3.0 @ 09/12/2024
+### 0.3.0 @ 09/13/2024
 
 #### :mega: New
 
@@ -23,6 +23,8 @@
 1. Fix: The mixins needs to exclude the type `bytes` from `Sequence`.
 2. Fix: Running unit tests for `Dash` needs to installl the browser. The `chrome`/`chromium` has been added to the docker file dependencies.
 3. Fix: `apt` may suffer occassional failure when accessing the packages. Improve the stability by configuring the `retry` option.
+4. Fix: Some docker scripts may malfunction because `~/.bashrc` provided by some base images may skip in non-interactive mode. To fix this issue, ensure the entrypoint run in the interactive mode.
+5. Fix: If using the system-wide python and the newest version, the `pip` may be blocked unless a virtual environment is created. Now the python will run in the virtual environment if the system-wide python is used.
 
 #### :floppy_disk: Change
 

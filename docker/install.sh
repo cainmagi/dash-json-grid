@@ -35,25 +35,35 @@ function nvm_has {
     type "$1" > /dev/null 2>&1
 }
 
-# Check existence of python3
-EXTRA_PY=""
-if ! nvm_has "python3"; then
-	if ! nvm_has "python"; then
-		msg_warn "Need to have python installed in the image. If not provided, will try to install python with apt."
-        EXTRA_PY="python3-dev python3-pip"
-	fi
-fi
-
 APT_OPTIONS="-o Acquire::Retries=5 -o Acquire::http::timeout=20 -o Acquire::https::timeout=20"
 
 # Required packages
 apt-get -y update || fail && apt-get $APT_OPTIONS -y install \
     apt-utils apt-transport-https git-core wget jq \
-    gnupg2 lsb-release xz-utils ${EXTRA_PY} || fail
+    gnupg2 lsb-release xz-utils || fail
 
 if ! nvm_has "lsb_release"; then
     msg_err "lsb_release does not exist. This should not happen. Please contact the author for technical supports."
     exit 1
+fi
+
+# Check the OS version
+NAME_OS=$(lsb_release -is)
+if [ "x${NAME_OS}" = "xUbuntu" ] || [ "x${NAME_OS}" = "xDebian" ]; then
+	msg "Pass the OS check. Current OS: ${NAME_OS}."
+else
+	msg_err "The base image is an unknown OS, this dockerfile does not support it: ${NAME_OS}."
+fi
+
+# Install system-wide python
+EXTRA_PY=""
+USE_VENV=false
+if ! nvm_has "python3"; then
+	if ! nvm_has "python"; then
+    msg_warn "Need to have python installed in the image. If not provided, will try to install python with apt."
+    apt-get install $APT_OPTIONS -y python3-dev python3-pip python3-venv || fail
+    USE_VENV=true
+	fi
 fi
 
 if nvm_has "python"; then
@@ -67,12 +77,12 @@ else
     fi
 fi
 
-# Check the OS version
-NAME_OS=$(lsb_release -is)
-if [ "x${NAME_OS}" = "xUbuntu" ] || [ "x${NAME_OS}" = "xDebian" ]; then
-	msg "Pass the OS check. Current OS: ${NAME_OS}."
-else
-	msg_err "The base image is an unknown OS, this dockerfile does not support it: ${NAME_OS}."
+# Creat the venv if it needs to be used
+if $USE_VENV
+then
+  ${PYTHON} -m venv /opt/pyvenv || fail
+  source /opt/pyvenv/bin/activate  || fail
+  msg "Using the venv $(which python)"
 fi
 
 # Install browser according to the OS
@@ -89,8 +99,8 @@ fi
 
 # Install Node.js and Yarn.
 mcd /app || fail
-wget -O- https://gist.githubusercontent.com/cainmagi/f028e8ac4b06c3deefaf8ec38d5a7d8f/raw/install-nodejs.sh | bash -s -- --all
+wget -O- https://gist.githubusercontent.com/cainmagi/f028e8ac4b06c3deefaf8ec38d5a7d8f/raw/install-nodejs.sh | bash -s -- --all || fail
 ${PYTHON} -m pip install --compile --no-cache-dir pip wheel setuptools --upgrade || fail
-${PYTHON} -m pip install --compile --no-cache-dir -r ./requirements-docker.txt 
+${PYTHON} -m pip install --compile --no-cache-dir -r ./requirements-docker.txt || fail
 
 msg "Successfully install the python dependencies."

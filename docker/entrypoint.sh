@@ -54,10 +54,16 @@ do
     esac
 done
 
+# Enter the virtual environment if necessary.
+if [ -s "/opt/pyvenv/bin/activate" ]; then
+  source /opt/pyvenv/bin/activate  || fail
+  msg "Using the venv $(which python)"
+fi
+
 if $BASH
 then
     # Run bash
-    exec bash
+    exec bash --login
     exit 0
 fi
 
