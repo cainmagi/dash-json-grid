@@ -15,6 +15,7 @@
 2. Add `conftest.py` for `pytest`.
 3. Rewrite and move the guideline for the developers from `readme.md` to `contributing.md`.
 4. Add the "code of conduct" file.
+5. Finalize the readme file (including the usage documentation).
 
 #### :wrench: Fix
 
