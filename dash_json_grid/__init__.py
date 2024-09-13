@@ -26,12 +26,15 @@ import json
 
 import dash as _dash
 
+from . import typehints
+from . import mixins
+
 # noinspection PyUnresolvedReferences
 from ._imports_ import DashJsonGrid as _DashJsonGrid
 from .mixins import MixinDataRoute as _MixinDataRoute, MixinFile as _MixinFile
 from .typehints import ThemeConfigs
 
-__all__ = ("DashJsonGrid", "ThemeConfigs")
+__all__ = ("typehints", "mixins", "DashJsonGrid", "ThemeConfigs")
 
 if not hasattr(_dash, "__plotly_dash") and not hasattr(_dash, "development"):
     print(

@@ -1,7 +1,7 @@
 include dash_json_grid/dash_json_grid.min.js
 include dash_json_grid/dash_json_grid.min.js.map
-include dash_json_grid/async-*.js
-include dash_json_grid/async-*.js.map
+include dash_json_grid/async-DashJsonGrid.js
+include dash_json_grid/async-DashJsonGrid.js.map
 include dash_json_grid/*-shared.js
 include dash_json_grid/*-shared.js.map
 include dash_json_grid/metadata.json
