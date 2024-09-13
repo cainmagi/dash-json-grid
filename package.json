@@ -5,10 +5,10 @@
   "description": "Dash porting version of the react project React JSON Grid. Provide structured and nested grid table view of complicated JSON objects/arrays.",
   "repository": {
     "type": "git",
-    "url": "git://github.com/cainmgi/dash-json-grid.git"
+    "url": "git://github.com/cainmagi/dash-json-grid.git"
   },
   "bugs": {
-    "url": "https://github.com/cainmgi/dash-json-grid/issues"
+    "url": "https://github.com/cainmagi/dash-json-grid/issues"
   },
   "homepage": "https://pypi.org/project/dash-json-grid",
   "main": "build/index.js",

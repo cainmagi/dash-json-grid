@@ -55,7 +55,7 @@ You should be able to see the message like this, which shows that `docker` is wo
 Then, build the docker image by
 
 ``` sh
-docker build -t dash-json-grid:latest https://github.com/cainmgi/dash-json-grid
+docker build -t dash-json-grid:latest https://github.com/cainmagi/dash-json-grid
 ```
 
 This step may take a little bit long. After successfully building the image, you can start working on this project.
@@ -97,7 +97,7 @@ http://localhost:8080/
 To modify the scripts, you may want to clone an Git repository by yourself:
 
 ``` sh
-git clone https://github.com/cainmgi/dash-json-grid
+git clone https://github.com/cainmagi/dash-json-grid
 ```
 
 Then, you can run the docker container and mount the newly cloned Git folder to the container:
@@ -190,7 +190,7 @@ Before start the installation, you need to ensure the following things are insta
 Use Git to clone the latest source codes:
 
 ``` sh
-git clone https://github.com/cainmgi/dash-json-grid
+git clone https://github.com/cainmagi/dash-json-grid
 ```
 
 #### 3.2. Prepare the dependencies
