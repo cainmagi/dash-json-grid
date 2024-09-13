@@ -126,7 +126,6 @@ jspm_packages/
 /DESCRIPTION
 /NAMESPACE
 /Project.toml
-/yarn.lock
 
 # Created by builder
 /dash_json_grid/_imports_.py

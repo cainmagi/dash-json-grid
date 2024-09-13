@@ -18,6 +18,7 @@
 5. Finalize the readme file (including the usage documentation).
 6. Add the typehints `dash_json_grid.ThemeConfigs` for providing the `theme` property easily.
 7. Configure the python test workflow.
+8. Upload the .lock file because it is required by the workflow.
 
 #### :wrench: Fix
 
@@ -26,6 +27,7 @@
 3. Fix: `apt` may suffer occassional failure when accessing the packages. Improve the stability by configuring the `retry` option.
 4. Fix: Some docker scripts may malfunction because `~/.bashrc` provided by some base images may skip in non-interactive mode. To fix this issue, ensure the entrypoint run in the interactive mode.
 5. Fix: If using the system-wide python and the newest version, the `pip` may be blocked unless a virtual environment is created. Now the python will run in the virtual environment if the system-wide python is used.
+6. Fix: Adjust the workflow to fix wrong version issues.
 
 #### :floppy_disk: Change
 
