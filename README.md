@@ -9,7 +9,7 @@
 
 Dash JSON Grid is a Dash component library.
 
-Dash porting version of the react project [React JSON Grid:link:][git-react-json-grid]. Provide structured and nested grid table view of complicated JSON objects/arrays.
+Dash porting version of the react project [React JSON Grid :link:][git-react-json-grid]. Provide structured and nested grid table view of complicated JSON objects/arrays.
 
 The following two figures compare the demos of the original React version and the ported Dash version. Since this project is just a dash component wrapper on the original React component, the performance is the same.
 
@@ -87,9 +87,9 @@ The `DashJsonGrid` component supports the following callback-accessible properti
 
 | Name                  | Type     | Description                                                           | Default       |
 | --------------------- | -------- | --------------------------------------------------------------------- | ------------- |
-| id                      | `str` or `dict`   | The ID of the component. A dictionary-id is used for creating a [pattern-matching callback:book:][dash-pmcallback].        | undefined     |
+| id                      | `str` or `dict`   | The ID of the component. A dictionary-id is used for creating a [pattern-matching callback :book:][dash-pmcallback].        | undefined     |
 | class_name              | `str`   | The css-class of the component. Use ` ` to separate different names.        | undefined     |
-| data                    | `Any`   | The JSON-serializable simple object to be transformed into a grid table.         | Requried:exclamation:     |
+| data                    | `Any`   | The JSON-serializable simple object to be transformed into a grid table.         | Requried :exclamation:     |
 | default_expand_depth    | `int`   | The depth to which the grid is expanded by default.                   | `0`             |
 | default_expand_key_tree | `dict`  | Tree-like structure with all keys that needs to be expanded. This value should be used only when `data` is a `dict`.          | undefined     |
 | selected_path           | `list`  | A sequence of indicies representing the route of the currently selected element. The last value can represent a column or a table if it is a one-value list. | `[]` |
@@ -104,13 +104,13 @@ The following arguments are **NOT** properties. They are used for providing diff
   
     | Name                  | Type     | Description                                                           | Default       |
     | --------------------- | -------- | --------------------------------------------------------------------- | ------------- |
-    | json_string | `str`   | A string that can be decoded as json data. This value is configured for replacing `data` duirng the initialization.  | Required:exclamation:   |
+    | json_string | `str`   | A string that can be decoded as json data. This value is configured for replacing `data` duirng the initialization.  | Required :exclamation:   |
 
 * Used by the class method `from_file(...)`
   
     | Name                  | Type     | Description                                                           | Default       |
     | --------------------- | -------- | --------------------------------------------------------------------- | ------------- |
-    | json_file | `str` or `PathLike` or `IO[str]` | If it is a string or a path-like object, it is used for locating the json file. It can be a file-like object, too. This value is also used for replacing `data`.  | Required:exclamation:   |
+    | json_file | `str` or `PathLike` or `IO[str]` | If it is a string or a path-like object, it is used for locating the json file. It can be a file-like object, too. This value is also used for replacing `data`.  | Required :exclamation:   |
 
 ## 4. Available themes
 
@@ -169,9 +169,9 @@ See [Changelog.md](./Changelog.md)
 
 ## 7. Acknowledgements
 
-- [RedHeadphone/react-json-grid:link:][git-react-json-grid]: The original React component implementation of this project.
-- [jsongrid.com:link:][link-json-grid]: Grid design and styles.
-- [kevincobain2000/json-to-html-table:link:][git-json-to-html]: React Component and project structure
+- [RedHeadphone/react-json-grid :link:][git-react-json-grid]: The original React component implementation of this project.
+- [jsongrid.com :link:][link-json-grid]: Grid design and styles.
+- [kevincobain2000/json-to-html-table :link:][git-json-to-html]: React Component and project structure
 
 [git-react-json-grid]:https://github.com/RedHeadphone/react-json-grid
 [git-json-to-html]:https://github.com/kevincobain2000/json-to-html-table
