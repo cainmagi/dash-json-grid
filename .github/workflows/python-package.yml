@@ -31,6 +31,10 @@ jobs:
       with:
         node-version: 22.x
         cache: 'npm'
+    - name: Enable Corepack
+      run: |
+        npm install -g corepack
+        corepack enable
     - name: Yarn run install
       uses: borales/actions-yarn@v4
       with:
