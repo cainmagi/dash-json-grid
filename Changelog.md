@@ -36,6 +36,7 @@
 6. Expose the `mixins` and `typehints` submodules to users. 
 7. Adjust `flake8` configurations to ignore some auto-generated files.
 8. Adjust the project keywords.
+9. Optimize the code structure to reduce the complexity reported by `flake8`.
 
 ### 0.2.0 @ 09/11/2024
 

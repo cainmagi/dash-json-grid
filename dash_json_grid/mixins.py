@@ -27,13 +27,164 @@ try:
 except ImportError:
     from collections.abc import Sequence, Callable
 
-from typing_extensions import ParamSpec
+from typing_extensions import ParamSpec, TypeGuard
 
 
 P = ParamSpec("P")
 T = TypeVar("T")
 Route = Sequence[Union[str, int, Sequence[Union[str, int]]]]
-__all__ = ("Route", "MixinDataRoute", "MixinFile")
+__all__ = (
+    "is_sequence",
+    "get_item_of_object",
+    "set_item_of_object",
+    "pop_item_of_object",
+    "Route",
+    "MixinDataRoute",
+    "MixinFile",
+)
+
+
+def is_sequence(val: Any) -> TypeGuard[Sequence[Any]]:
+    """Check whether `val` is a sequence or not."""
+    return (not isinstance(val, (str, bytes))) and isinstance(
+        val, collections.abc.Sequence
+    )
+
+
+def get_item_of_object(data: Any, index: Any) -> Any:
+    """Run `data[index]` supposing that `data` is abitrary and `index` can be a
+    one-value sequence."""
+    if is_sequence(index):
+        if isinstance(data, collections.abc.Mapping):
+            return data[index[0]]
+        elif isinstance(data, collections.abc.Sequence):
+            index_key = index[0]
+            return tuple(d_item[index_key] for d_item in data)
+    else:
+        if isinstance(data, collections.abc.Mapping):
+            return data[index]
+        elif isinstance(data, collections.abc.Sequence):
+            if not isinstance(index, int):
+                raise TypeError(
+                    "Index {0} does not match the type of the data "
+                    "{1}".format(index, data)
+                )
+            return data[index]
+    return data
+
+
+class _set_item_of_object:
+    """Private class implementation for the method `set_item_of_object`."""
+
+    @staticmethod
+    def _set_by_broadcast(data: Sequence[Any], index_key: str, value: Any):
+        """Suppose that `data` is formatted like
+        `[{"key": val1, ...}, {"key": val2, ...}, ...]`
+        where `key` in each item is the same. This method will modify each value of
+        these items by broadcasting `value` into `data`.
+        """
+        if not is_sequence(value):
+            for item in data:
+                item[index_key] = value
+        elif len(value) == len(data):
+            for item, vitem in zip(data, value):
+                item[index_key] = vitem
+        elif len(value) == 1:
+            vitem = value[0]
+            for item in data:
+                item[index_key] = vitem
+        else:
+            raise IndexError(
+                "The current index {0} locates a table column. However, "
+                'the provided argument "val" does not match the length of '
+                "the table column. len(located_column)={1}, len(val)="
+                "{2}.".format(index_key, len(data), len(value))
+            )
+
+    @staticmethod
+    def _call_if_idx_is_sequence(data: Any, index: Sequence[Any], value: Any) -> None:
+        """Case when `index` is a sequence."""
+        index_key = index[0]
+        if is_sequence(data):
+            _set_item_of_object._set_by_broadcast(data, index_key, value)
+        elif isinstance(data, collections.abc.MutableMapping):
+            data[index_key] = value
+        elif isinstance(data, collections.abc.MutableSequence):
+            if not isinstance(index_key, int):
+                raise TypeError(
+                    "Index {0} does not match the type of the data "
+                    "{1}".format(index_key, data)
+                )
+            data[index_key] = value
+        else:
+            raise ValueError(
+                "Fail to modify the data, because the given data {0} is "
+                "immutable.".format(data)
+            )
+
+    @staticmethod
+    def _call_if_idx_is_scalar(data: Any, index: Any, value: Any) -> None:
+        """Case when `index` is not sequence."""
+        if isinstance(data, collections.abc.MutableMapping):
+            data[index] = value
+        elif isinstance(data, collections.abc.MutableSequence):
+            if not isinstance(index, int):
+                raise TypeError(
+                    "Index {0} does not match the type of the data "
+                    "{1}".format(index, data)
+                )
+            data[index] = value
+        else:
+            raise ValueError(
+                "Fail to modify the data, because the given data {0} is "
+                "immutable.".format(data)
+            )
+
+
+def set_item_of_object(data: Any, index: Any, value: Any) -> None:
+    """Run `data[index] = value` supposing that `data` is abitrary and `index` can be a
+    one-value sequence.
+
+    Raise an `ValueError` if the item of `data` cannot be set.
+
+    Raise an `IndexError` if the item of `data` is a sequence, while `value` cannot
+    be broadcast to this item.
+    """
+    if is_sequence(index):
+        return _set_item_of_object._call_if_idx_is_sequence(data, index, value)
+    else:
+        return _set_item_of_object._call_if_idx_is_scalar(data, index, value)
+
+
+def pop_item_of_object(data: Any, index: Any) -> Any:
+    """Run `val = data[index]; del data[index]; return val` supposing that `data` is
+    abitrary and `index` can be a one-value sequence."""
+    if is_sequence(index):
+        index_key = index[0]
+        if is_sequence(data):
+            return tuple(item.pop(index_key) for item in data)
+        elif isinstance(data, collections.abc.MutableMapping):
+            return data.pop(index_key)
+        else:
+            raise ValueError(
+                "Fail to modify the data, because the given data {0} is "
+                "immutable.".format(data)
+            )
+    else:
+        if isinstance(data, collections.abc.MutableMapping):
+            return data.pop(index)
+        elif isinstance(data, collections.abc.MutableSequence):
+            if not isinstance(index, int):
+                raise TypeError(
+                    "Index {0} does not match the type of the data "
+                    "{1}".format(index, data)
+                )
+            return data.pop(index)
+        else:
+            raise ValueError(
+                "Fail to modify the data, because the given data {0} is "
+                "immutable.".format(data)
+            )
 
 
 class MixinDataRoute:
@@ -92,22 +243,7 @@ class MixinDataRoute:
         ):
             return cur_data
         for idx in route:
-            if (not isinstance(idx, (str, bytes))) and isinstance(
-                idx, collections.abc.Sequence
-            ):
-                if isinstance(cur_data, collections.abc.Sequence):
-                    return tuple(item[idx[0]] for item in cur_data)
-                else:
-                    return cur_data[idx[0]]
-            if isinstance(cur_data, collections.abc.Mapping):
-                cur_data = cur_data[idx]
-            elif isinstance(cur_data, collections.abc.Sequence):
-                if not isinstance(idx, int):
-                    raise TypeError(
-                        "Index {0} does not match the type of the data "
-                        "{1}".format(idx, cur_data)
-                    )
-                cur_data = cur_data[idx]
+            cur_data = get_item_of_object(cur_data, idx)
         return cur_data
 
     @staticmethod
@@ -145,73 +281,11 @@ class MixinDataRoute:
         cur_data = data
         idx_last = route[-1]
         for idx in route[:-1]:
-            if (not isinstance(idx, (str, bytes))) and isinstance(
-                idx, collections.abc.Sequence
-            ):
+            if is_sequence(idx):
                 idx_last = idx
                 break
-            if isinstance(cur_data, collections.abc.Mapping):
-                cur_data = cur_data[idx]
-            elif isinstance(cur_data, collections.abc.Sequence):
-                if not isinstance(idx, int):
-                    raise TypeError(
-                        "Index {0} does not match the type of the data "
-                        "{1}".format(idx, cur_data)
-                    )
-                cur_data = cur_data[idx]
-        if (not isinstance(idx_last, (str, bytes))) and isinstance(
-            idx_last, collections.abc.Sequence
-        ):
-            if (not isinstance(cur_data, (str, bytes))) and isinstance(
-                cur_data, collections.abc.Sequence
-            ):
-                if isinstance(val, (str, bytes)) or (
-                    not isinstance(val, collections.abc.Sequence)
-                ):
-                    for item in cur_data:
-                        item[idx_last[0]] = val
-                elif len(val) == len(cur_data):
-                    for item, vitem in zip(cur_data, val):
-                        item[idx_last[0]] = vitem
-                elif len(val) == 1:
-                    for item in cur_data:
-                        item[idx_last[0]] = val[0]
-                else:
-                    raise IndexError(
-                        'The argument "route" {0} locates a table column. However, '
-                        'the provided argument "val" does not match the length of '
-                        "the table column. len(located_column)={1}, len(val)="
-                        "{2}.".format(route, len(cur_data), len(val))
-                    )
-            elif isinstance(cur_data, collections.abc.MutableMapping):
-                cur_data[idx_last[0]] = val
-            elif isinstance(cur_data, collections.abc.MutableSequence):
-                if not isinstance(idx_last[0], int):
-                    raise TypeError(
-                        "Index {0} does not match the type of the data "
-                        "{1}".format(idx_last[0], cur_data)
-                    )
-                cur_data[idx_last[0]] = val
-            else:
-                raise ValueError(
-                    "Fail to modify the data, because the given data {0} is "
-                    "immutable.".format(cur_data)
-                )
-        else:
-            if isinstance(cur_data, collections.abc.MutableMapping):
-                cur_data[idx_last] = val
-            elif isinstance(cur_data, collections.abc.MutableSequence):
-                if not isinstance(idx_last, int):
-                    raise TypeError(
-                        "Index {0} does not match the type of the data "
-                        "{1}".format(idx_last, cur_data)
-                    )
-                cur_data[idx_last] = val
-            else:
-                raise ValueError(
-                    "Fail to modify the data, because the given data {0} is "
-                    "immutable.".format(cur_data)
-                )
+            cur_data = get_item_of_object(cur_data, idx)
+        set_item_of_object(cur_data, idx_last, val)
         return data
 
     @staticmethod
@@ -246,51 +320,11 @@ class MixinDataRoute:
             )
         idx_last = route[-1]
         for idx in route[:-1]:
-            if (not isinstance(idx, (str, bytes))) and isinstance(
-                idx, collections.abc.Sequence
-            ):
+            if is_sequence(idx):
                 idx_last = idx
                 break
-            if isinstance(cur_data, collections.abc.Mapping):
-                cur_data = cur_data[idx]
-            elif (not isinstance(cur_data, (str, bytes))) and isinstance(
-                cur_data, collections.abc.Sequence
-            ):
-                if not isinstance(idx, int):
-                    raise TypeError(
-                        "Index {0} does not match the type of the data "
-                        "{1}".format(idx, cur_data)
-                    )
-                cur_data = cur_data[idx]
-        if (not isinstance(idx_last, (str, bytes))) and isinstance(
-            idx_last, collections.abc.Sequence
-        ):
-            if (not isinstance(cur_data, (str, bytes))) and isinstance(
-                cur_data, collections.abc.Sequence
-            ):
-                return tuple(item.pop(idx_last[0]) for item in cur_data)
-            elif isinstance(cur_data, collections.abc.MutableMapping):
-                return cur_data.pop(idx_last[0])
-            else:
-                raise ValueError(
-                    "Fail to modify the data, because the given data {0} is "
-                    "immutable.".format(cur_data)
-                )
-        else:
-            if isinstance(cur_data, collections.abc.MutableMapping):
-                return cur_data.pop(idx_last)
-            elif isinstance(cur_data, collections.abc.MutableSequence):
-                if not isinstance(idx_last, int):
-                    raise TypeError(
-                        "Index {0} does not match the type of the data "
-                        "{1}".format(idx_last, cur_data)
-                    )
-                return cur_data.pop(idx_last)
-            else:
-                raise ValueError(
-                    "Fail to modify the data, because the given data {0} is "
-                    "immutable.".format(cur_data)
-                )
+            cur_data = get_item_of_object(cur_data, idx)
+        return pop_item_of_object(cur_data, idx_last)
 
 
 class MixinFile:
