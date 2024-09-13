@@ -55,7 +55,7 @@ You should be able to see the message like this, which shows that `docker` is wo
 Then, build the docker image by
 
 ``` sh
-docker build -t dash-json-grid:latest https://github.com/cainmagi/dash-json-grid
+docker build -t dash-json-grid:latest https://github.com/cainmagi/dash-json-grid.git
 ```
 
 This step may take a little bit long. After successfully building the image, you can start working on this project.
