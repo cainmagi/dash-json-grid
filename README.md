@@ -112,19 +112,31 @@ The property `theme` can be a theme name (`str`) or a theme-configuration dictio
 ``` python
 theme = {
     "bgColor": "#f5f5f5",
-    "tableBorderColor": "#d3d3d3",
-    "highlightBgColor": "#e0e0e0",
-    "cellBorderColor": "#c0c0c0",
-    "keyNameColor": "#333333",
-    "indexColor": "#666666",
-    "numberColor": "#007acc",
     "booleanColor": "#007acc",
-    "stringColor": "#2ca22c",
+    "cellBorderColor": "#c0c0c0",
+    "highlightBgColor": "#e0e0e0",
+    "indexColor": "#666666",
+    "keyNameColor": "#333333",
+    "numberColor": "#007acc",
     "objectColor": "#333333",
+    "searchHighlightBgColor": "#cccccc",
+    "stringColor": "#2ca22c",
+    "tableBorderColor": "#d3d3d3",
     "tableHeaderBgColor": "#dddddd",
     "tableHeaderColor": "#333333",
-    "searchHighlightBgColor": "#cccccc",
 }
+```
+
+The configuration `theme` can be incomplete. It is recommended that this value can be initialized by a typed dictionary:
+
+``` python
+import dash_json_grid
+
+theme = dash_json_grid.ThemeConfigs(
+    bgColor="#f5f5f5",
+    booleanColor="#007acc",
+    ...
+)
 ```
 
 When using the theme name, the available theme names are:

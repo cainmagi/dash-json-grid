@@ -47,22 +47,6 @@ test_data = {
     ],
 }
 
-theme = {
-    "bgColor": "#f5f5f5",
-    "tableBorderColor": "#d3d3d3",
-    "highlightBgColor": "#e0e0e0",
-    "cellBorderColor": "#c0c0c0",
-    "keyNameColor": "#333333",
-    "indexColor": "#666666",
-    "numberColor": "#007acc",
-    "booleanColor": "#007acc",
-    "stringColor": "#2ca22c",
-    "objectColor": "#333333",
-    "tableHeaderBgColor": "#dddddd",
-    "tableHeaderColor": "#333333",
-    "searchHighlightBgColor": "#cccccc",
-}
-
 app.layout = html.Div(
     [
         html.P(

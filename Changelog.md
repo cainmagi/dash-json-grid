@@ -16,6 +16,7 @@
 3. Rewrite and move the guideline for the developers from `readme.md` to `contributing.md`.
 4. Add the "code of conduct" file.
 5. Finalize the readme file (including the usage documentation).
+6. Add the typehints `dash_json_grid.ThemeConfigs` for providing the `theme` property easily.
 
 #### :wrench: Fix
 
