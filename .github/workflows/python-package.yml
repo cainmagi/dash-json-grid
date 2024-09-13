@@ -38,7 +38,7 @@ jobs:
     - name: Yarn run install
       uses: borales/actions-yarn@v4
       with:
-        cmd: install # will run `yarn install` command
+        cmd: install
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip

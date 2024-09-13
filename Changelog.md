@@ -19,6 +19,7 @@
 6. Add the typehints `dash_json_grid.ThemeConfigs` for providing the `theme` property easily.
 7. Configure the python test workflow.
 8. Upload the .lock file because it is required by the workflow.
+9. Configure the python package uploading workflow.
 
 #### :wrench: Fix
 
