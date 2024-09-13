@@ -20,6 +20,7 @@
 7. Configure the python test workflow.
 8. Upload the .lock file because it is required by the workflow.
 9. Configure the python package uploading workflow.
+10. Add the issue and pull request templates.
 
 #### :wrench: Fix
 
