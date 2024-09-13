@@ -39,16 +39,16 @@ jobs:
       uses: borales/actions-yarn@v4
       with:
         cmd: install # will run `yarn install` command
-    - name: Use Yarn to build component
-      uses: borales/actions-yarn@v4
-      with:
-        cmd: build
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         python -m pip install flake8 pytest wheel
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f tests/requirements.txt ]; then pip install -r tests/requirements.txt; fi
+    - name: Use Yarn to build component
+      uses: borales/actions-yarn@v4
+      with:
+        cmd: build
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names

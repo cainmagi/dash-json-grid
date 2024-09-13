@@ -28,6 +28,8 @@
 4. Fix: Some docker scripts may malfunction because `~/.bashrc` provided by some base images may skip in non-interactive mode. To fix this issue, ensure the entrypoint run in the interactive mode.
 5. Fix: If using the system-wide python and the newest version, the `pip` may be blocked unless a virtual environment is created. Now the python will run in the virtual environment if the system-wide python is used.
 6. Fix: Adjust the workflow to fix wrong version issues.
+7. Fix: `Corepack` needs to be enabled in the workflow explicitly.
+8. Fix: `Yarn build` needs to be run after installing dash dependencies.
 
 #### :floppy_disk: Change
 
