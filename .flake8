@@ -13,3 +13,7 @@ exclude =
     ./src
     ./.yarn
     ./node_modules
+    ./dash_json_grid/_imports_.py
+    ./dash_json_grid/DashJsonGrid.py
+    ./_validate_init.py
+    ./alpha-*.py

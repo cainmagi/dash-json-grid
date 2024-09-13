@@ -34,6 +34,8 @@
 4. Adjust the dependency `dash` from `>=2.0.0` to `>=2.7.0` to prevent the issue caused by `flask`.
 5. Update the meta-data of the project.
 6. Expose the `mixins` and `typehints` submodules to users. 
+7. Adjust `flake8` configurations to ignore some auto-generated files.
+8. Adjust the project keywords.
 
 ### 0.2.0 @ 09/11/2024
 

@@ -22,6 +22,8 @@ keywords = [
   "plotly-dash",
   "python-dash",
   "json",
+  "json-viewer",
+  "json-table",
   "data-visualization",
 ]
 license = { file = "LICENSE" }
