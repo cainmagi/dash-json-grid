@@ -18,6 +18,7 @@
 1. Add the section "3. Additional utilities" to the readme.
 2. Adjust project details in the readme.
 3. Add an explanation about `data` in the readme.
+4. Adjust the metadata of the project, and remove the auto-genreated file.
 
 ### 0.3.0 @ 09/13/2024
 
