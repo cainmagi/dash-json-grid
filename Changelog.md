@@ -10,6 +10,7 @@
 
 1. Fix: Fix some links and formats in the readme.
 2. Fix: The step for installing the dev version suggested in the readme is not correct. Now it has been corrected.
+3. Fix: Make `data` sanitized. Now a scalar like `int` or `str` can be passed to the property `data` and the `data` will be rendered as a one-value list.
 
 #### :floppy_disk: Change
 

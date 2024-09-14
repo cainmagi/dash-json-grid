@@ -16,12 +16,12 @@ import React, {Component} from 'react';
 import JSONGrid from '@redheadphone/react-json-grid';
 
 import {propTypes, defaultProps} from '../components/DashJsonGrid.react';
-import {isArray} from '../utils';
+import {isArray, sanitizeData} from '../utils';
 
 /**
  * DashJsonGrid is a Dash porting version for the React component:
  * `react-json-grid/JSONGrid`
- * 
+ *
  * This component provides a JSON Grid viewer used for viewing complicated and
  * unstructured serializable JSON data.
  */
@@ -97,7 +97,7 @@ export default class DashJsonGrid extends Component {
         }
       >
         <JSONGrid
-          data={data}
+          data={sanitizeData(data)}
           defaultExpandDepth={default_expand_depth}
           defaultExpandKeyTree={default_expand_key_tree}
           onSelect={this.handleOnSelect}
