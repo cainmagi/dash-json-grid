@@ -35,6 +35,7 @@ Or use the following commands to install **the developing version** from the Git
 ```bash
 git clone https://github.com/cainmagi/dash-json-grid
 cd dash-json-grid
+python -m pip install -r requirements-dev.txt
 yarn install
 yarn build
 python -m pip install .
