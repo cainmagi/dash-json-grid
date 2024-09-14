@@ -19,6 +19,7 @@
 2. Adjust project details in the readme.
 3. Add an explanation about `data` in the readme.
 4. Adjust the metadata of the project, and remove the auto-genreated file.
+5. Adjust the format of the workflow files.
 
 ### 0.3.0 @ 09/13/2024
 
