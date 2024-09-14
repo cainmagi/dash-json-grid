@@ -16,7 +16,7 @@
 #### :floppy_disk: Change
 
 1. Add the section "3. Additional utilities" to the readme.
-2. Adjust project details in the readme.
+2. Adjust project details and fix typos in the readme.
 3. Add an explanation about `data` in the readme.
 4. Adjust the metadata of the project, and remove the auto-genreated file.
 5. Adjust the format of the workflow files.
