@@ -3,9 +3,13 @@
 <p align="center">
   <a href="https://github.com/cainmagi/dash-json-grid/releases/latest"><img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/cainmagi/dash-json-grid?logo=github&sort=semver&style=flat-square"></a>
   <a href="https://github.com/cainmagi/dash-json-grid/releases"><img alt="GitHub all releases" src="https://img.shields.io/github/downloads/cainmagi/dash-json-grid/total?logo=github&style=flat-square"></a>
-  <a href="https://github.com/cainmagi/dash-json-grid/blob/main/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/cainmagi/dash-json-grid?style=flat-square"></a>
-  <a href="https://pypi.org/project/dash-json-grid"><img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/dash-json-grid?style=flat-square&logo=pypi&logoColor=white
+  <a href="https://github.com/cainmagi/dash-json-grid/blob/main/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/cainmagi/dash-json-grid?style=flat-square&logo=opensourceinitiative&logoColor=white"></a>
+  <a href="https://pypi.org/project/dash-json-grid"><img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/dash-json-grid?style=flat-square&logo=pypi&logoColor=white&label=pypi
   "></a>
+</p>
+<p align="center">
+  <a href="https://github.com/cainmagi/dash-json-grid/actions/workflows/python-package.yml"><img alt="GitHub Actions (Build)" src="https://img.shields.io/github/actions/workflow/status/cainmagi/dash-json-grid/python-package.yml?style=flat-square&logo=githubactions&logoColor=white&label=build"></a>
+  <a href="https://github.com/cainmagi/dash-json-grid/actions/workflows/python-publish.yml"><img alt="GitHub Actions (Release)" src="https://img.shields.io/github/actions/workflow/status/cainmagi/dash-json-grid/python-publish.yml?style=flat-square&logo=githubactions&logoColor=white&label=release"></a>
 </p>
 
 Dash JSON Grid is a Dash component library.
@@ -116,6 +120,9 @@ The following arguments are **NOT** properties. They are used for providing diff
     | Name                  | Type     | Description                                                           | Default       |
     | --------------------- | -------- | --------------------------------------------------------------------- | ------------- |
     | json_file | `str` or `PathLike` or `IO[str]` | If it is a string or a path-like object, it is used for locating the json file. It can be a file-like object, too. This value is also used for replacing `data`.  | Required :exclamation:   |
+
+> [!CAUTION]
+> Please remember to use the callback property to get `data` in any case. Python allows users to define a dictionary key by hashable objects like `int`. However, the keyword in the JSON data is always `str`. Therefore, using `data` property to get the value can ensure that the data structure is aligned with the other callback properties like `selected_path`.
 
 ## 3. Additional utilities
 
