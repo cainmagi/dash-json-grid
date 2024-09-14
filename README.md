@@ -4,7 +4,8 @@
   <a href="https://github.com/cainmagi/dash-json-grid/releases/latest"><img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/cainmagi/dash-json-grid?logo=github&sort=semver&style=flat-square"></a>
   <a href="https://github.com/cainmagi/dash-json-grid/releases"><img alt="GitHub all releases" src="https://img.shields.io/github/downloads/cainmagi/dash-json-grid/total?logo=github&style=flat-square"></a>
   <a href="https://github.com/cainmagi/dash-json-grid/blob/main/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/cainmagi/dash-json-grid?style=flat-square"></a>
-  <a href="https://pypi.org/project/dash-json-grid"><img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/dash-json-grid?style=flat-square"></a>
+  <a href="https://pypi.org/project/dash-json-grid"><img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/dash-json-grid?style=flat-square&logo=pypi&logoColor=white
+  "></a>
 </p>
 
 Dash JSON Grid is a Dash component library.
@@ -15,7 +16,7 @@ The following two figures compare the demos of the original React version and th
 
 |             React JSON Grid             |            Dash JSON Grid             |
 | :-------------------------------------: | :-----------------------------------: |
-| ![demo-react](./display/demo-react.png) | ![demo-dash](./display/demo-dash.png) |
+| ![demo-react][pic-demo-react] | ![demo-dash][pic-demo-dash] |
 
 ## 1. Install
 
@@ -25,10 +26,14 @@ Intall the **latest released version** of this package by using the PyPI source:
 python -m pip install dash-json-grid
 ```
 
-Or use the following command to install **the developing version** from the GitHub Source:
+Or use the following commands to install **the developing version** from the GitHub Source when you have already installed [Git :hammer:][tool-git], [NodeJS :hammer:][tool-nodejs], and [Yarn :hammer:][tool-yarn]:
 
 ```bash
-python -m pip install git+https://github.com/cainmagi/dash-json-grid
+git clone https://github.com/cainmagi/dash-json-grid
+cd dash-json-grid
+yarn install
+yarn build
+python -m pip install .
 ```
 
 ## 2. Usage
@@ -95,7 +100,7 @@ The `DashJsonGrid` component supports the following callback-accessible properti
 | selected_path           | `list`  | A sequence of indicies representing the route of the currently selected element. The last value can represent a column or a table if it is a one-value list. | `[]` |
 | highlight_selected      | `bool`  | Whether to highlight the selected item or not. If disabled, the selection will not trigger callbacks. | `True`          |
 | search_text             | `str`   | The text that needs to be searched in the JSON data.                  | undefined     |
-| theme                   | `str` or `dict`   | The theme name or the dictionary representing the details of a theme.  | 'default'     |
+| theme                   | `str` or `dict`   | The theme name or the dictionary representing the details of a theme.  | `"default"`   |
 | loading_state           | `dict`   | The loading state set by Dash. This value should not be used by users. | undefined            |
 
 The following arguments are **NOT** properties. They are used for providing different ways of initialization.
@@ -111,6 +116,131 @@ The following arguments are **NOT** properties. They are used for providing diff
     | Name                  | Type     | Description                                                           | Default       |
     | --------------------- | -------- | --------------------------------------------------------------------- | ------------- |
     | json_file | `str` or `PathLike` or `IO[str]` | If it is a string or a path-like object, it is used for locating the json file. It can be a file-like object, too. This value is also used for replacing `data`.  | Required :exclamation:   |
+
+## 3. Additional utilities
+
+The following functions are used for helping users to update the component by the callback.
+
+### 3.1. Compare routes
+
+``` python
+class DashJsonGrid:
+    @staticmethod
+    def compare_routes(route_1: Route, route_2: Route) -> bool: ...
+
+
+# Example
+@callback(
+    Output(...),
+    Input("viewer", "selected_path")
+)
+def check_route(route):
+    if DashJsonGrid.compare_routes(route, [1, "new", ["column"]]):
+        # Will do something only when route is [1, "new", ["column"]]
+        ...
+```
+
+We use this `compare_route` method to validate whether the route provided by the selected callback is a specific value or not.
+
+| Argument                  | Type     | Description                                                           | Default       |
+| --------------------- | -------- | --------------------------------------------------------------------- | ------------- |
+| route_1 | `Sequence` of `int`, `str`, or `[str]` | The routes are provided by the `selected_path` callback. Each element represents a index of the routing level sequentially. The last element may be a one-element sequence. In this case, it represents the selected value is a table or a table column.  | Required :exclamation:   |
+| route_2 | The same as `route_1` | The second route value to be compared.  | Required :exclamation:   |
+
+### 3.2. Get a part of the data.
+
+``` python
+class DashJsonGrid:
+    @staticmethod
+    def get_data_by_route(data: Any, route: Route) -> Any: ...
+
+
+# Example
+@callback(
+    Output(...),
+    Input("viewer", "selected_path"),
+    State("viewer", "data")
+)
+def show_data(route, data):
+    data_part = DashJsonGrid.get_data_by_route(data, route)
+    ...
+```
+
+This method is used for getting the small part of the data by a specific `route`.
+
+| Argument                  | Type     | Description                                                           | Default       |
+| --------------------- | -------- | --------------------------------------------------------------------- | ------------- |
+| data | `Any` | The whole data object to be routed.  | Required :exclamation:   |
+| route | `Sequence` of `int`, `str`, or `[str]` | A sequence of indicies used for locating the specific value in `data`. If the last element of this `route` locates a table column, will locate each value of the column as a sequence.  | Required :exclamation:   |
+
+| Returned                  | Type     | Description                                                           |
+| --------------------- | -------- | --------------------------------------------------------------------- |
+| #1 | `Any` | The value located by `route`.  |
+
+### 3.3. Modify a part of the data.
+
+``` python
+class DashJsonGrid:
+    @staticmethod
+    def update_data_by_route(data: Any, route: Route, val: Any) -> Any: ...
+
+
+# Example
+@callback(
+    Output("viewer", "data"),
+    Input("viewer", "selected_path"),
+    State("viewer", "data")
+)
+def modify_data(route, data):
+    data_part = DashJsonGrid.get_data_by_route(data, route)
+    modified_part = ...  # Do some modification
+    DashJsonGrid.update_data_by_route(data, route, modified_part)
+    return data
+```
+
+This method is used for updating the data part selected by a specific `route`, where `route` is provided by the callback value `selected_path`.
+
+| Argument                  | Type     | Description                                                           | Default       |
+| --------------------- | -------- | --------------------------------------------------------------------- | ------------- |
+| data | `Any` | The whole data object to be updated.  | Required :exclamation:   |
+| route | `Sequence` of `int`, `str`, or `[str]` | A sequence of indicies used for locating the specific value in `data`. If the last element of this `route` locates a table column, will apply the update to each value of the column.  | Required :exclamation:   |
+| val | `Any` | The value used for updating the located part of the given dictionary. If a table column is located, this `val` will be broadcasted to each value of the column. If the broadcasting fails, raise an `IndexError`. | Required :exclamation: |
+
+| Returned                  | Type     | Description                                                           |
+| --------------------- | -------- | --------------------------------------------------------------------- |
+| #1 | `Any` | The modified `data`.  Since `data` is mutable, even if this returned value is not used, the modification will still take effect. |
+
+### 3.4. Delete a part of the data.
+
+``` python
+class DashJsonGrid:
+    @staticmethod
+    def delete_data_by_route(data: Any, route: Route) -> Any:
+
+
+# Example
+@callback(
+    Output("viewer", "data"),
+    Input("viewer", "selected_path"),
+    State("viewer", "data")
+)
+def delete_data(route, data):
+    deleted_part = DashJsonGrid.delete_data_by_route(data, route)
+    # deleted_part is the part that is removed from the whole data.
+    return data
+```
+
+This method is similar to the functionality of `dict.pop(...)`. It accepts the `route` specified by the callback value `selected_path`, remove the data part selected by the value, and return the removed part as the output.
+
+| Argument                  | Type     | Description                                                           | Default       |
+| --------------------- | -------- | --------------------------------------------------------------------- | ------------- |
+| data | `Any` | The whole data object to be modified, where the located part will be deleted.  | Required :exclamation:   |
+| route | `Sequence` of `int`, `str`, or `[str]` | A sequence of indicies used for locating the specific value in `data`. If the last element of this `route` locates a table column, will pop out the each value of the column.  | Required :exclamation:   |
+| val | `Any` | The data that is deleted and poped out. | Required :exclamation: |
+
+| Returned                  | Type     | Description                                                           |
+| --------------------- | -------- | --------------------------------------------------------------------- |
+| #1 | `Any` | The data that is deleted and poped out. |
 
 ## 4. Available themes
 
@@ -161,11 +291,11 @@ When using the theme name, the available theme names are:
 
 ## 5. Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md)
+See [CONTRIBUTING.md :book:][link-contributing]
 
 ## 6. Changelog
 
-See [Changelog.md](./Changelog.md)
+See [Changelog.md :book:][link-changelog]
 
 ## 7. Acknowledgements
 
@@ -177,3 +307,12 @@ See [Changelog.md](./Changelog.md)
 [git-json-to-html]:https://github.com/kevincobain2000/json-to-html-table
 [link-json-grid]:https://jsongrid.com/json-grid
 [dash-pmcallback]:https://dash.plotly.com/pattern-matching-callbacks
+[tool-git]:https://git-scm.com/downloads
+[tool-nodejs]:https://nodejs.org/en/download/package-manager
+[tool-yarn]:https://yarnpkg.com/getting-started/install
+
+[pic-demo-react]:https://raw.githubusercontent.com/cainmagi/dash-json-grid/main/display/demo-react.png
+[pic-demo-dash]:https://raw.githubusercontent.com/cainmagi/dash-json-grid/main/display/demo-dash.png
+
+[link-contributing]:https://github.com/cainmagi/dash-json-grid/blob/main/CONTRIBUTING.md
+[link-changelog]:https://github.com/cainmagi/dash-json-grid/blob/main/Changelog.md

@@ -4,6 +4,17 @@
 
 ## CHANGELOG
 
+### 0.3.1 @ 09/14/2024
+
+#### :wrench: Fix
+
+1. Fix: Fix some links and formats in the readme.
+2. Fix: The step for installing the dev version suggested in the readme is not correct. Now it has been corrected.
+
+#### :floppy_disk: Change
+
+1. Add the section "3. Additional utilities" to the readme.
+
 ### 0.3.0 @ 09/13/2024
 
 #### :mega: New
