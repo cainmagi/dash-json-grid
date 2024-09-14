@@ -35,6 +35,7 @@ T = TypeVar("T")
 Route = Sequence[Union[str, int, Sequence[Union[str, int]]]]
 __all__ = (
     "is_sequence",
+    "sanitize_list_index",
     "get_item_of_object",
     "set_item_of_object",
     "pop_item_of_object",
@@ -51,6 +52,16 @@ def is_sequence(val: Any) -> TypeGuard[Sequence[Any]]:
     )
 
 
+def sanitize_list_index(index: Any) -> int:
+    """Try to ensure `index` to be a `int`. If failed, raise `ValueError`."""
+    if isinstance(index, int):
+        return index
+    if isinstance(index, str):
+        return int(index)
+    else:
+        raise ValueError("Unrecognized index value: {0}".format(index))
+
+
 def get_item_of_object(data: Any, index: Any) -> Any:
     """Run `data[index]` supposing that `data` is abitrary and `index` can be a
     one-value sequence."""
@@ -64,11 +75,13 @@ def get_item_of_object(data: Any, index: Any) -> Any:
         if isinstance(data, collections.abc.Mapping):
             return data[index]
         elif isinstance(data, collections.abc.Sequence):
-            if not isinstance(index, int):
+            try:
+                index = sanitize_list_index(index)
+            except ValueError as exc:
                 raise TypeError(
                     "Index {0} does not match the type of the data "
-                    "{1}".format(index, data)
-                )
+                    "{1}".format(repr(index), data)
+                ) from exc
             return data[index]
     return data
 
@@ -110,11 +123,13 @@ class _set_item_of_object:
         elif isinstance(data, collections.abc.MutableMapping):
             data[index_key] = value
         elif isinstance(data, collections.abc.MutableSequence):
-            if not isinstance(index_key, int):
+            try:
+                index_key = sanitize_list_index(index_key)
+            except ValueError as exc:
                 raise TypeError(
                     "Index {0} does not match the type of the data "
-                    "{1}".format(index_key, data)
-                )
+                    "{1}".format(repr(index_key), data)
+                ) from exc
             data[index_key] = value
         else:
             raise ValueError(
@@ -128,11 +143,13 @@ class _set_item_of_object:
         if isinstance(data, collections.abc.MutableMapping):
             data[index] = value
         elif isinstance(data, collections.abc.MutableSequence):
-            if not isinstance(index, int):
+            try:
+                index = sanitize_list_index(index)
+            except ValueError as exc:
                 raise TypeError(
                     "Index {0} does not match the type of the data "
-                    "{1}".format(index, data)
-                )
+                    "{1}".format(repr(index), data)
+                ) from exc
             data[index] = value
         else:
             raise ValueError(
@@ -174,11 +191,13 @@ def pop_item_of_object(data: Any, index: Any) -> Any:
         if isinstance(data, collections.abc.MutableMapping):
             return data.pop(index)
         elif isinstance(data, collections.abc.MutableSequence):
-            if not isinstance(index, int):
+            try:
+                index = sanitize_list_index(index)
+            except ValueError as exc:
                 raise TypeError(
                     "Index {0} does not match the type of the data "
-                    "{1}".format(index, data)
-                )
+                    "{1}".format(repr(index), data)
+                ) from exc
             return data.pop(index)
         else:
             raise ValueError(

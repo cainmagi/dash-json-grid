@@ -11,6 +11,7 @@
 1. Fix: Fix some links and formats in the readme.
 2. Fix: The step for installing the dev version suggested in the readme is not correct. Now it has been corrected.
 3. Fix: Make `data` sanitized. Now a scalar like `int` or `str` can be passed to the property `data` and the `data` will be rendered as a one-value list.
+4. Fix: When selecting a scalar element from a list, the returned index in `selected_path` is `str` but not `int`. Add `mixins.sanitize_list_index(...)` to treat this special case.
 
 #### :floppy_disk: Change
 
