@@ -125,11 +125,11 @@ The following arguments are **NOT** properties. They are used for providing diff
 > [!CAUTION]
 > Please remember to use the callback property to get `data` in any case. Python allows users to define a dictionary key by hashable objects like `int`. However, the keyword in the JSON data is always `str`. Therefore, using `data` property to get the value can ensure that the data structure is aligned with the other callback properties like `selected_path`.
 
-## 3. Additional utilities
+## 4. Additional utilities
 
 The following functions are used for helping users to update the component by the callback.
 
-### 3.1. Compare routes
+### 4.1. Compare routes
 
 ``` python
 class DashJsonGrid:
@@ -155,7 +155,7 @@ We use this `compare_route` method to validate whether the route provided by the
 | route_1 | `Sequence` of `int`, `str`, or `[str]` | The routes are provided by the `selected_path` callback. Each element represents a index of the routing level sequentially. The last element may be a one-element sequence. In this case, it represents the selected value is a table or a table column.  | Required :exclamation:   |
 | route_2 | The same as `route_1` | The second route value to be compared.  | Required :exclamation:   |
 
-### 3.2. Get a part of the data.
+### 4.2. Get a part of the data.
 
 ``` python
 class DashJsonGrid:
@@ -185,7 +185,7 @@ This method is used for getting the small part of the data by a specific `route`
 | --------------------- | -------- | --------------------------------------------------------------------- |
 | #1 | `Any` | The value located by `route`.  |
 
-### 3.3. Modify a part of the data.
+### 4.3. Modify a part of the data.
 
 ``` python
 class DashJsonGrid:
@@ -218,7 +218,7 @@ This method is used for updating the data part selected by a specific `route`, w
 | --------------------- | -------- | --------------------------------------------------------------------- |
 | #1 | `Any` | The modified `data`.  Since `data` is mutable, even if this returned value is not used, the modification will still take effect. |
 
-### 3.4. Delete a part of the data.
+### 4.4. Delete a part of the data.
 
 ``` python
 class DashJsonGrid:
@@ -250,7 +250,7 @@ This method is similar to the functionality of `dict.pop(...)`. It accepts the `
 | --------------------- | -------- | --------------------------------------------------------------------- |
 | #1 | `Any` | The data that is deleted and poped out. |
 
-## 4. Available themes
+## 5. Available themes
 
 The property `theme` can be a theme name (`str`) or a theme-configuration dictionary (`dict`). The dictionary format should be like this:
 
@@ -297,15 +297,15 @@ When using the theme name, the available theme names are:
 ]
 ```
 
-## 5. Contributing
+## 6. Contributing
 
 See [CONTRIBUTING.md :book:][link-contributing]
 
-## 6. Changelog
+## 7. Changelog
 
 See [Changelog.md :book:][link-changelog]
 
-## 7. Acknowledgements
+## 8. Acknowledgements
 
 - [RedHeadphone/react-json-grid :link:][git-react-json-grid]: The original React component implementation of this project.
 - [jsongrid.com :link:][link-json-grid]: Grid design and styles.
