@@ -21,6 +21,7 @@
 
 1. Modify the workflow to exempt the out-of-date dependency: `borales/actions-yarn@v4`.
 2. Update the issue templates by changing some examples.
+3. Update the link of submitting the vulnerability issue, and the description in the security policy file.
 
 ### 0.3.1 @ 09/14/2024
 
