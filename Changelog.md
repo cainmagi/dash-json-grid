@@ -14,6 +14,7 @@
 #### :wrench: Fix
 
 1. Fix: When rendering the data, the component will print `data`. Remove this unexpected behavior.
+2. Fix: Correct the component name and the specified style name in `usage.py`.
 
 ### 0.3.1 @ 09/14/2024
 

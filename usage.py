@@ -66,8 +66,9 @@ test_data = {
 app.layout = html.Div(
     style=main_css,
     children=[
-        html.P(
-            [
+        html.Div(
+            style={"marginBottom": "1rem"},
+            children=[
                 html.Span("Search:"),
                 dcc.Input(
                     id="search",
@@ -75,17 +76,18 @@ app.layout = html.Div(
                     style={
                         "height": "32px",
                         "padding": "6px 10px",
-                        "background-color": "#fff",
+                        "backgroundColor": "#fff",
                         "border": "1px solid #D1D1D1",
-                        "border-radius": "4px",
-                        "box-shadow": "none",
-                        "box-sizing": "border-box",
+                        "borderRadius": "4px",
+                        "boxShadow": "none",
+                        "boxSizing": "border-box",
                     },
                 ),
-            ]
+            ],
         ),
-        html.P(
-            [
+        html.Div(
+            style={"marginBottom": "1rem"},
+            children=[
                 html.Span("Theme:"),
                 dcc.Dropdown(
                     id="theme",
@@ -121,7 +123,7 @@ app.layout = html.Div(
                     clearable=False,
                     value="default",
                 ),
-            ]
+            ],
         ),
         dcc.Loading(
             dash_json_grid.DashJsonGrid(
