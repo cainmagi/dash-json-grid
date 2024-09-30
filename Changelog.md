@@ -16,6 +16,10 @@
 1. Fix: When rendering the data, the component will print `data`. Remove this unexpected behavior.
 2. Fix: Correct the component name and the specified style name in `usage.py`.
 
+#### :floppy_disk: Change
+
+1. Modify the workflow to exempt the out-of-date dependency: `borales/actions-yarn@v4`.
+
 ### 0.3.1 @ 09/14/2024
 
 #### :wrench: Fix

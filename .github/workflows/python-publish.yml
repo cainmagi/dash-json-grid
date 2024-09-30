@@ -40,10 +40,10 @@ jobs:
         run: |
           npm install -g corepack
           corepack enable
+          corepack prepare yarn --activate
       - name: Yarn run install
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install
+        run: |
+          yarn install
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -51,9 +51,8 @@ jobs:
           if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
           if [ -f requirements-dev.txt ]; then python -m pip install -r requirements-dev.txt; fi
       - name: Use Yarn to build component
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: build
+        run: |
+          yarn build
       - name: Build package
         run: python -m build
       - name: Publish package distributions to PyPI
