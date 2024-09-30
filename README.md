@@ -330,7 +330,7 @@ body {
 
 > [!NOTE]
 >
-> Using `"inherit" | "unset"` is a new feature provided by dash-json-grid since v0.4.2.
+> Using `"inherit" | "unset"` is a new feature provided by dash-json-grid since v0.3.2.
 > The original component (react-json-grid@0.7.0) does not support this feature yet.
 
 ## 6. Contributing
