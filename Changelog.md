@@ -10,6 +10,7 @@
 
 1. Add the `style` property to the component.
 2. Allow users to specify the `theme` property as `inherit` or `unset`, which allows more flexible configurations.
+3. Add the security policy and the corresponding issue template.
 
 #### :wrench: Fix
 
@@ -19,6 +20,7 @@
 #### :floppy_disk: Change
 
 1. Modify the workflow to exempt the out-of-date dependency: `borales/actions-yarn@v4`.
+2. Update the issue templates by changing some examples.
 
 ### 0.3.1 @ 09/14/2024
 

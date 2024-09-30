@@ -42,7 +42,7 @@ body:
     attributes:
       label: Traceback
       description: >-
-        The python trackback of the bug. If there is no traceback, please describe (1) The expected behaviors. (2) The actual behaviors.
+        The python traceback of the bug. If there is no traceback, please describe (1) The expected behaviors. (2) The actual behaviors.
       render: bash
 
   - type: textarea
@@ -64,7 +64,7 @@ body:
     attributes:
       label: OS
       description: >-
-        e.g. Ubuntu 22.04, Debian 12, Windows 10 21H1
+        e.g. Ubuntu 24.04, Debian 12, Windows 11 23H2
     validations:
       required: true
   - type: input
@@ -78,7 +78,7 @@ body:
     attributes:
       label: Dash JSON Grid Viewer version
       description: >-
-        e.g. 0.3.0
+        e.g. 0.3.2
     validations:
       required: true
 
