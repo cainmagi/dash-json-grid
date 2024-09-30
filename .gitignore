@@ -46,6 +46,14 @@
 /logs
 /outputs
 
+# zipped files.
+*.tar
+*.tar.gz
+*.tar.bz2
+*.zip
+*.rar
+*.7z
+
 # Auto-generated python scripts.
 /dash_json_grid/_imports_.py
 /dash_json_grid/DashJsonGrid.py

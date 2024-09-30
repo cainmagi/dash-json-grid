@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.3.2 @ 09/30/2024
+
+#### :mega: New
+
+1. Add the `style` property to the component.
+
 ### 0.3.1 @ 09/14/2024
 
 #### :wrench: Fix

@@ -78,6 +78,7 @@ export default class DashJsonGrid extends Component {
     const {
       id,
       class_name,
+      style,
       data,
       default_expand_depth,
       default_expand_key_tree,
@@ -92,6 +93,7 @@ export default class DashJsonGrid extends Component {
       <div
         id={id}
         className={class_name}
+        style={style}
         data-dash-is-loading={
           (loading_state && loading_state.is_loading) || undefined
         }

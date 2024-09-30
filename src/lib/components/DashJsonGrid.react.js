@@ -49,6 +49,11 @@ DashJsonGrid.propTypes = {
   class_name: PropTypes.string,
 
   /**
+   * Defines CSS styles which will override styles previously set.
+   */
+  style: PropTypes.object,
+
+  /**
    * The JSON object or array to be transformed into a grid table.
    */
   data: PropTypes.oneOfType([
