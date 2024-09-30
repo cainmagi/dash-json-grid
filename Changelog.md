@@ -9,6 +9,7 @@
 #### :mega: New
 
 1. Add the `style` property to the component.
+2. Allow users to specify the `theme` property as `inherit` or `unset`, which allows more flexible configurations.
 
 #### :wrench: Fix
 

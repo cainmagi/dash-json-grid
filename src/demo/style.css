@@ -1,0 +1,15 @@
+body {
+    --jg-bg-color: #fff;
+    --jg-boolean-color: #00f;
+    --jg-cell-border-color: #ddd;
+    --jg-highlight-bg-color: #c1def133;
+    --jg-index-color: #00f;
+    --jg-key-name-color: #32373b;
+    --jg-number-color: #007acc;
+    --jg-object-color: #00009f;
+    --jg-search-highlight-bg-color: #8885;
+    --jg-string-color: #A31515;
+    --jg-table-border-color: #a5a5a5;
+    --jg-table-header-bg-color: #ddd;
+    --jg-table-header-color: #333;
+}

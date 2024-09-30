@@ -60,6 +60,55 @@ export default class DashJsonGrid extends Component {
   }
 
   /**
+   * Get the theme configurations
+   * @param {string | Object.<string, string>} theme - The theme name or the theme
+   * definition object.
+   * @returns {{
+   *   themeName: string, customTheme: Object.<string, string>
+   * }} The dispatched theme name and the theme object. If either of them is
+   *    configured, the other one should be undefined.
+   */
+  getTheme(theme) {
+    if (typeof theme === 'object') {
+      return {
+        themeName: undefined,
+        customTheme: theme,
+      };
+    }
+    if (typeof theme === 'string') {
+      if (theme === 'inherit' || theme == 'unset') {
+        return {
+          themeName: undefined,
+          customTheme: {
+            bgColor: theme,
+            tableBorderColor: theme,
+            highlightBgColor: theme,
+            cellBorderColor: theme,
+            keyNameColor: theme,
+            indexColor: theme,
+            numberColor: theme,
+            booleanColor: theme,
+            stringColor: theme,
+            objectColor: theme,
+            tableHeaderBgColor: theme,
+            tableHeaderColor: theme,
+            searchHighlightBgColor: theme,
+          },
+        };
+      } else {
+        return {
+          themeName: theme,
+          customTheme: undefined,
+        };
+      }
+    }
+    return {
+      themeName: 'default',
+      customTheme: undefined,
+    };
+  }
+
+  /**
    * Handle the onSelect() event of `<JSONGrid/>`
    * @param {array} keyPath - A flattened sequence of indicies used for locating
    * (routing) the selected part of the data.
@@ -87,6 +136,9 @@ export default class DashJsonGrid extends Component {
       theme,
       loading_state,
     } = this.props;
+
+    const {themeName, customTheme} = this.getTheme(theme);
+
     return (
       <div
         id={id}
@@ -103,12 +155,8 @@ export default class DashJsonGrid extends Component {
           onSelect={this.handleOnSelect}
           highlightSelected={highlight_selected}
           searchText={search_text}
-          theme={
-            typeof theme === 'string' && theme.trim().length > 0
-              ? theme
-              : undefined
-          }
-          customTheme={typeof theme === 'object' ? theme : undefined}
+          theme={themeName}
+          customTheme={customTheme}
         />
       </div>
     );

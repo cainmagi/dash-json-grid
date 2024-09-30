@@ -293,9 +293,45 @@ When using the theme name, the available theme names are:
     "defaultLight", "defaultLight2", "slime", "spacegray",
     "blueberryDark", "nord", "nightOwl", "oneMonokai", "cobaltNext",
     "shadesOfPurple", "codeBlue", "softEra", "atomMaterial",
-    "evaDark", "moonLight"
+    "evaDark", "moonLight", "unset", "inherit"
 ]
 ```
+
+If you prefer to specify the theme of `dash-json-grid` by `css` or `scss`, please use
+
+``` python
+import dash_json_grid
+
+dash_json_grid.DashJsonGrid(
+    ...
+    theme="inherit"  # or "unset"
+)
+```
+
+and specify the following configurations in your stylesheet:
+
+``` css
+body {
+    --jg-bg-color: #f5f5f5;
+    --jg-boolean-color: #007acc;
+    --jg-cell-border-color: #c0c0c0;
+    --jg-highlight-bg-color: #e0e0e0;
+    --jg-index-color: #666666;
+    --jg-key-name-color: #333333;
+    --jg-number-color: #007acc;
+    --jg-object-color: #333333;
+    --jg-search-highlight-bg-color: #cccccc;
+    --jg-string-color: #2ca22c;
+    --jg-table-border-color: #d3d3d3;
+    --jg-table-header-bg-color: #dddddd;
+    --jg-table-header-color: #333333;
+}
+```
+
+> [!NOTE]
+>
+> Using `"inherit" | "unset"` is a new feature provided by dash-json-grid since v0.4.2.
+> The original component (react-json-grid@0.7.0) does not support this feature yet.
 
 ## 6. Contributing
 

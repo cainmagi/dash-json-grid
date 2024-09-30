@@ -1,6 +1,7 @@
 /* eslint no-magic-numbers: 0 */
 import React, {useState} from 'react';
 
+import './style.css';
 import {DashJsonGrid} from '../lib';
 
 const Search = (props) => {
@@ -57,6 +58,8 @@ const Theme = (props) => {
             'atomMaterial',
             'evaDark',
             'moonLight',
+            'inherit',
+            'unset',
           ].map((e, idx) => {
             return (
               <option key={idx} value={`${e}`}>

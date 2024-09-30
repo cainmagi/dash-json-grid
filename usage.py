@@ -23,6 +23,22 @@ import dash_json_grid
 
 app = Dash(__name__)
 
+main_css = {
+    "--jg-bg-color": "#fff",
+    "--jg-boolean-color": "#00f",
+    "--jg-cell-border-color": "#ddd",
+    "--jg-highlight-bg-color": "#c1def133",
+    "--jg-index-color": "#00f",
+    "--jg-key-name-color": "#32373b",
+    "--jg-number-color": "#007acc",
+    "--jg-object-color": "#00009f",
+    "--jg-search-highlight-bg-color": "#8885",
+    "--jg-string-color": "#A31515",
+    "--jg-table-border-color": "#a5a5a5",
+    "--jg-table-header-bg-color": "#ddd",
+    "--jg-table-header-color": "#333",
+}
+
 test_data = {
     "id": "0001",
     "type": "donut",
@@ -48,7 +64,8 @@ test_data = {
 }
 
 app.layout = html.Div(
-    [
+    style=main_css,
+    children=[
         html.P(
             [
                 html.Span("Search:"),
@@ -97,6 +114,8 @@ app.layout = html.Div(
                         "atomMaterial",
                         "evaDark",
                         "moonLight",
+                        "inherit",
+                        "unset",
                     ),
                     multi=False,
                     clearable=False,
@@ -115,7 +134,7 @@ app.layout = html.Div(
         html.Div((html.P("Selected Path:"), html.P(id="selected-path"))),
         html.Div((html.P("Selected Value:"), html.P(id="selected-val"))),
         html.Div(id="placeholder"),
-    ]
+    ],
 )
 
 

@@ -140,6 +140,8 @@ DashJsonGrid.propTypes = {
       'atomMaterial',
       'evaDark',
       'moonLight',
+      'inherit',
+      'unset',
     ]),
     PropTypes.exact({
       /**
