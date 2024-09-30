@@ -10,6 +10,10 @@
 
 1. Add the `style` property to the component.
 
+#### :wrench: Fix
+
+1. Fix: When rendering the data, the component will print `data`. Remove this unexpected behavior.
+
 ### 0.3.1 @ 09/14/2024
 
 #### :wrench: Fix

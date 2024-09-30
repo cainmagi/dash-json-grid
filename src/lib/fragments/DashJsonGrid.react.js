@@ -87,8 +87,6 @@ export default class DashJsonGrid extends Component {
       theme,
       loading_state,
     } = this.props;
-    console.log(this.props);
-
     return (
       <div
         id={id}
