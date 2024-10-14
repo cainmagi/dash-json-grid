@@ -13,6 +13,7 @@
 #### :floppy_disk: Change
 
 1. Add the folder `/docs` to the ignore list of `git`, `docker`, `flake8`, `black`, and `pyright`.
+2. Add the banner to the readme file.
 
 ### 0.3.2 @ 09/30/2024
 

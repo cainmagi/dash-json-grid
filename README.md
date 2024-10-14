@@ -1,5 +1,7 @@
 # Dash JSON Grid
 
+<p><img alt="Banner" src="https://repository-images.githubusercontent.com/856794016/fe6159c5-0ca5-4f8e-83d5-816a36e64ce2"></p>
+
 <p align="center">
   <a href="https://github.com/cainmagi/dash-json-grid/releases/latest"><img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/cainmagi/dash-json-grid?logo=github&sort=semver&style=flat-square"></a>
   <a href="https://github.com/cainmagi/dash-json-grid/releases"><img alt="GitHub all releases" src="https://img.shields.io/github/downloads/cainmagi/dash-json-grid/total?logo=github&style=flat-square"></a>
@@ -17,8 +19,8 @@ Dash porting version of the react project [React JSON Grid :link:][git-react-jso
 
 The following two figures compare the demos of the original React version and the ported Dash version. Since this project is just a dash component wrapper on the original React component, the performance is the same.
 
-|             React JSON Grid             |            Dash JSON Grid             |
-| :-------------------------------------: | :-----------------------------------: |
+|        React JSON Grid        |       Dash JSON Grid        |
+| :---------------------------: | :-------------------------: |
 | ![demo-react][pic-demo-react] | ![demo-dash][pic-demo-dash] |
 
 ## 1. Install
