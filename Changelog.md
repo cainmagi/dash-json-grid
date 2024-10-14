@@ -6,6 +6,10 @@
 
 ### 0.4.0 @ 10/14/2023
 
+#### :wrench: Fix
+
+1. Fix: Correct a typo of the html codes in the readme file.
+
 #### :floppy_disk: Change
 
 1. Add the folder `/docs` to the ignore list of `git`, `docker`, `flake8`, `black`, and `pyright`.
