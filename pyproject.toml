@@ -67,6 +67,7 @@ extend-exclude = '''
   ^/dash_json_grid/_imports_.py
   |^/dash_json_grid/DashJsonGrid.py
   |^/_validate_init.py
+  |^/docs
 )
 '''
 
@@ -92,6 +93,7 @@ exclude = [
   "data-*",
   "logs",
   "outputs",
+  "docs",
   ".VSCodeCounter",
   ".github",
   ".git",

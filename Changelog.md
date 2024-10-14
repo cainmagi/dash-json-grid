@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.4.0 @ 10/14/2023
+
+#### :floppy_disk: Change
+
+1. Add the folder `/docs` to the ignore list of `git`, `docker`, `flake8`, `black`, and `pyright`.
+
 ### 0.3.2 @ 09/30/2024
 
 #### :mega: New

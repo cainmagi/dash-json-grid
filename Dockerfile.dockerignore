@@ -44,6 +44,9 @@
 /logs
 /outputs
 
+# Ignore docs (maintained by another branch)
+/docs
+
 # Auto-generated python scripts.
 /dash_json_grid/_imports_.py
 /dash_json_grid/DashJsonGrid.py

@@ -46,6 +46,9 @@
 /logs
 /outputs
 
+# Ignore docs (maintained by another branch)
+/docs
+
 # zipped files.
 *.tar
 *.tar.gz
