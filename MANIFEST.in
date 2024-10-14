@@ -9,6 +9,9 @@ include dash_json_grid/package-info.json
 include README.md
 include Changelog.md
 include CONTRIBUTING.md
+include CODE_OF_CONDUCT.md
+include SECURITY.md
+include review_checklist.md
 include LICENSE
 include package.json
 include version/__init__.py
