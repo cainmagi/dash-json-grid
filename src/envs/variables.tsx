@@ -23,8 +23,8 @@ export const repoURL = (url: string): string => {
   return variables.repoURL + "/" + url;
 };
 
-export const demoURL = (url: string): string => {
-  return variables.sourceURL + "/examples/" + url;
+export const rootURL = (url: string): string => {
+  return variables.sourceURL + "/" + url;
 };
 
 export const sourceURL = (url: string): string => {

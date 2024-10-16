@@ -14,3 +14,4 @@
 #### :wrench: Fix
 
 1. Correct a link in `/docs/examples`.
+2. Correct another broken link in `/docs/examples`.
