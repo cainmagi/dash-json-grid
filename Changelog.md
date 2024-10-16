@@ -4,7 +4,7 @@
 
 ## CHANGELOG
 
-### 0.4.0 @ 10/14/2023
+### 0.3.3 @ 10/16/2023
 
 #### :wrench: Fix
 
@@ -15,6 +15,7 @@
 1. Add the folder `/docs` to the ignore list of `git`, `docker`, `flake8`, `black`, and `pyright`.
 2. Add the banner to the readme file.
 3. Add more files to the `MANIFEST.in` list.
+4. Previously, `DashJsonGrid.pop_item_of_object(...)` cannot pop a column if the column name does not exist in a specific row. Now, the `undefined` value will be treated as `None` when popped out to make this method compatible with a partially complete column.
 
 ### 0.3.2 @ 09/30/2024
 

@@ -179,9 +179,16 @@ def pop_item_of_object(data: Any, index: Any) -> Any:
     if is_sequence(index):
         index_key = index[0]
         if is_sequence(data):
-            return tuple(item.pop(index_key) for item in data)
+            return tuple(
+                (
+                    item.pop(index_key, None)
+                    if isinstance(item, collections.abc.MutableMapping)
+                    else item.pop(index_key)
+                )
+                for item in data
+            )
         elif isinstance(data, collections.abc.MutableMapping):
-            return data.pop(index_key)
+            return data.pop(index_key, None)
         else:
             raise ValueError(
                 "Fail to modify the data, because the given data {0} is "
@@ -189,7 +196,7 @@ def pop_item_of_object(data: Any, index: Any) -> Any:
             )
     else:
         if isinstance(data, collections.abc.MutableMapping):
-            return data.pop(index)
+            return data.pop(index, None)
         elif isinstance(data, collections.abc.MutableSequence):
             try:
                 index = sanitize_list_index(index)
