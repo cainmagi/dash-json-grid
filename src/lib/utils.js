@@ -18,7 +18,7 @@ export const isArray =
   });
 
 export const sanitizeData = (data) => {
-  if (['object', 'array'].includes(typeof data)) {
+  if (["object", "array"].includes(typeof data)) {
     return data;
   }
 

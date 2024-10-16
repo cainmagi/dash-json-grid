@@ -11,12 +11,12 @@
  * https://github.com/RedHeadphone/react-json-grid
  */
 
-import React, {Component} from 'react';
+import React, {Component} from "react";
 
-import JSONGrid from '@redheadphone/react-json-grid';
+import JSONGrid from "@redheadphone/react-json-grid";
 
-import {propTypes, defaultProps} from '../components/DashJsonGrid.react';
-import {isArray, sanitizeData} from '../utils';
+import {propTypes, defaultProps} from "../components/DashJsonGrid.react";
+import {isArray, sanitizeData} from "../utils";
 
 /**
  * DashJsonGrid is a Dash porting version for the React component:
@@ -69,14 +69,14 @@ export default class DashJsonGrid extends Component {
    *    configured, the other one should be undefined.
    */
   getTheme(theme) {
-    if (typeof theme === 'object') {
+    if (typeof theme === "object") {
       return {
         themeName: undefined,
         customTheme: theme,
       };
     }
-    if (typeof theme === 'string') {
-      if (theme === 'inherit' || theme == 'unset') {
+    if (typeof theme === "string") {
+      if (theme === "inherit" || theme == "unset") {
         return {
           themeName: undefined,
           customTheme: {
@@ -103,7 +103,7 @@ export default class DashJsonGrid extends Component {
       }
     }
     return {
-      themeName: 'default',
+      themeName: "default",
       customTheme: undefined,
     };
   }

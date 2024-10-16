@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 export const DashJsonGrid = React.lazy(() =>
   import(
-    /* webpackChunkName: "DashJsonGrid" */ './fragments/DashJsonGrid.react'
+    /* webpackChunkName: "DashJsonGrid" */ "./fragments/DashJsonGrid.react"
   )
 );

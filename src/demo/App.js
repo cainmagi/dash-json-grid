@@ -1,8 +1,8 @@
 /* eslint no-magic-numbers: 0 */
-import React, {useState} from 'react';
+import React, {useState} from "react";
 
-import './style.css';
-import {DashJsonGrid} from '../lib';
+import "./style.css";
+import {DashJsonGrid} from "../lib";
 
 const Search = (props) => {
   return (
@@ -27,39 +27,39 @@ const Theme = (props) => {
       <p>
         <span>Theme:</span>
         <select
-          name={'theme'}
+          name={"theme"}
           value={props.value}
           onChange={(e) => {
             props.setTheme(e.target.value);
           }}
         >
           {[
-            'default',
-            'dracula',
-            'monokai',
-            'oceanicPark',
-            'panda',
-            'gruvboxMaterial',
-            'tokyoNight',
-            'remedy',
-            'atlanticNight',
-            'defaultLight',
-            'defaultLight2',
-            'slime',
-            'spacegray',
-            'blueberryDark',
-            'nord',
-            'nightOwl',
-            'oneMonokai',
-            'cobaltNext',
-            'shadesOfPurple',
-            'codeBlue',
-            'softEra',
-            'atomMaterial',
-            'evaDark',
-            'moonLight',
-            'inherit',
-            'unset',
+            "default",
+            "dracula",
+            "monokai",
+            "oceanicPark",
+            "panda",
+            "gruvboxMaterial",
+            "tokyoNight",
+            "remedy",
+            "atlanticNight",
+            "defaultLight",
+            "defaultLight2",
+            "slime",
+            "spacegray",
+            "blueberryDark",
+            "nord",
+            "nightOwl",
+            "oneMonokai",
+            "cobaltNext",
+            "shadesOfPurple",
+            "codeBlue",
+            "softEra",
+            "atomMaterial",
+            "evaDark",
+            "moonLight",
+            "inherit",
+            "unset",
           ].map((e, idx) => {
             return (
               <option key={idx} value={`${e}`}>
@@ -86,26 +86,26 @@ const Output = (props) => {
 
 const App = () => {
   const _data = {
-    id: '0001',
-    type: 'donut',
-    name: 'Cake',
+    id: "0001",
+    type: "donut",
+    name: "Cake",
     ppu: 1111.55,
     batters: {
       batter: [
-        {id: '1001', type: 'Regular'},
-        {id: '1002', type: 'Chocolate'},
-        {id: '1003', type: 'Blueberry'},
-        {id: '1004', type: "Devil's Food"},
+        {id: "1001", type: "Regular"},
+        {id: "1002", type: "Chocolate"},
+        {id: "1003", type: "Blueberry"},
+        {id: "1004", type: "Devil's Food"},
       ],
     },
     topping: [
-      {id: '5001', type: 'None'},
-      {id: '5002', type: 'Glazed'},
-      {id: '5005', type: 'Sugar'},
-      {id: '5007', type: 'Powdered Sugar'},
-      {id: '5006', type: 'Chocolate with Sprinkles'},
-      {id: '5003', type: 'Chocolate'},
-      {id: '5004', type: 'Maple'},
+      {id: "5001", type: "None"},
+      {id: "5002", type: "Glazed"},
+      {id: "5005", type: "Sugar"},
+      {id: "5007", type: "Powdered Sugar"},
+      {id: "5006", type: "Chocolate with Sprinkles"},
+      {id: "5003", type: "Chocolate"},
+      {id: "5004", type: "Maple"},
     ],
   };
 
@@ -114,7 +114,7 @@ const App = () => {
   const [defaultExpandPath, setDefaultExpandPath] = useState(0);
   const [selectedPath, setSelectedPath] = useState([]);
   const [hightlightSelected, setHightlightSelected] = useState(true);
-  const [theme, setTheme] = useState('defaultLight');
+  const [theme, setTheme] = useState("defaultLight");
 
   const states = {
     data: setData,
@@ -144,7 +144,7 @@ const App = () => {
         highlight_selected={hightlightSelected}
         theme={theme}
       />
-      <Output label={'Selected'}>{selectedPath}</Output>
+      <Output label={"Selected"}>{selectedPath}</Output>
     </div>
   );
 };

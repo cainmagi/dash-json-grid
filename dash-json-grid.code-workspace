@@ -30,10 +30,19 @@
       "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.tabSize": 2
     },
+    "[scss]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.tabSize": 2
+    },
     "python.languageServer": "Pylance",
     "python.analysis.typeCheckingMode": "standard",
     "prettier.tabWidth": 2,
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
+    "npm.packageManager": "yarn",
+    "search.exclude": {
+      "**/.yarn": true,
+      "**/.pnp.*": true
+    },
   },
   "extensions": {
     "recommendations": [

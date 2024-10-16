@@ -11,9 +11,9 @@
  * https://github.com/RedHeadphone/react-json-grid
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import {DashJsonGrid as RealComponent} from '../LazyLoader';
+import React from "react";
+import PropTypes from "prop-types";
+import {DashJsonGrid as RealComponent} from "../LazyLoader";
 
 /**
  * DashJsonGrid is a Dash porting version for the React component:
@@ -34,7 +34,7 @@ DashJsonGrid.defaultProps = {
   default_expand_depth: 0,
   selected_path: [],
   highlight_selected: true,
-  theme: 'default',
+  theme: "default",
 };
 
 DashJsonGrid.propTypes = {
@@ -116,32 +116,32 @@ DashJsonGrid.propTypes = {
    */
   theme: PropTypes.oneOfType([
     PropTypes.oneOf([
-      'default',
-      'dracula',
-      'monokai',
-      'oceanicPark',
-      'panda',
-      'gruvboxMaterial',
-      'tokyoNight',
-      'remedy',
-      'atlanticNight',
-      'defaultLight',
-      'defaultLight2',
-      'slime',
-      'spacegray',
-      'blueberryDark',
-      'nord',
-      'nightOwl',
-      'oneMonokai',
-      'cobaltNext',
-      'shadesOfPurple',
-      'codeBlue',
-      'softEra',
-      'atomMaterial',
-      'evaDark',
-      'moonLight',
-      'inherit',
-      'unset',
+      "default",
+      "dracula",
+      "monokai",
+      "oceanicPark",
+      "panda",
+      "gruvboxMaterial",
+      "tokyoNight",
+      "remedy",
+      "atlanticNight",
+      "defaultLight",
+      "defaultLight2",
+      "slime",
+      "spacegray",
+      "blueberryDark",
+      "nord",
+      "nightOwl",
+      "oneMonokai",
+      "cobaltNext",
+      "shadesOfPurple",
+      "codeBlue",
+      "softEra",
+      "atomMaterial",
+      "evaDark",
+      "moonLight",
+      "inherit",
+      "unset",
     ]),
     PropTypes.exact({
       /**

@@ -14,6 +14,6 @@
  * https://github.com/RedHeadphone/react-json-grid
  */
 
-import DashJsonGrid from './components/DashJsonGrid.react';
+import DashJsonGrid from "./components/DashJsonGrid.react";
 
 export {DashJsonGrid};
