@@ -163,7 +163,7 @@ See [`DashJsonGrid`](../../apis/DashJsonGrid.mdx#component-properties).
 
 :::info
 
-`search_text` is a write-only property. It means that this property can be only
+`search_text` is a set-only property. It means that this property can be only
 set by a callback. The component itself will not fire a callback with an output of
 `search_text` in any case. In other words, `search_text` can only be
 changed by codes but not changed by users' interactions.
@@ -274,7 +274,7 @@ The dash app is expected to render the following result:
 
 :::info
 
-`highlight_selected` is a write-only property. It means that this property can be only
+`highlight_selected` is a set-only property. It means that this property can be only
 set by a callback. The component itself will not fire a callback with an output of
 `highlight_selected` in any case. In other words, `highlight_selected` can only be
 changed by codes but not changed by users' interactions.
@@ -380,8 +380,8 @@ The dash app is expected to render the following result:
 
 :::info
 
-`selected_path` is a read-only property. It means that user interactions can change
-this property and fire a callback. However, configuring this property by
+`selected_path` is an interact-only property. It means that user interactions can
+change this property and fire a callback. However, configuring this property by
 `Output("grid", "selected_path")` will not change the selected data of the component.
 To avoid any unexpected behaviors, users should not make `selected_path` changed by
 an `Output`.

@@ -9,6 +9,7 @@
 #### :floppy_disk: Change
 
 1. Update the document to synchronize the `dash-json-grid==0.3.3`.
+2. Adjust the terminologies in `/docs/usages/search-and-select`.
 
 ### 0.3.2 @ 10/16/2024
 
