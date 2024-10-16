@@ -10,6 +10,7 @@
 
 1. Update the document to synchronize the `dash-json-grid==0.3.3`.
 2. Adjust the terminologies in `/docs/usages/search-and-select`.
+3. Make the screenshots on the `/docs` page turn dark in the dark mode.
 
 ### 0.3.2 @ 10/16/2024
 
