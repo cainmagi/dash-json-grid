@@ -43,13 +43,12 @@ jobs:
           corepack prepare yarn --activate
       - name: Yarn run install
         run: |
-          yarn install
+          yarn install --immutable
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install build wheel
-          if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
-          if [ -f requirements-dev.txt ]; then python -m pip install -r requirements-dev.txt; fi
+          python -m pip install -r requirements.txt -r requirements-dev.txt
       - name: Use Yarn to build component
         run: |
           yarn build

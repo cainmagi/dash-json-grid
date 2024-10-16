@@ -21,6 +21,7 @@
 7. Make `DashJsonGrid` (with mixins version) synchronized with the auto-generated docstring.
 8. Adjust `.gitattributes` for providing more auto-linebreak rules.
 9. Adjust the automatic formatter and editor configurations for the compatibility with the package manager.
+10. Change the dependency configurations (but the dependency versions are not changed).
 
 ### 0.3.2 @ 09/30/2024
 

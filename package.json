@@ -37,7 +37,7 @@
   "author": "Yuchen Jin (cainmagi) <cainmagi@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@redheadphone/react-json-grid": "^0.7.0",
+    "@redheadphone/react-json-grid": "~0.7.0",
     "ramda": "^0.26.1"
   },
   "devDependencies": {

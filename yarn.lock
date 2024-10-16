@@ -1569,7 +1569,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redheadphone/react-json-grid@npm:^0.7.0":
+"@redheadphone/react-json-grid@npm:~0.7.0":
   version: 0.7.0
   resolution: "@redheadphone/react-json-grid@npm:0.7.0"
   peerDependencies:
@@ -2940,7 +2940,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.22.3"
     "@plotly/dash-component-plugins": "npm:^1.2.3"
     "@plotly/webpack-dash-dynamic-import": "npm:^1.2.0"
-    "@redheadphone/react-json-grid": "npm:^0.7.0"
+    "@redheadphone/react-json-grid": "npm:~0.7.0"
     babel-eslint: "npm:^10.1.0"
     babel-loader: "npm:^9.1.2"
     copyfiles: "npm:^2.1.1"
