@@ -22,6 +22,7 @@
 8. Adjust `.gitattributes` for providing more auto-linebreak rules.
 9. Adjust the automatic formatter and editor configurations for the compatibility with the package manager.
 10. Change the dependency configurations (but the dependency versions are not changed).
+11. Python 3.13 is released, add this version to the test profile.
 
 ### 0.3.2 @ 09/30/2024
 
