@@ -22,6 +22,7 @@ import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
 comp = DashJsonGrid(
     id: str | Mapping,
     class_name: str,
+    style: Mapping,
     data: Any,
     default_expand_depth: int,
     default_expand_key_tree: Mapping,
@@ -55,6 +56,7 @@ unstructured serializable JSON data.
 | :-----------------------: | :------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |           `id`            |                      `str \| Mapping[str, Any]`                      | The ID of the component. A dictionary-id is used for creating a [pattern-matching callback :book:][dash-pmcallback].                                         |
 |       `class_name`        |                                `str`                                 | The css-class of the component. Use ` ` to separate different names.                                                                                         |
+|          `style`          |                         `Mapping[str, str]`                          | The css-styles which will override styles of the component container.                                                                                        |
 |          `data`           |                                `Any`                                 | The JSON-serializable simple object to be transformed into a grid table.                                                                                     |
 |  `default_expand_depth`   |                                `int`                                 | The depth to which the grid is expanded by default.                                                                                                          |
 | `default_expand_key_tree` |                         `Mapping[Any, Any]`                          | Tree-like structure with all keys that needs to be expanded. This value should be used only when `data` is a `dict`.                                         |
@@ -72,6 +74,7 @@ unstructured serializable JSON data.
 | :-----------------------: | :------------------------------------------------------------------: | :-------------------------------: | :-------------------------------: | :-------------------------------: | :---------: |
 |           `id`            |                      `str \| Mapping[str, Any]`                      |                                   |                                   |                                   |  undefined  |
 |       `class_name`        |                                `str`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |  undefined  |
+|          `style`          |                         `Mapping[str, str]`                          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |  undefined  |
 |          `data`           |                                `Any`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> | <InlineIcon icon={vsiCheckIcon}/> |             |
 |  `default_expand_depth`   |                                `int`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |     `0`     |
 | `default_expand_key_tree` |                         `Mapping[Any, Any]`                          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |  undefined  |

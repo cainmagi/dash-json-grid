@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.3.3 @ 10/16/2024
+
+#### :floppy_disk: Change
+
+1. Update the document to synchronize the `dash-json-grid==0.3.3`.
+
 ### 0.3.2 @ 10/16/2024
 
 #### :mega: New

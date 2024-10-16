@@ -12,7 +12,7 @@ import mdiDot from "@iconify-icons/mdi/dot";
 const variables = {
   repoURL: "https://github.com/cainmagi/dash-json-grid",
   rawURL: "https://raw.githubusercontent.com/cainmagi/dash-json-grid",
-  sourceURL: "https://github.com/cainmagi/dash-json-grid/blob/v0.3.2",
+  sourceURL: "https://github.com/cainmagi/dash-json-grid/blob/v0.3.3",
 };
 
 export const rawURL = (url: string): string => {
