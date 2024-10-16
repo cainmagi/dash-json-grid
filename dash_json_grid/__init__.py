@@ -157,9 +157,12 @@ class DashJsonGrid(_DashJsonGrid, _MixinDataRoute, _MixinFile):
     - selected_path (list; optional):
         keyPath captured by the onSelect method of the grid viewer. This
         value is a sequence of indicies used for locating the element of
-        the selected data.  Due to the limitation of the exported
+        the selected data. Due to the limitation of the exported
         functionalities, this value cannot be reset by the callback. In
         other words, using it with callbacks.Output will not take effects.
+
+    - style (dict; optional):
+        Defines CSS styles which will override styles previously set.
 
     - theme (dict; default 'default'):
         The theme (name) that needs to be applied. If a dictionary is
@@ -171,7 +174,8 @@ class DashJsonGrid(_DashJsonGrid, _MixinDataRoute, _MixinFile):
         'atlanticNight', 'defaultLight', 'defaultLight2', 'slime',
         'spacegray', 'blueberryDark', 'nord', 'nightOwl', 'oneMonokai',
         'cobaltNext', 'shadesOfPurple', 'codeBlue', 'softEra',
-        'atomMaterial', 'evaDark', 'moonLight' | dict with keys:
+        'atomMaterial', 'evaDark', 'moonLight', 'inherit', 'unset' | dict
+        with keys:
 
         - bgColor (string; optional):
             Background color.
