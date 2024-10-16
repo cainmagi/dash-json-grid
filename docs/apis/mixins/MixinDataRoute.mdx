@@ -1,0 +1,83 @@
+---
+id: MixinDataRoute
+title: MixinDataRoute
+sidebar_label: MixinDataRoute
+slug: /apis/mixins/MixinDataRoute
+description: Mixin of providing data routing functionalities.
+---
+
+import vsiCheckIcon from "@iconify-icons/codicon/check";
+
+import InlineIcon from "@site/src/components/InlineIcon";
+import APITopBar, { IconObjType } from "@site/src/components/APITopBar";
+
+<APITopBar type="class" isMixin={true} source="mixins.py#L209" />
+
+```python
+mixin = MixinDataRoute()
+```
+
+Mixin of providing data routing functionalities.
+
+## Methods
+
+### <IconObjType type="method"/> `compare_routes`
+
+```python
+flag: bool = mixin.compare_routes(route_1: Route, route_2: Route)
+```
+
+Compare two different routes, where [`Route`](./Route.mdx) is provided by
+`selected_path`.
+
+The comparison results will not change if the arguments are swapped. This
+method is used for checking whether `route_1` and `route_2` point to the
+same location.
+
+To find more details about the arguments, see
+[DashJsonGrid](../DashJsonGrid.mdx#-compare_routes).
+
+---
+
+### <IconObjType type="method"/> `get_data_by_route`
+
+```python
+data_selected: Any = mixin.get_data_by_route(data: Any, route: Route)
+```
+
+Get the small part of the data by a specific route.
+
+To find more details about the arguments, see
+[DashJsonGrid](../DashJsonGrid.mdx#-get_data_by_route).
+
+---
+
+### <IconObjType type="method"/> `update_data_by_route`
+
+```python
+data: Any = mixin.update_data_by_route(data: Any, route: Route, val: Any)
+```
+
+Update a specific part of `data` by a route.
+
+If the update fails (for example, maybe the data is immutable), raise a
+`ValueError`.
+
+To find more details about the arguments, see
+[DashJsonGrid](../DashJsonGrid.mdx#-update_data_by_route).
+
+---
+
+### <IconObjType type="method"/> `delete_data_by_route`
+
+```python
+data_selected: Any = mixin.delete_data_by_route(data: Any, route: Route)
+```
+
+Delete the data part specified by a route.
+
+If the deletion fails (for example, maybe the data is immutable), raise a
+`ValueError`.
+
+To find more details about the arguments, see
+[DashJsonGrid](../DashJsonGrid.mdx#-delete_data_by_route).

@@ -1,0 +1,124 @@
+---
+id: examples
+sidebar_label: Examples
+title: Example applications
+description: Test the example applications of this component.
+slug: /examples
+---
+
+import IconExternalLink from "@theme/Icon/ExternalLink";
+import mdiLanguagePython from "@iconify-icons/mdi/language-python";
+
+import DarkButton from "@site/src/components/DarkButton";
+import {sourceURL} from "@site/src/envs/variables";
+
+# Example applications
+
+## Example for `dash` users
+
+When the package `dash_json_grid` is installed, users can test the following example
+application:
+
+<p>
+  <DarkButton to={sourceURL("usage.py")} icon={mdiLanguagePython}>
+    {"usage.py"}
+  </DarkButton>
+</p>
+
+This application provides the following features:
+
+1. An input box for searching and highlighting the keywords in the data.
+2. A dropdown menu (selecting box) for change the themes.
+3. By selecting a part of the data, the selected path and value will be catched and
+   shown.
+4. If a number is selected, make that number value increased by `1`.
+
+The other features are already mentioned in the [usage guides](/category/usages).
+Besides, this demo application provides an example of catching and updating the
+selected **value** by using the `selected_path` from the callback.
+
+```python title="usage.py" showLineNumbers
+...
+@callback(
+    Output("selected-path", "children"),
+    Output("selected-val", "children"),
+    Output("viewer", "data"),
+    Input("viewer", "selected_path"),
+    State("viewer", "data"),
+)
+def display_output(route, data):
+    if not route:
+        return None, None, dash.no_update
+
+    sel_data = dash_json_grid.DashJsonGrid.get_data_by_route(data, route)
+    if isinstance(sel_data, (int, float)):
+        sel_data_new = sel_data + 1
+        dash_json_grid.DashJsonGrid.update_data_by_route(data, route, sel_data_new)
+        return str(route), str(sel_data_new), data
+
+    return str(route), str(sel_data), dash.no_update
+...
+```
+
+where [`get_data_by_route`](../apis/DashJsonGrid.mdx#-get_data_by_route) and
+[`update_data_by_route`](../apis/DashJsonGrid.mdx#-update_data_by_route) are class
+methods. They are used for locating the specific part of the `data` by `route`, and
+updating the part located by `route`, respectively.
+
+:::info
+
+Class methods like [`get_data_by_route`](../apis/DashJsonGrid.mdx#-get_data_by_route)
+are provided by this dash component implmentaion exclusively. In other words, if you
+are using [`react-json-grid`<IconExternalLink/>][git-react-json-grid], you need to
+implement the logics of getting or updating values by yourself.
+
+:::
+
+## More examples
+
+We provide more examples in the [API document](../apis/DashJsonGrid.mdx#examples).
+Check that part to view some useful code snippets.
+
+## Example purely based on React
+
+:::warning
+
+This example can be only used when you are developing the source project. In other
+words, the React version is a developer-only example.
+
+:::
+
+To launch this example, please ensure that the following dependencies are available
+
+- [Git<IconExternalLink/>][link-git]
+- [NodeJS<IconExternalLink/>][link-nodejs]
+- [Yarn<IconExternalLink/>][link-yarn]
+
+After that, clone the project and run the demo by:
+
+```shell
+git clone https://github.com/cainmagi/dash-json-grid
+cd dash-json-grid
+python -m pip install -r requirements.txt -r tests/requirements.txt
+yarn install
+yarn start
+```
+
+Overall, this example has most features of the `usage.py` demo. However, since it is
+purely implemented React, in this example, we do not provide the features of getting
+and updating the selected value.
+
+:::info
+
+For somehow, the demo in the [Introduction](../introduction.mdx) section is the same
+thing of this example. However, due to the limitation of the document, the live demo
+in this document is always synchronized with the newest version even if you choose
+an older version of the document. If you want to check the exact behavior of the
+legacy version, it is better to run the demo.
+
+:::
+
+[git-react-json-grid]: https://github.com/RedHeadphone/react-json-grid
+[link-git]: https://git-scm.com/downloads
+[link-nodejs]: https://nodejs.org/en/download/package-manager
+[link-yarn]: https://yarnpkg.com/getting-started/install

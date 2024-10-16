@@ -1,0 +1,63 @@
+---
+id: ThemeConfigs
+title: ThemeConfigs
+sidebar_label: ThemeConfigs
+slug: /apis/typehints/ThemeConfigs
+description: Detailed configuration for defining a customized theme.
+---
+
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="type" source="typehints.py#L22" />
+
+```python
+ThemeConfigs(
+    bgColor: NotRequired[str],
+    booleanColor: NotRequired[str],
+    cellBorderColor: NotRequired[str],
+    highlightBgColor: NotRequired[str],
+    indexColor: NotRequired[str],
+    keyNameColor: NotRequired[str],
+    numberColor: NotRequired[str],
+    objectColor: NotRequired[str],
+    searchHighlightBgColor: NotRequired[str],
+    stringColor: NotRequired[str],
+    tableBorderColor: NotRequired[str],
+    tableHeaderBgColor: NotRequired[str],
+    tableHeaderColor: NotRequired[str],
+)
+```
+
+`ThemeConfigs` is a `TypedDict`.
+
+Detailed configuration for defining a customized theme.
+
+## Aliases
+
+This class can be acquired by
+
+```python
+import dash_json_grid as djg
+
+
+djg.ThemeConfigs
+djg.typehints.ThemeConfigs
+```
+
+## Keywords
+
+|         Keywork          | Type  | Required | <center>Description</center>                            |
+| :----------------------: | :---: | :------: | :------------------------------------------------------ |
+|        `bgColor`         | `str` |          | Background color.                                       |
+|      `booleanColor`      | `str` |          | Text color of boolean variables.                        |
+|    `cellBorderColor`     | `str` |          | Background color of table cells.                        |
+|    `highlightBgColor`    | `str` |          | Background color when this part is highlighted.         |
+|       `indexColor`       | `str` |          | Text color of array indicies.                           |
+|      `keyNameColor`      | `str` |          | Text color of JSON keys.                                |
+|      `numberColor`       | `str` |          | Text color of numeric values.                           |
+|      `objectColor`       | `str` |          | Text color of unrecognized objects.                     |
+| `searchHighlightBgColor` | `str` |          | Background color of the part highlighted by the search. |
+|      `stringColor`       | `str` |          | Text color of strings.                                  |
+|    `tableBorderColor`    | `str` |          | Border color of the whole table                         |
+|   `tableHeaderBgColor`   | `str` |          | Background color of the table header.                   |
+|    `tableHeaderColor`    | `str` |          | Text color of the table header.                         |

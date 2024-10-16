@@ -1,0 +1,117 @@
+---
+id: set_item_of_object
+title: set_item_of_object
+sidebar_label: set_item_of_object
+slug: /apis/mixins/set_item_of_object
+description: Run data[index] = value supposing that data is abitrary.
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+import vsiCheckIcon from "@iconify-icons/codicon/check";
+
+import InlineIcon from "@site/src/components/InlineIcon";
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="func" isPrivate={true} source="mixins.py#L161" />
+
+```python
+set_item_of_object(data: Any, index: Any, value: Any)
+```
+
+Run `data[index] = value` supposing that `data` is abitrary and `index` can be a
+one-value sequence.
+
+Raise an `ValueError` if the item of `data` cannot be set.
+
+Raise an `IndexError` if the item of `data` is a sequence, while `value` cannot
+be broadcast to this item.
+
+:::warning
+
+Note that `index` is not a [`route`](./Route.mdx). If it is a sequence, it should only
+contain one element.
+
+:::
+
+## Arguments
+
+### Requires
+
+| Argument | Type  |             Required              | <center>Description</center>                                                                                                   |
+| :------: | :---: | :-------------------------------: | ------------------------------------------------------------------------------------------------------------------------------ |
+|  `data`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | The whole data to be indexed.                                                                                                  |
+| `index`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | The index to be used for locating the part to be modified. It can be a number, or keyword, or a one-value sequence like `[0]`. |
+| `value`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | The new value used for updating the member of `data` located by `index`.                                                       |
+
+## Examples
+
+### <IconObjType type="term"/> Set a part of the whole data
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="set_a_part_of_data.py" showLineNumbers
+import pprint
+from dash_json_grid.mixins import set_item_of_object
+
+data = {
+    "id": "0001",
+    "type": "donut",
+    "name": "Cake",
+    "ppu": 1111.55,
+    "batters": {
+        "batter": [
+            {"id": "1001", "type": "Regular"},
+            {"id": "1002", "type": "Chocolate"},
+            {"id": "1003", "type": "Blueberry"},
+            {"id": "1004", "type": "Devil's Food"},
+        ]
+    },
+    "topping": [
+        {"id": "5001", "type": "None"},
+        {"id": "5002", "type": "Glazed"},
+        {"id": "5005", "type": "Sugar"},
+        {"id": "5007", "type": "Powdered Sugar"},
+        {"id": "5006", "type": "Chocolate with Sprinkles"},
+        {"id": "5003", "type": "Chocolate"},
+        {"id": "5004", "type": "Maple"},
+    ],
+}
+
+route = "batters"
+
+set_item_of_object(data, route, 0)
+pprint.pprint(data)
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+```python
+{'batters': 0,
+ 'id': '0001',
+ 'name': 'Cake',
+ 'ppu': 1111.55,
+ 'topping': [{'id': '5001', 'type': 'None'},
+             {'id': '5002', 'type': 'Glazed'},
+             {'id': '5005', 'type': 'Sugar'},
+             {'id': '5007', 'type': 'Powdered Sugar'},
+             {'id': '5006', 'type': 'Chocolate with Sprinkles'},
+             {'id': '5003', 'type': 'Chocolate'},
+             {'id': '5004', 'type': 'Maple'}],
+ 'type': 'donut'}
+```
+
+</TabItem>
+
+</Tabs>

@@ -1,0 +1,121 @@
+---
+id: pop_item_of_object
+title: pop_item_of_object
+sidebar_label: pop_item_of_object
+slug: /apis/mixins/pop_item_of_object
+description: Run val = data[index]; del data[index]; return val supposing that data is abitrary.
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+import vsiCheckIcon from "@iconify-icons/codicon/check";
+
+import InlineIcon from "@site/src/components/InlineIcon";
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="func" isPrivate={true} source="mixins.py#L176" />
+
+```python
+data_selected: Any = pop_item_of_object(data: Any, index: Any)
+```
+
+Run `val = data[index]; del data[index]; return val` supposing that `data` is
+abitrary and `index` can be a one-value sequence.
+
+:::warning
+
+Note that `index` is not a [`route`](./Route.mdx). If it is a sequence, it should only
+contain one element.
+
+:::
+
+## Arguments
+
+### Requires
+
+| Argument | Type  |             Required              | <center>Description</center>                                                                                                  |
+| :------: | :---: | :-------------------------------: | ----------------------------------------------------------------------------------------------------------------------------- |
+|  `data`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | The whole data to be indexed.                                                                                                 |
+| `index`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | The index to be used for locating the part to be removed. It can be a number, or keyword, or a one-value sequence like `[0]`. |
+
+### Returns
+
+|    Argument     | Type  | <center>Description</center>                                                     |
+| :-------------: | :---: | :------------------------------------------------------------------------------- |
+| `data_selected` | `Any` | The part of the `data` located by the given `index` and removed from the `data`. |
+
+## Examples
+
+### <IconObjType type="term"/> Remove a part of the whole data
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="remove_a_part_of_data.py" showLineNumbers
+import pprint
+from dash_json_grid.mixins import pop_item_of_object
+
+data = {
+    "id": "0001",
+    "type": "donut",
+    "name": "Cake",
+    "ppu": 1111.55,
+    "batters": {
+        "batter": [
+            {"id": "1001", "type": "Regular"},
+            {"id": "1002", "type": "Chocolate"},
+            {"id": "1003", "type": "Blueberry"},
+            {"id": "1004", "type": "Devil's Food"},
+        ]
+    },
+    "topping": [
+        {"id": "5001", "type": "None"},
+        {"id": "5002", "type": "Glazed"},
+        {"id": "5005", "type": "Sugar"},
+        {"id": "5007", "type": "Powdered Sugar"},
+        {"id": "5006", "type": "Chocolate with Sprinkles"},
+        {"id": "5003", "type": "Chocolate"},
+        {"id": "5004", "type": "Maple"},
+    ],
+}
+
+route = "topping"
+
+removed = pop_item_of_object(data, route)
+pprint.pprint(data)
+pprint.pprint(removed)
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+```python
+{'batters': {'batter': [{'id': '1001', 'type': 'Regular'},
+                        {'id': '1002', 'type': 'Chocolate'},
+                        {'id': '1003', 'type': 'Blueberry'},
+                        {'id': '1004', 'type': "Devil's Food"}]},
+ 'id': '0001',
+ 'name': 'Cake',
+ 'ppu': 1111.55,
+ 'type': 'donut'}
+[{'id': '5001', 'type': 'None'},
+ {'id': '5002', 'type': 'Glazed'},
+ {'id': '5005', 'type': 'Sugar'},
+ {'id': '5007', 'type': 'Powdered Sugar'},
+ {'id': '5006', 'type': 'Chocolate with Sprinkles'},
+ {'id': '5003', 'type': 'Chocolate'},
+ {'id': '5004', 'type': 'Maple'}]
+```
+
+</TabItem>
+
+</Tabs>

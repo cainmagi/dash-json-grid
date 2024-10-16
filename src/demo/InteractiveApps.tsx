@@ -1,0 +1,143 @@
+/**
+ * Demo used for showing some interactive features.
+ *
+ * Author: Yuchen Jin (cainmagi)
+ * GitHub: https://github.com/cainmagi/dash-json-grid
+ * License: MIT
+ *
+ * Thanks the base project:
+ * https://github.com/RedHeadphone/react-json-grid
+ */
+
+import React, {useState} from "react";
+
+import {useColorMode} from "@docusaurus/theme-common";
+
+import JSONGrid from "@redheadphone/react-json-grid";
+
+import {sanitizeData, sanitizeTheme} from "./utils";
+import styles from "./InteractiveApps.module.scss";
+
+export const getDemoData = () => {
+  return {
+    id: "0001",
+    type: "donut",
+    name: "Cake",
+    ppu: 1111.55,
+    batters: {
+      batter: [
+        {id: "1001", type: "Regular"},
+        {id: "1002", type: "Chocolate"},
+        {id: "1003", type: "Blueberry"},
+        {id: "1004", type: "Devil's Food"},
+      ],
+    },
+    topping: [
+      {id: "5001", type: "None"},
+      {id: "5002", type: "Glazed"},
+      {id: "5005", type: "Sugar"},
+      {id: "5007", type: "Powdered Sugar"},
+      {id: "5006", type: "Chocolate with Sprinkles"},
+      {id: "5003", type: "Chocolate"},
+      {id: "5004", type: "Maple"},
+    ],
+  };
+};
+
+type DemoAppProps = {
+  data: Object | any[] | number | string | boolean;
+};
+
+export const SearchOnlyApp = ({data}: DemoAppProps): JSX.Element => {
+  const {colorMode, setColorMode} = useColorMode();
+  const [searchText, setSearchText] = useState("");
+
+  const handleOnSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(event.target.value);
+  };
+
+  return (
+    <div>
+      <p>
+        <span>Search:</span>{" "}
+        <input type="text" value={searchText} onChange={handleOnSearch}></input>
+      </p>
+      <div className={styles.jsGridContainer}>
+        <JSONGrid
+          data={sanitizeData(data)}
+          theme={sanitizeTheme(
+            {light: "remedy", dark: "moonLight"},
+            colorMode === "dark"
+          )}
+          searchText={
+            typeof searchText === "string" && searchText.trim().length > 0
+              ? searchText
+              : undefined
+          }
+          defaultExpandDepth={2}
+        />
+      </div>
+    </div>
+  );
+};
+
+export const SelectableOnlyApp = ({data}: DemoAppProps): JSX.Element => {
+  const {colorMode, setColorMode} = useColorMode();
+  const [highlightSelected, setHighlightSelected] = useState(true);
+
+  const handleOnHighlight = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setHighlightSelected(event.target.checked);
+  };
+
+  return (
+    <div>
+      <p>
+        <span>Is selection highlighted:</span>{" "}
+        <input
+          type="checkbox"
+          checked={highlightSelected}
+          onChange={handleOnHighlight}
+        ></input>
+      </p>
+      <div className={styles.jsGridContainer}>
+        <JSONGrid
+          data={sanitizeData(data)}
+          theme={sanitizeTheme(
+            {light: "remedy", dark: "moonLight"},
+            colorMode === "dark"
+          )}
+          highlightSelected={highlightSelected}
+          defaultExpandDepth={2}
+        />
+      </div>
+    </div>
+  );
+};
+
+export const OnSelectApp = ({data}: DemoAppProps): JSX.Element => {
+  const {colorMode, setColorMode} = useColorMode();
+  const [selectedValue, setSelectedValue] = useState("");
+
+  const handleOnSelect = (keyPath: (string | [string])[]) => {
+    setSelectedValue(JSON.stringify(keyPath));
+  };
+
+  return (
+    <div>
+      <div className={styles.jsGridContainer}>
+        <JSONGrid
+          data={sanitizeData(data)}
+          theme={sanitizeTheme(
+            {light: "remedy", dark: "moonLight"},
+            colorMode === "dark"
+          )}
+          onSelect={handleOnSelect}
+          defaultExpandDepth={2}
+        />
+      </div>
+      <p>
+        Selected: <span>{selectedValue}</span>
+      </p>
+    </div>
+  );
+};
