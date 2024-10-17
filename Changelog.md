@@ -15,6 +15,7 @@
 #### :floppy_disk: Change
 
 1. Upgrade the demo version of `react-json-grid` to `0.9.2`.
+2. Adjust terminlogies in some documents.
 
 ### 0.3.3 @ 10/16/2024
 

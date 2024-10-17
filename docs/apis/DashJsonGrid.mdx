@@ -70,19 +70,19 @@ unstructured serializable JSON data.
 
 <TabItem value="properties">
 
-|           Name            |                                 Type                                 |            Interactive            |              Setable              |             Required              |   Default   |
-| :-----------------------: | :------------------------------------------------------------------: | :-------------------------------: | :-------------------------------: | :-------------------------------: | :---------: |
-|           `id`            |                      `str \| Mapping[str, Any]`                      |                                   |                                   |                                   |  undefined  |
-|       `class_name`        |                                `str`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |  undefined  |
-|          `style`          |                         `Mapping[str, str]`                          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |  undefined  |
-|          `data`           |                                `Any`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> | <InlineIcon icon={vsiCheckIcon}/> |             |
-|  `default_expand_depth`   |                                `int`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |     `0`     |
-| `default_expand_key_tree` |                         `Mapping[Any, Any]`                          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |  undefined  |
-|      `selected_path`      |                                `list`                                | <InlineIcon icon={vsiCheckIcon}/> |                                   |                                   |    `[]`     |
-|   `highlight_selected`    |                                `bool`                                |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |   `True`    |
-|       `search_text`       |                                `str`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |  undefined  |
-|          `theme`          | <code>{`str \| `}[ThemeConfigs](./typehints/ThemeConfigs.mdx)</code> |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   | `"default"` |
-|      `loading_state`      |         [`LoadingState`<IconExternalLink/>][link-loadstate]          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |  undefined  |
+|           Name            |                                 Type                                 |            Interactive            |              Setable              |             Required              |            Default             |
+| :-----------------------: | :------------------------------------------------------------------: | :-------------------------------: | :-------------------------------: | :-------------------------------: | :----------------------------: |
+|           `id`            |                      `str \| Mapping[str, Any]`                      |                                   |                                   |                                   |           undefined            |
+|       `class_name`        |                                `str`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
+|          `style`          |                         `Mapping[str, str]`                          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
+|          `data`           |                                `Any`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> | <InlineIcon icon={vsiCheckIcon}/> | <InlineIcon icon={biSlashLg}/> |
+|  `default_expand_depth`   |                                `int`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |              `0`               |
+| `default_expand_key_tree` |                         `Mapping[Any, Any]`                          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
+|      `selected_path`      |                                `list`                                | <InlineIcon icon={vsiCheckIcon}/> |                                   |                                   |              `[]`              |
+|   `highlight_selected`    |                                `bool`                                |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |             `True`             |
+|       `search_text`       |                                `str`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
+|          `theme`          | <code>{`str \| `}[ThemeConfigs](./typehints/ThemeConfigs.mdx)</code> |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |          `"default"`           |
+|      `loading_state`      |         [`LoadingState`<IconExternalLink/>][link-loadstate]          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
 
 - "Interactive" means that the property can be changed by users' interactions.
 - "Setable" means that changing it by callback `Output(...)` will take effects.
@@ -207,7 +207,7 @@ comp = DashJsonGrid.from_str(json_string: str, *args, **kwargs)
 
 Use a JSON string to initialize the component.
 
-If using this method, users should leave the argument `"data"` blank because
+If using this method, users should leave the argument `data` blank because
 this method will load `json_string` and pass it to the `data` argument.
 
 #### Requires
@@ -237,7 +237,7 @@ comp = DashJsonGrid.from_file(
 
 Use a JSON file to initialize the component.
 
-If using this method, users should leave the argument `"data"` blank because
+If using this method, users should leave the argument `data` blank because
 this method will load `json_file` and pass it to the `data` argument.
 
 #### Requires
