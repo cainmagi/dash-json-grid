@@ -10,6 +10,7 @@
  */
 
 import React, {useState} from "react";
+import clsx from "clsx/lite";
 
 import {useColorMode} from "@docusaurus/theme-common";
 
@@ -99,7 +100,12 @@ export const SelectableOnlyApp = ({data}: DemoAppProps): JSX.Element => {
           onChange={handleOnHighlight}
         ></input>
       </p>
-      <div className={styles.jsGridContainer}>
+      <div
+        className={clsx(
+          styles.jsGridContainer,
+          !highlightSelected ? styles.noSelect : undefined
+        )}
+      >
         <JSONGrid
           data={sanitizeData(data)}
           theme={sanitizeTheme(

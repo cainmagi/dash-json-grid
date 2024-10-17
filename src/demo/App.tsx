@@ -10,6 +10,7 @@
  */
 
 import React, {useState} from "react";
+import clsx from "clsx/lite";
 
 import {useColorMode} from "@docusaurus/theme-common";
 
@@ -165,7 +166,12 @@ const App = ({
           onChange={handleOnHighlight}
         ></input>
       </p>
-      <div className={styles.jsGridContainer}>
+      <div
+        className={clsx(
+          styles.jsGridContainer,
+          !highlightSelected ? styles.noSelect : undefined
+        )}
+      >
         <JSONGrid
           data={sanitizeData(data)}
           onSelect={handleOnSelect}
