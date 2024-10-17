@@ -10,6 +10,7 @@
 
 1. Fix: Correct a typo in the footer external links.
 2. Fix: Correct a typo in code display: `/docs/usages/data`.
+3. Fix: Rows rendered by `react-json-grid` in this document should not be styled by the colors of Docusaurus.
 
 ### 0.3.3 @ 10/16/2024
 

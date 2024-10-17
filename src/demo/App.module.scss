@@ -5,5 +5,13 @@
 
   & > div > table {
     margin-bottom: 0;
+
+    tr {
+      background-color: transparent;
+
+      &:nth-child(2n) {
+        background-color: transparent;
+      }
+    }
   }
 }
