@@ -9,7 +9,7 @@
  * https://github.com/RedHeadphone/react-json-grid
  */
 
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import clsx from "clsx/lite";
 
 import {useColorMode} from "@docusaurus/theme-common";
@@ -137,6 +137,12 @@ const App = ({
   const [selectedValue, setSelectedValue] = useState("");
 
   const {colorMode, setColorMode} = useColorMode();
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleOnSelect = (keyPath: (string | [string])[]) => {
     if (highlightSelected) {

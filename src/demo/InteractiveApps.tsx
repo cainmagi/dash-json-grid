@@ -9,7 +9,7 @@
  * https://github.com/RedHeadphone/react-json-grid
  */
 
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import clsx from "clsx/lite";
 
 import {useColorMode} from "@docusaurus/theme-common";
@@ -57,6 +57,12 @@ export const SearchOnlyApp = ({data}: DemoAppProps): JSX.Element => {
     setSearchText(event.target.value);
   };
 
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <div>
       <p>
@@ -89,6 +95,12 @@ export const SelectableOnlyApp = ({data}: DemoAppProps): JSX.Element => {
   const handleOnHighlight = (event: React.ChangeEvent<HTMLInputElement>) => {
     setHighlightSelected(event.target.checked);
   };
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div>
@@ -127,6 +139,12 @@ export const OnSelectApp = ({data}: DemoAppProps): JSX.Element => {
   const handleOnSelect = (keyPath: (string | [string])[]) => {
     setSelectedValue(JSON.stringify(keyPath));
   };
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div>

@@ -9,7 +9,7 @@
  * https://github.com/RedHeadphone/react-json-grid
  */
 
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 import {useColorMode} from "@docusaurus/theme-common";
 
@@ -51,6 +51,12 @@ const App = ({
   customTheme = {},
 }: AppProps): JSX.Element => {
   const {colorMode, setColorMode} = useColorMode();
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const sanitizedTheme = sanitizeTheme(theme, colorMode === "dark");
   const valTheme =
@@ -153,6 +159,12 @@ type ThemedAppProps = {
 export const ThemedApp = ({data}: ThemedAppProps): JSX.Element => {
   const {colorMode, setColorMode} = useColorMode();
   const [theme, setTheme] = useState("defaultLight");
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const sanitizedTheme = sanitizeTheme(theme, colorMode === "dark");
 
