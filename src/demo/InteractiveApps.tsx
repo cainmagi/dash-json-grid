@@ -147,7 +147,7 @@ export const OnSelectApp = ({data}: DemoAppProps): JSX.Element => {
   }, []);
 
   return (
-    <div>
+    <div key={String(mounted)}>
       <div className={styles.jsGridContainer}>
         <JSONGrid
           data={sanitizeData(data)}

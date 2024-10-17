@@ -159,7 +159,7 @@ const App = ({
   };
 
   return (
-    <div>
+    <div key={String(mounted)}>
       <p>
         <span>Search:</span>{" "}
         <input type="text" value={searchText} onChange={handleOnSearch}></input>

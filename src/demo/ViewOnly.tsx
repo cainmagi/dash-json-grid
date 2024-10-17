@@ -178,7 +178,7 @@ export const ThemedApp = ({data}: ThemedAppProps): JSX.Element => {
       : undefined;
 
   return (
-    <div>
+    <div key={String(mounted)}>
       <Theme value={theme} setTheme={setTheme} />
       <div className={styles.jsGridContainer}>
         <JSONGrid
