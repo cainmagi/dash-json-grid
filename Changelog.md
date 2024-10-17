@@ -4,6 +4,13 @@
 
 ## CHANGELOG
 
+### 0.3.3 @ 10/17/2024
+
+#### :wrench: Fix
+
+1. Fix: Correct a typo in the footer external links.
+2. Fix: Correct a typo in code display: `/docs/usages/data`.
+
 ### 0.3.3 @ 10/16/2024
 
 #### :floppy_disk: Change

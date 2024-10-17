@@ -148,7 +148,7 @@ const config: Config = {
               href: "https://github.com/aschrc-ait-team",
             },
             {
-              label: "UH MODAL Lib",
+              label: "UH MODAL Lab",
               href: "https://modal.ece.uh.edu/",
             },
             {
