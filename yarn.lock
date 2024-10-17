@@ -2558,13 +2558,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redheadphone/react-json-grid@npm:~0.9.1":
-  version: 0.9.1
-  resolution: "@redheadphone/react-json-grid@npm:0.9.1"
+"@redheadphone/react-json-grid@npm:~0.9.2":
+  version: 0.9.2
+  resolution: "@redheadphone/react-json-grid@npm:0.9.2"
   peerDependencies:
     react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/ccc09c04a73e05769b92de9917b5402b205037c64135db50746058fcd5e22ef05599e1afec8cf2d6693e9633471aa438ac84c84186e44a9b0bae2753dfbf5bd4
+  checksum: 10c0/a8d7dc28b34d2f7bc79bc576d72c94cacf27ae19278353d8e2b50f3d3fcb8a7c0c05f5668529314a728386612b37c4af2b67773538f21f2fbfcb40eb7ac6d5c3
   languageName: node
   linkType: hard
 
@@ -5453,7 +5453,7 @@ __metadata:
     "@iconify-icons/octicon": "npm:^1.2.46"
     "@iconify/react": "npm:^5.0.2"
     "@mdx-js/react": "npm:^3.0.1"
-    "@redheadphone/react-json-grid": "npm:~0.9.1"
+    "@redheadphone/react-json-grid": "npm:~0.9.2"
     "@types/node": "npm:^22.7.5"
     "@types/react": "npm:^18.0.0"
     "@yarnpkg/types": "npm:^4.0.0"

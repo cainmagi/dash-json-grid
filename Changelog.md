@@ -12,6 +12,10 @@
 2. Fix: Correct a typo in code display: `/docs/usages/data`.
 3. Fix: Rows rendered by `react-json-grid` in this document should not be styled by the colors of Docusaurus.
 
+#### :floppy_disk: Change
+
+1. Upgrade the demo version of `react-json-grid` to `0.9.2`.
+
 ### 0.3.3 @ 10/16/2024
 
 #### :floppy_disk: Change

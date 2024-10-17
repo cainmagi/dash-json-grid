@@ -19,7 +19,7 @@ import {sanitizeData, sanitizeTheme} from "./utils";
 import styles from "./App.module.scss";
 
 export const AppVer = (): JSX.Element => (
-  <code>{"@redheadphone/react-json-grid@0.9.1"}</code>
+  <code>{"@redheadphone/react-json-grid@0.9.2"}</code>
 );
 
 export const getDemoData = () => {
