@@ -1,3 +1,5 @@
+import {translate} from "@docusaurus/Translate";
+
 import vsiSymbolClass from "@iconify-icons/codicon/symbol-class";
 import vsiPackage from "@iconify-icons/codicon/package";
 import vsiSymbolNamespace from "@iconify-icons/codicon/symbol-namespace";
@@ -57,7 +59,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={vsiSymbolClass}
           vspace={vspace}
-          text={hasText ? text || "Class" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.class",
+                    description:
+                      "The text displayed for the APITopBar icon: Class.",
+                    message: "Class",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "func":
@@ -65,7 +80,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={mdiFunctionVariant}
           vspace={vspace}
-          text={hasText ? text || "Function" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.func",
+                    description:
+                      "The text displayed for the APITopBar icon: Function.",
+                    message: "Function",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "type":
@@ -73,7 +101,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={mdiAlphaTBoxOutline}
           vspace={vspace || -0.3}
-          text={hasText ? text || "Type" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.type",
+                    description:
+                      "The text displayed for the APITopBar icon: Type.",
+                    message: "Type",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "package":
@@ -81,7 +122,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={vsiPackage}
           vspace={vspace}
-          text={hasText ? text || "Package" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.package",
+                    description:
+                      "The text displayed for the APITopBar icon: Package.",
+                    message: "Package",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "module":
@@ -89,7 +143,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={vsiSymbolNamespace}
           vspace={vspace}
-          text={hasText ? text || "Module" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.module",
+                    description:
+                      "The text displayed for the APITopBar icon: Module.",
+                    message: "Module",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "param":
@@ -97,7 +164,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={vsiSymbolParameter}
           vspace={vspace}
-          text={hasText ? text || "Parameter" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.param",
+                    description:
+                      "The text displayed for the APITopBar icon: Parameter.",
+                    message: "Parameter",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "op":
@@ -105,7 +185,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={vsiSymbolOperator}
           vspace={vspace}
-          text={hasText ? text || "Operator" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.op",
+                    description:
+                      "The text displayed for the APITopBar icon: Operator.",
+                    message: "Operator",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "method":
@@ -113,7 +206,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={vsiSymbolMethod}
           vspace={vspace}
-          text={hasText ? text || "Method" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.method",
+                    description:
+                      "The text displayed for the APITopBar icon: Method.",
+                    message: "Method",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "ctx":
@@ -121,7 +227,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={vsiSymbolField}
           vspace={vspace}
-          text={hasText ? text || "Context" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.ctx",
+                    description:
+                      "The text displayed for the APITopBar icon: Context.",
+                    message: "Context",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "deco":
@@ -129,7 +248,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={mdiAt}
           vspace={vspace}
-          text={hasText ? text || "Decorator" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.deco",
+                    description:
+                      "The text displayed for the APITopBar icon: Decorator.",
+                    message: "Decorator",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "abc":
@@ -137,7 +269,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={mdiAbc}
           vspace={vspace}
-          text={hasText ? text || "Abstract" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.abc",
+                    description:
+                      "The text displayed for the APITopBar icon: Abstract.",
+                    message: "Abstract",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "ext":
@@ -145,7 +290,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={vsiExtensions}
           vspace={vspace || -0.3}
-          text={hasText ? text || "Extension" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.ext",
+                    description:
+                      "The text displayed for the APITopBar icon: Extension.",
+                    message: "Extension",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "comp":
@@ -153,7 +311,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={iconoirComponentSolid}
           vspace={vspace || -0.3}
-          text={hasText ? text || "Component" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.comp",
+                    description:
+                      "The text displayed for the APITopBar icon: Component.",
+                    message: "Component",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "term":
@@ -161,7 +332,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={vsiTerminalIcon}
           vspace={vspace || -0.2}
-          text={hasText ? text || "Terminal" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.term",
+                    description:
+                      "The text displayed for the APITopBar icon: Terminal.",
+                    message: "Terminal",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "private":
@@ -169,7 +353,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={mdiLockOutline}
           vspace={vspace}
-          text={hasText ? text || "Private" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.private",
+                    description:
+                      "The text displayed for the APITopBar icon: Private.",
+                    message: "Private",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "public":
@@ -177,7 +374,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={mdiLockOpenVariantOutline}
           vspace={vspace}
-          text={hasText ? text || "Public" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.public",
+                    description:
+                      "The text displayed for the APITopBar icon: Public.",
+                    message: "Public",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     case "src":
@@ -185,7 +395,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={octFileCode16}
           vspace={vspace}
-          text={hasText ? text || "Source" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.src",
+                    description:
+                      "The text displayed for the APITopBar icon: Source.",
+                    message: "Source",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
     default:
@@ -193,7 +416,20 @@ export const IconObjType = ({
         <InlineIcon
           icon={octUnverified16}
           vspace={vspace}
-          text={hasText ? text || "Unknown" : undefined}
+          text={
+            hasText
+              ? text ||
+                translate(
+                  {
+                    id: "components.apitopbar.icon.default",
+                    description:
+                      "The text displayed for the APITopBar icon: Unknown.",
+                    message: "Unknown",
+                  },
+                  {}
+                )
+              : undefined
+          }
         />
       );
   }
