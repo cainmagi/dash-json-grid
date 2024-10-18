@@ -21,9 +21,11 @@ Dash porting version of the react project
 [React JSON Grid<IconExternalLink/>][git-react-json-grid]. Provide structured and
 nested grid table view of complicated JSON objects/arrays.
 
-<p>
-  <ThemedComponent light={<OverviewLightSVG />} dark={<OverviewDarkSVG />} />
-</p>
+<ThemedComponent
+  className="mb-default"
+  light={<OverviewLightSVG />}
+  dark={<OverviewDarkSVG />}
+/>
 
 This graph shows the high-level overview of the whole package. The core component is
 `DashJsonGrid` which has been already modified by merging mixins.

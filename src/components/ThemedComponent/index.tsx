@@ -1,7 +1,7 @@
 /* Themed Component
  * Author: cainmagi@gmail.com
  */
-import React, {useEffect, useState} from "react";
+import React, {CSSProperties, useEffect, useState} from "react";
 
 // import useThemeContext from '@theme/hooks/useThemeContext'; //docs: https://v2.docusaurus.io/docs/2.0.0-alpha.69/theme-classic#usethemecontext
 /* Refactor:
@@ -13,13 +13,18 @@ import {useColorMode} from "@docusaurus/theme-common";
 type ThemedComponentProps = {
   light: JSX.Element;
   dark: JSX.Element;
+  className?: string;
+  style?: React.CSSProperties;
 };
 
 /**
  * ThemedComponent will render different components in different color modes.
+ * 
+ * Note that the top level of this component is a `<div>` which cannot be used in `<p>`
  *
  * @param props - The components used in light and dark modes, respectively.
- * @returns The themed component that will render different components in different color modes.
+ * @returns The themed component that will render different components in different
+ *   color modes.
  */
 const ThemedComponent = (props: ThemedComponentProps): JSX.Element => {
   const [mounted, setMounted] = useState(false);
@@ -31,7 +36,11 @@ const ThemedComponent = (props: ThemedComponentProps): JSX.Element => {
   const {colorMode, setColorMode} = useColorMode();
   const isDarkTheme = colorMode === "dark";
 
-  return isDarkTheme ? props.dark : props.light;
+  return (
+    <div key={String(mounted)} className={props.className} style={props.style}>
+      {isDarkTheme ? props.dark : props.light}
+    </div>
+  );
 };
 
 export default ThemedComponent;
