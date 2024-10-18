@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.3.3 @ 10/18/2024
+
+#### :wrench: Fix
+
+1. Fix: The customized `ThemedComponent` may not be suitable for rendering `<svg>` files because it only raises issues in the production build. Try to fall back to the docusaurus `ThemedImage`.
+
 ### 0.3.3 @ 10/17/2024
 
 #### :wrench: Fix

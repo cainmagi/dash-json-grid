@@ -6,12 +6,11 @@ description: The overview of all APIs.
 slug: /apis
 ---
 
-import IconExternalLink from "@theme/Icon/ExternalLink";
-import ThemedComponent from "@site/src/components/ThemedComponent";
-import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
-import OverviewLightSVG from "./static/overview-light.svg";
-import OverviewDarkSVG from "./static/overview-dark.svg";
+import IconExternalLink from "@theme/Icon/ExternalLink";
+import ThemedImage from "@theme/ThemedImage";
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
 
 # Overview of APIs
 
@@ -21,11 +20,15 @@ Dash porting version of the react project
 [React JSON Grid<IconExternalLink/>][git-react-json-grid]. Provide structured and
 nested grid table view of complicated JSON objects/arrays.
 
-<ThemedComponent
-  className="mb-default"
-  light={<OverviewLightSVG />}
-  dark={<OverviewDarkSVG />}
-/>
+<div className="mb-default">
+  <ThemedImage
+    alt="Docusaurus themed image"
+    sources={{
+      light: useBaseUrl("/img/overview-light.svg"),
+      dark: useBaseUrl("/img/overview-dark.svg"),
+    }}
+  />
+</div>
 
 This graph shows the high-level overview of the whole package. The core component is
 `DashJsonGrid` which has been already modified by merging mixins.
