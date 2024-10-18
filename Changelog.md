@@ -19,6 +19,7 @@
 1. Upgrade the demo version of `react-json-grid` to `0.9.2`.
 2. Adjust terminlogies in some documents.
 3. Make the style of the table rendered by `react-json-grid` improved to the preview of the next version.
+4. Optimize the details of mermaid `<svg>` files and remove overheads.
 
 ### 0.3.3 @ 10/16/2024
 
