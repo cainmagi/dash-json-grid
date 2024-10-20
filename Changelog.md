@@ -6,6 +6,10 @@
 
 ### 0.3.4 @ 10/20/2024
 
+#### :wrench: Fix
+
+1. Fix: Correct some translation mistakes in the `zh-cn` doc of`docs/apis/DashJsonGrid`.
+
 #### :floppy_disk: Change
 
 1. Update the document to synchronize the `dash-json-grid==0.3.4`.
