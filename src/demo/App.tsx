@@ -13,6 +13,7 @@ import React, {useState, useEffect} from "react";
 import clsx from "clsx/lite";
 
 import {useColorMode} from "@docusaurus/theme-common";
+import Translate from "@docusaurus/Translate";
 
 import JSONGrid from "@redheadphone/react-json-grid";
 
@@ -161,11 +162,25 @@ const App = ({
   return (
     <div key={String(mounted)}>
       <p>
-        <span>Search:</span>{" "}
+        <span>
+          <Translate
+            id="demo.app.search"
+            description="Text of the search input, demo: App."
+          >
+            Search:
+          </Translate>
+        </span>{" "}
         <input type="text" value={searchText} onChange={handleOnSearch}></input>
       </p>
       <p>
-        <span>Is selection highlighted:</span>{" "}
+        <span>
+          <Translate
+            id="demo.app.selhighlight"
+            description="Text of the selectable toggle box, demo: App."
+          >
+            Is selection highlighted:
+          </Translate>
+        </span>{" "}
         <input
           type="checkbox"
           checked={highlightSelected}
@@ -192,7 +207,13 @@ const App = ({
         />
       </div>
       <p>
-        Selected: <span>{selectedValue}</span>
+        <Translate
+          id="demo.app.selected"
+          description="Text of the selected value, demo: App."
+        >
+          Selected:
+        </Translate>{" "}
+        <span>{selectedValue}</span>
       </p>
     </div>
   );

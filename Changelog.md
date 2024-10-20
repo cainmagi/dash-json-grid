@@ -13,6 +13,7 @@
 #### :floppy_disk: Change
 
 1. Modify the format of the license from `.md` to `.mdx`.
+2. Add more keywords in `src/demo` to the translation list.
 
 ### 0.3.3 @ 10/18/2024
 

@@ -13,6 +13,7 @@ import React, {useState, useEffect} from "react";
 import clsx from "clsx/lite";
 
 import {useColorMode} from "@docusaurus/theme-common";
+import Translate from "@docusaurus/Translate";
 
 import JSONGrid from "@redheadphone/react-json-grid";
 
@@ -66,7 +67,14 @@ export const SearchOnlyApp = ({data}: DemoAppProps): JSX.Element => {
   return (
     <div>
       <p>
-        <span>Search:</span>{" "}
+        <span>
+          <Translate
+            id="demo.interactive.searchonly.search"
+            description="Text of the search input, demo: SearchOnlyApp."
+          >
+            Search:
+          </Translate>
+        </span>{" "}
         <input type="text" value={searchText} onChange={handleOnSearch}></input>
       </p>
       <div className={styles.jsGridContainer}>
@@ -105,7 +113,14 @@ export const SelectableOnlyApp = ({data}: DemoAppProps): JSX.Element => {
   return (
     <div>
       <p>
-        <span>Is selection highlighted:</span>{" "}
+        <span>
+          <Translate
+            id="demo.interactive.selectableonly.selhighlight"
+            description="Text of the selectable toggle box, demo: SelectableOnlyApp."
+          >
+            Is selection highlighted:
+          </Translate>
+        </span>{" "}
         <input
           type="checkbox"
           checked={highlightSelected}
@@ -160,7 +175,13 @@ export const OnSelectApp = ({data}: DemoAppProps): JSX.Element => {
         />
       </div>
       <p>
-        Selected: <span>{selectedValue}</span>
+        <Translate
+          id="demo.interactive.onselectapp.selected"
+          description="Text of the selected value, demo: OnSelectApp."
+        >
+          Selected:
+        </Translate>{" "}
+        <span>{selectedValue}</span>
       </p>
     </div>
   );

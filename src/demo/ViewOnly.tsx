@@ -12,6 +12,7 @@
 import React, {useState, useEffect} from "react";
 
 import {useColorMode} from "@docusaurus/theme-common";
+import Translate from "@docusaurus/Translate";
 
 import JSONGrid from "@redheadphone/react-json-grid";
 
@@ -103,7 +104,14 @@ const Theme = (props: ThemeProps): JSX.Element => {
   return (
     <div className="select">
       <p>
-        <span>Theme:</span>{" "}
+        <span>
+          <Translate
+            id="demo.viewonly.theme.text"
+            description="Text of the theme selection box, demo: ThemedApp."
+          >
+            Theme:
+          </Translate>
+        </span>{" "}
         <select
           name={"theme"}
           value={props.value}
