@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.3.3 @ 10/20/2024
+
+#### :floppy_disk: Change
+
+1. Modify the format of the license from `.md` to `.mdx`.
+
 ### 0.3.3 @ 10/18/2024
 
 #### :wrench: Fix
