@@ -15,6 +15,7 @@
 #### :floppy_disk: Change
 
 1. Previously, `DashJsonGrid.get_data_by_route(...)` cannot get a column if the column name does not exist in a specific row. Now, the `undefined` value will be treated as `None` when acquired to make this method compatible with a partially complete column.
+2. Update the project metadata.
 
 ### 0.3.3 @ 10/16/2024
 
