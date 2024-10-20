@@ -10,6 +10,7 @@
 
 1. Fix: The modification in `0.3.3` incorrectly allows `DashJsonGrid.pop_item_of_object(...)` to export a table row/cell even if the data fails to be routed. Now this situation is disallowed.
 2. Fix: A bug of `react-json-grid<=0.9.0` causes the selection may return an incorrect route containing `null`. Now the codes will handle this case. When routing the data, the routing will stop by the parent of the place where the `null` index is applied to. When modifying the data, using a route containing `null` will do nothing.
+3. Fix: Correct typos in the docstrings of `mixins`.
 
 #### :floppy_disk: Change
 

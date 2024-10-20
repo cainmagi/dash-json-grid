@@ -366,7 +366,7 @@ class MixinFile:
     ) -> T:
         """Use a JSON string to initialize the component.
 
-        If using this method, users should leave the argument `"data"` blank because
+        If using this method, users should leave the argument `data` blank because
         this method will load `json_string` and pass it to the `data` argument.
 
         Extra Arguments
@@ -402,7 +402,7 @@ class MixinFile:
     ) -> T:
         """Use a JSON file to initialize the component.
 
-        If using this method, users should leave the argument `"data"` blank because
+        If using this method, users should leave the argument `data` blank because
         this method will load `json_file` and pass it to the `data` argument.
 
         Extra Arguments
@@ -426,8 +426,8 @@ class MixinFile:
         all_args = inspect.signature(cls).bind(*args, **kwargs).arguments.keys()
         if "data" in all_args:
             raise TypeError(
-                'When using "from_str", it is not allowed to specify the argument '
-                '"data" because "data" is delegated to the argument "json_string".'
+                'When using "json_file", it is not allowed to specify the argument '
+                '"data" because "data" is delegated to the argument "json_file".'
             )
         if isinstance(json_file, (str, os.PathLike)):
             with open(json_file, "r") as fobj:
