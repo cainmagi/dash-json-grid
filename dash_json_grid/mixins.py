@@ -269,6 +269,8 @@ class MixinDataRoute:
         ):
             return cur_data
         for idx in route:
+            if idx is None:
+                return cur_data
             cur_data = get_item_of_object(cur_data, idx)
         return cur_data
 
@@ -307,6 +309,8 @@ class MixinDataRoute:
         cur_data = data
         idx_last = route[-1]
         for idx in route[:-1]:
+            if idx is None:
+                return
             if is_sequence(idx):
                 idx_last = idx
                 break
@@ -346,6 +350,8 @@ class MixinDataRoute:
             )
         idx_last = route[-1]
         for idx in route[:-1]:
+            if idx is None:
+                return None
             if is_sequence(idx):
                 idx_last = idx
                 break
