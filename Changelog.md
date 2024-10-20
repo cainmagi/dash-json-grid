@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.4.0 @ 10/20/2024
+
+#### :floppy_disk: Change
+
+1. Configure `.gitattributes` for specifying the line-breaks of files.
+
 ### 0.3.4 @ 10/20/2024
 
 #### :wrench: Fix
