@@ -70,7 +70,18 @@ def get_item_of_object(data: Any, index: Any) -> Any:
             return data[index[0]]
         elif isinstance(data, collections.abc.Sequence):
             index_key = index[0]
-            return tuple(d_item.get(index_key, None) for d_item in data)
+            _missing = object()
+            _res = tuple(
+                (
+                    d_item.get(index_key, _missing)
+                    if isinstance(d_item, collections.abc.Mapping)
+                    else d_item[index_key]
+                )
+                for d_item in data
+            )
+            if _res and any(val is not _missing for val in _res):
+                return tuple((None if val is _missing else val for val in _res))
+            raise KeyError(index_key)
     else:
         if isinstance(data, collections.abc.Mapping):
             return data[index]
@@ -426,7 +437,7 @@ class MixinFile:
         all_args = inspect.signature(cls).bind(*args, **kwargs).arguments.keys()
         if "data" in all_args:
             raise TypeError(
-                'When using "json_file", it is not allowed to specify the argument '
+                'When using "from_file", it is not allowed to specify the argument '
                 '"data" because "data" is delegated to the argument "json_file".'
             )
         if isinstance(json_file, (str, os.PathLike)):

@@ -88,8 +88,11 @@ class TestInitFrom:
         )
         log.info("Successfully initialize the component with a file-like object.")
 
-        with pytest.raises(TypeError, match='When using "from_str", it is not allowed'):
+        with pytest.raises(
+            TypeError, match='When using "from_file", it is not allowed'
+        ):
             dash_json_grid.DashJsonGrid.from_file(file_path, data={})
         log.info(
-            'Successfully validate the functionality of using "data" with file_file(...)'
+            'Successfully validate the functionality of using "data" with '
+            "from_file(...)"
         )
