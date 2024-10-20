@@ -14,6 +14,7 @@
 
 1. Modify the format of the license from `.md` to `.mdx`.
 2. Add more keywords in `src/demo` to the translation list.
+3. Adjust the style of buttons with icons. Move the icons to the left side by `1ex`.
 
 ### 0.3.3 @ 10/18/2024
 
