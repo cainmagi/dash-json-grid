@@ -2,7 +2,7 @@
 id: search-and-select
 sidebar_label: Search & Select
 title: Search and select data
-description: A guide showing how to fed the search query and how to collect the selected value.
+description: A guide showing how to fed the data query and how to collect the selected value.
 slug: /usages/search-and-select
 ---
 
@@ -54,9 +54,9 @@ test_data = {
 
 ## Search and highlight data
 
-The following example uses a `dcc.Input` component to specify the keyword (query) used
-for searching the data. All values that are searched will be highlighted with a special
-style.
+The following example uses a [`dcc.Input`<IconExternalLink/>][link-dccinput] component
+to specify the keyword (query) used for searching the data. All values that are
+searched will be highlighted with a special style.
 
 <Tabs
   defaultValue="server"
@@ -384,8 +384,10 @@ The dash app is expected to render the following result:
 change this property and fire a callback. However, configuring this property by
 `Output("grid", "selected_path")` will not change the selected data of the component.
 To avoid any unexpected behaviors, users should not make `selected_path` changed by
-an `Output`.
+a [`dash.Output`<IconExternalLink/>][link-dashoutput].
 
 :::
 
 [link-client]: https://dash.plotly.com/clientside-callbacks
+[link-dccinput]: https://dash.plotly.com/dash-core-components/input
+[link-dashoutput]: https://dash.plotly.com/basic-callbacks

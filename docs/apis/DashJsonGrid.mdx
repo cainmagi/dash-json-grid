@@ -84,7 +84,7 @@ unstructured serializable JSON data.
 |          `theme`          | <code>{`str \| `}[ThemeConfigs](./typehints/ThemeConfigs.mdx)</code> |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |          `"default"`           |
 |      `loading_state`      |         [`LoadingState`<IconExternalLink/>][link-loadstate]          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
 
-- "Interactive" means that the property can be changed by users' interactions.
+- "Interactive" means that the property can be changed by users' interactions, thus firing a callback.
 - "Setable" means that changing it by callback `Output(...)` will take effects.
 - "Required" means that the component cannot be initialized if this value is not explicitly provided.
 
@@ -215,7 +215,7 @@ this method will load `json_string` and pass it to the `data` argument.
 |     Argument      | Type  |             Required              | <center>Description</center>                                                                                                                                                    |
 | :---------------: | :---: | :-------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   `json_string`   | `str` | <InlineIcon icon={vsiCheckIcon}/> | A string where JSON data is encoded.                                                                                                                                            |
-| `*args, **kwargs` | `...` |  <InlineIcon icon={biSlashLg}/>   | The same as the initialization, see [component properties](#component-properties). The exception is `data` which should not be configured because it is replaced by `json_str`. |
+| `*args, **kwargs` | `...` |  <InlineIcon icon={biSlashLg}/>   | The same as the initialization, see [component properties](#component-properties). The exception is `data` which should not be configured because it is replaced by `json_string`. |
 
 #### Returns
 
@@ -449,7 +449,7 @@ def show_data(route, data):
     ...
 ```
 
-### <IconObjType type="term"/> Modify the selected data.
+### <IconObjType type="term"/> Modify the selected data
 
 ```python title="callback_modify_selected.py" showLineNumbers
 @app.callback(
@@ -465,7 +465,7 @@ def modify_data(route, data):
     ...
 ```
 
-### <IconObjType type="term"/> Delete the selected data.
+### <IconObjType type="term"/> Delete the selected data
 
 ```python title="callback_delete_selected.py" showLineNumbers
 @app.callback(
@@ -475,7 +475,7 @@ def modify_data(route, data):
 )
 def delete_data(route, data):
     deleted_part = DashJsonGrid.delete_data_by_route(data, route)
-    # deleted_part is the part that is removed from the whole data.
+    # deleted_part is the part that is removed from the whole data
     return data
 ```
 

@@ -26,7 +26,7 @@ const sidebars: SidebarsConfig = {
         type: "generated-index",
         title: "How to use DashJsonGrid",
         slug: "/category/usages",
-        description: "Simple guides for showing the basic usage of this component.",
+        description: "Simple guides for showing the basic usages of this component.",
       },
       items: [
         "tutorial/usages/data",

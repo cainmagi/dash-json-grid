@@ -6,6 +6,10 @@
 
 ### 0.3.3 @ 10/20/2024
 
+#### :wrench: Fix
+
+1. Fix: Correct the typos and ambiguous descriptions throughout the whole document.
+
 #### :floppy_disk: Change
 
 1. Modify the format of the license from `.md` to `.mdx`.

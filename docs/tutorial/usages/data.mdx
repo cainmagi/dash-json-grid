@@ -2,7 +2,7 @@
 id: data
 sidebar_label: Data
 title: Configuring data
-description: A guide overviewing the supported data formats of DashJsonGrid.
+description: A guide overviewing the supported data rendering methods of DashJsonGrid.
 slug: /usages/data
 ---
 
@@ -90,8 +90,9 @@ The dash app is expected to render the following result:
 </Tabs>
 
 We can find that the result does not change compared to the minimal example. That's
-because all literal value that is not a [`Sequence`<IconExternalLink/>][link-sequence]
-or a [`Mapping`<IconExternalLink/>][link-mapping] will be automatically converted to
+because all literal value that is passed to `data` but not a
+[`Sequence`<IconExternalLink/>][link-sequence] or a
+[`Mapping`<IconExternalLink/>][link-mapping] will be automatically converted to
 a sequence with only one element. In other words, `data=1` will be sanitized as
 `data=[1]` implicitly.
 
@@ -137,8 +138,8 @@ The dash app is expected to render the following result:
 
 </Tabs>
 
-A sequence containing literal values will be rendered as a vertical list containing an
-index column and a value column.
+A sequence containing literal or unstructured values will be rendered as a vertical
+list containing an index column and a value column.
 
 ## Render a mapping
 
@@ -329,7 +330,7 @@ The data can be fed into the component by another two initialization methods.
 
 <TabItem value="str">
 
-Users can also initialize the component by a string:
+Users can also initialize the component by a JSON string:
 
 ```python
 app.layout = dash_json_grid.DashJsonGrid.from_str(
@@ -344,7 +345,7 @@ decoded by a JSON decoder. In this case, `data` should not be used.
 
 <TabItem value="file">
 
-It is also allowed to use a file to initialize the component directly:
+It is also allowed to use a JSON file to initialize the component directly:
   
 ```python
 app.layout = dash_json_grid.DashJsonGrid.from_file(
@@ -352,7 +353,7 @@ app.layout = dash_json_grid.DashJsonGrid.from_file(
 )
 ```
 
-By using this method, the first argument `json_file` will be path pointing to a json
+By using this method, the first argument `json_file` will be path pointing to a JSON
 file or a file-like object. In this case, `data` should not be used.
 
 </TabItem>
@@ -361,8 +362,8 @@ file or a file-like object. In this case, `data` should not be used.
 
 :::warning
 
-Note that `json_str` and `json_file` are translated to `data` during the
-initialization. Therefore, `json_str` or `json_file` will not be properties that can
+Note that `json_string` and `json_file` are translated to `data` during the
+initialization. Therefore, `json_string` or `json_file` will not be properties that can
 be accessed by a callback.
 
 :::
