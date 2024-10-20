@@ -4,6 +4,16 @@
 
 ## CHANGELOG
 
+### 0.3.4 @ 10/20/2024
+
+#### :wrench: Fix
+
+1. Fix: The modification in `0.3.3` incorrectly allows `DashJsonGrid.pop_item_of_object(...)` to export a table row/cell even if the data fails to be routed. Now this situation is disallowed.
+
+#### :floppy_disk: Change
+
+1. Previously, `DashJsonGrid.get_data_by_route(...)` cannot get a column if the column name does not exist in a specific row. Now, the `undefined` value will be treated as `None` when acquired to make this method compatible with a partially complete column.
+
 ### 0.3.3 @ 10/16/2024
 
 #### :wrench: Fix

@@ -70,7 +70,7 @@ def get_item_of_object(data: Any, index: Any) -> Any:
             return data[index[0]]
         elif isinstance(data, collections.abc.Sequence):
             index_key = index[0]
-            return tuple(d_item[index_key] for d_item in data)
+            return tuple(d_item.get(index_key, None) for d_item in data)
     else:
         if isinstance(data, collections.abc.Mapping):
             return data[index]
@@ -188,7 +188,7 @@ def pop_item_of_object(data: Any, index: Any) -> Any:
                 for item in data
             )
         elif isinstance(data, collections.abc.MutableMapping):
-            return data.pop(index_key, None)
+            return data.pop(index_key)
         else:
             raise ValueError(
                 "Fail to modify the data, because the given data {0} is "
@@ -196,7 +196,7 @@ def pop_item_of_object(data: Any, index: Any) -> Any:
             )
     else:
         if isinstance(data, collections.abc.MutableMapping):
-            return data.pop(index, None)
+            return data.pop(index)
         elif isinstance(data, collections.abc.MutableSequence):
             try:
                 index = sanitize_list_index(index)
