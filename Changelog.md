@@ -6,6 +6,10 @@
 
 ### 0.3.3 @ 10/20/2024
 
+#### :mega: New
+
+1. Add the zh-cn translation of the whole document.
+
 #### :wrench: Fix
 
 1. Fix: Correct the typos and ambiguous descriptions throughout the whole document.

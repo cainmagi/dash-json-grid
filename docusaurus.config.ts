@@ -46,7 +46,7 @@ const config: Config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "en",
-    locales: ["en"],
+    locales: ["en", "zh-cn"],
   },
 
   presets: [
@@ -58,6 +58,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/cainmagi/dash-json-grid/edit/docs/",
+          editLocalizedFiles: true,
         },
         theme: {
           customCss: "./src/css/custom.scss",
@@ -87,6 +88,10 @@ const config: Config = {
           sidebarId: "apis",
           position: "left",
           label: "APIs",
+        },
+        {
+          type: 'localeDropdown',
+          position: 'right',
         },
         {
           href: "https://github.com/cainmagi/dash-json-grid",
@@ -135,7 +140,7 @@ const config: Config = {
               href: "mailto:cainmagi@gmail.com",
             },
             {
-              label: "Github",
+              label: "GitHub",
               href: "https://github.com/cainmagi",
             },
           ],

@@ -1,0 +1,317 @@
+---
+id: theme
+sidebar_label: 主题
+title: 配置主题
+description: 介绍配置组件主题的几种方式。
+slug: /usages/theme
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import IconExternalLink from "@theme/Icon/ExternalLink";
+
+import ViewOnlyDemoApp, {ThemedApp} from "@site/src/demo/ViewOnly";
+
+# 配置主题
+
+对于没有进行过任何特殊配置的组件，其主题默认配置为`"default"`。
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="not_themed_example.py" showLineNumbers
+import dash
+import dash_json_grid as djg
+
+
+app = dash.Dash("demo")
+app.layout = djg.DashJsonGrid(
+    data=[
+        {"key1": 1, "key2": "str"},
+        {"key1": True, "key2": None},
+        {"key1": 3.0},
+        {"key1": False, "key2": None, "key3": 4.0},
+        {"key5": "?"},
+    ]
+)
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+Dash应用应当呈现出以下结果：
+
+<ViewOnlyDemoApp
+  data={[
+    {key1: 1, key2: "str"},
+    {key1: true, key2: null},
+    {key1: 3.0},
+    {key1: false, key2: null, key3: 4.0},
+    {key5: "?"},
+  ]}
+  theme="default"
+/>
+
+</TabItem>
+
+</Tabs>
+
+## 配置主题名称 {#specify-a-theme-by-a-name}
+
+可以透过主题名称(`str`)来配置主题。对于上例，只需添加参数`theme="moonLight"`即可改为另一
+主题。
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data=[
+        {"key1": 1, "key2": "str"},
+        {"key1": True, "key2": None},
+        {"key1": 3.0},
+        {"key1": False, "key2": None, "key3": 4.0},
+        {"key5": "?"},
+    ],
+    # highlight-next-line
+    theme="moonLight",
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+Dash应用应当呈现出以下结果：
+
+<ViewOnlyDemoApp
+  data={[
+    {key1: 1, key2: "str"},
+    {key1: true, key2: null},
+    {key1: 3.0},
+    {key1: false, key2: null, key3: 4.0},
+    {key5: "?"},
+  ]}
+  theme="moonLight"
+/>
+
+</TabItem>
+
+</Tabs>
+
+可用的主题名称包括：
+
+```python
+[
+    "default", "dracula", "monokai", "oceanicPark", "panda",
+    "gruvboxMaterial", "tokyoNight", "remedy", "atlanticNight",
+    "defaultLight", "defaultLight2", "slime", "spacegray",
+    "blueberryDark", "nord", "nightOwl", "oneMonokai", "cobaltNext",
+    "shadesOfPurple", "codeBlue", "softEra", "atomMaterial",
+    "evaDark", "moonLight", "unset", "inherit"
+]
+```
+
+以下展示的范例，可以作为帮助用户预览各种主题，并选择合适主题的工具：
+
+<ThemedApp
+  data={[
+    {key1: 1, key2: "str"},
+    {key1: true, key2: null},
+    {key1: 3.0},
+    {key1: false, key2: null, key3: 4.0},
+    {key5: "?"},
+  ]}
+/>
+
+## 配置主题字典 {#specify-a-theme-by-a-dictionary}
+
+要针对主题的某一部分样式进行配置，可以使用一个含有类型标记的字典：
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data=[
+        {"key1": 1, "key2": "str"},
+        {"key1": True, "key2": None},
+        {"key1": 3.0},
+        {"key1": False, "key2": None, "key3": 4.0},
+        {"key5": "?"},
+    ],
+    # highlight-start
+    theme=djg.ThemeConfigs(
+        bgColor="#f5f5f5",
+        booleanColor="#007acc",
+        cellBorderColor="#c0c0c0",
+        highlightBgColor="#e0e0e0",
+        indexColor="#666666",
+        keyNameColor="#333333",
+        numberColor="#007acc",
+        objectColor="#333333",
+        searchHighlightBgColor="#cccccc",
+        stringColor="#2ca22c",
+        tableBorderColor="#d3d3d3",
+        tableHeaderBgColor="#dddddd",
+        tableHeaderColor="#333333",
+    ),
+    # highlight-end
+)
+...
+```
+
+代码中高亮的[`djg.ThemeConfigs(...)`](../../apis/typehints/ThemeConfigs.mdx)
+属于[`TypedDict`<IconExternalLink/>][link-typeddict]类型。
+
+</TabItem>
+
+<TabItem value="results">
+
+Dash应用应当呈现出以下结果：
+
+<ViewOnlyDemoApp
+  data={[
+    {key1: 1, key2: "str"},
+    {key1: true, key2: null},
+    {key1: 3.0},
+    {key1: false, key2: null, key3: 4.0},
+    {key5: "?"},
+  ]}
+  customTheme={{
+    bgColor: "#f5f5f5",
+    booleanColor: "#007acc",
+    cellBorderColor: "#c0c0c0",
+    selectHighlightBgColor: "#e0e0e0",
+    indexColor: "#666666",
+    keyColor: "#333333",
+    numberColor: "#007acc",
+    objectColor: "#333333",
+    searchHighlightBgColor: "#cccccc",
+    stringColor: "#2ca22c",
+    borderColor: "#d3d3d3",
+    tableHeaderBgColor: "#dddddd",
+    tableIconColor: "#333333",
+  }}
+/>
+
+</TabItem>
+
+</Tabs>
+
+## 将参数配置为`theme=inherit`并使用全局样式表 {#specify-a-theme-by-themeinherit-and-a-global-stylesheet}
+
+若用户更青睐于利用全局CSS/SCSS样式表来配置主题，可以采取将组件参数设置为`theme=inherit`，并
+于样式表中增加如下配置
+
+```css
+body .special-djg-style {
+  --jg-bg-color: #fff;
+  --jg-boolean-color: #00f;
+  --jg-cell-border-color: #ddd;
+  --jg-highlight-bg-color: #c1def133;
+  --jg-index-color: #00f;
+  --jg-key-name-color: #32373b;
+  --jg-number-color: #007acc;
+  --jg-object-color: #00009f;
+  --jg-search-highlight-bg-color: #8885;
+  --jg-string-color: #a31515;
+  --jg-table-border-color: #a5a5a5;
+  --jg-table-header-bg-color: #ddd;
+  --jg-table-header-color: #333;
+}
+```
+
+样式配置完成后，组件定义如下：
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+# highlight-next-line
+from dash import html
+...
+app.layout = html.Div(
+    # highlight-next-line
+    className="special-djg-style",
+    children=djg.DashJsonGrid(
+        data=[
+            {"key1": 1, "key2": "str"},
+            {"key1": True, "key2": None},
+            {"key1": 3.0},
+            {"key1": False, "key2": None, "key3": 4.0},
+            {"key5": "?"},
+        ],
+        # highlight-next-line
+        theme="inherit",
+    )
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+Dash应用应当呈现出以下结果：
+
+<div className="special-djg-style">
+  <ViewOnlyDemoApp
+    data={[
+      {key1: 1, key2: "str"},
+      {key1: true, key2: null},
+      {key1: 3.0},
+      {key1: false, key2: null, key3: 4.0},
+      {key5: "?"},
+    ]}
+    theme="inherit"
+  />
+</div>
+
+</TabItem>
+
+</Tabs>
+
+:::info
+
+使用`"inherit" | "unset"`配置主题，是dash-json-grid自`v0.3.2`后提供的新特性。
+原项目(`react-json-grid`)提供的组件并不支持这种配置。
+
+:::
+
+[link-typeddict]:https://docs.python.org/3/library/typing.html#typing.TypedDict

@@ -1,0 +1,106 @@
+---
+id: get_item_of_object
+title: get_item_of_object
+sidebar_label: get_item_of_object
+slug: /apis/mixins/get_item_of_object
+description: 对于任意数据data，获取data[index]的值。
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+import vsiCheckIcon from "@iconify-icons/codicon/check";
+
+import InlineIcon from "@site/src/components/InlineIcon";
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="func" isPrivate={true} source="mixins.py#L65" />
+
+```python
+data_selected: Any = get_item_of_object(data: Any, index: Any)
+```
+
+对于任意数据`data`，获取`data[index]`的值，其中`index`可以是一个由单元素构成的序列。
+
+:::warning
+
+注意`index`并非是[路由（`route`）](./Route.mdx)类型。若该值是序列，该序列只能包含单元素。
+
+:::
+
+## 参数 {#arguments}
+
+### 输入 {#requires}
+
+|  参数   | 类型  |               必选                | <center>说明</center>                                                               |
+| :-----: | :---: | :-------------------------------: | ----------------------------------------------------------------------------------- |
+| `data`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | 需要索引的完整数据。                                                                |
+| `index` | `Any` | <InlineIcon icon={vsiCheckIcon}/> | 用来索引数据某一部分的下标值。该值可以是数字、关键字、或者是形如`[0]`的单元素序列。 |
+
+### 输出 {#returns}
+
+|      参数       | 类型  | <center>说明</center>           |
+| :-------------: | :---: | :------------------------------ |
+| `data_selected` | `Any` | 由`index`定位的`data`的一部分。 |
+
+## 范例 {#examples}
+
+### <IconObjType type="term"/> 获取完整数据的某部分 {#-get-a-part-of-the-whole-data}
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="get_a_part_of_data.py" showLineNumbers
+import pprint
+from dash_json_grid.mixins import get_item_of_object
+
+data = {
+    "id": "0001",
+    "type": "donut",
+    "name": "Cake",
+    "ppu": 1111.55,
+    "batters": {
+        "batter": [
+            {"id": "1001", "type": "Regular"},
+            {"id": "1002", "type": "Chocolate"},
+            {"id": "1003", "type": "Blueberry"},
+            {"id": "1004", "type": "Devil's Food"},
+        ]
+    },
+    "topping": [
+        {"id": "5001", "type": "None"},
+        {"id": "5002", "type": "Glazed"},
+        {"id": "5005", "type": "Sugar"},
+        {"id": "5007", "type": "Powdered Sugar"},
+        {"id": "5006", "type": "Chocolate with Sprinkles"},
+        {"id": "5003", "type": "Chocolate"},
+        {"id": "5004", "type": "Maple"},
+    ],
+}
+
+index = ["batters"]
+
+pprint.pprint(get_item_of_object(data, index))
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+```python
+{'batter': [{'id': '1001', 'type': 'Regular'},
+            {'id': '1002', 'type': 'Chocolate'},
+            {'id': '1003', 'type': 'Blueberry'},
+            {'id': '1004', 'type': "Devil's Food"}]}
+```
+
+</TabItem>
+
+</Tabs>

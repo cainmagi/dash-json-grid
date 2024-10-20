@@ -1,0 +1,54 @@
+---
+id: MixinFile
+title: MixinFile
+sidebar_label: MixinFile
+slug: /apis/mixins/MixinFile
+description: 用来提供文件加载功能的插件。
+---
+
+import vsiCheckIcon from "@iconify-icons/codicon/check";
+
+import InlineIcon from "@site/src/components/InlineIcon";
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="class" isMixin={true} source="mixins.py#L356" />
+
+```python
+mixin = MixinFile()
+```
+
+用来提供文件加载功能的插件。
+
+## 方法 {#methods}
+
+### <IconObjType type="method"/> `from_str` {#-from_str}
+
+```python
+mixin = MixinFile.from_str(json_string: str, *args, **kwargs)
+```
+
+`from_str`是类方法，该方法初始化并返回一个实例。
+
+使用JSON格式的字符串以初始化该组件。
+
+使用该方法时，参数`data`需要留空，该方法会透过载入`json_string`将值传递给参数`data`。
+
+关于参数，详情请参见[`DashJsonGrid`](../DashJsonGrid.mdx#-from_str)。
+
+---
+
+### <IconObjType type="method"/> `from_file` {#-from_file}
+
+```python
+mixin = MixinFile.from_file(
+    json_file: str | os.PathLike | IO[str], *args, **kwargs
+)
+```
+
+`from_file`是类方法，该方法初始化并返回一个实例。
+
+使用JSON文件以初始化该组件。
+
+使用该方法时，参数`data`需要留空，该方法会透过载入`json_file`将值传递给参数`data`。
+
+关于参数，详情请参见[`DashJsonGrid`](../DashJsonGrid.mdx#-from_file)。
