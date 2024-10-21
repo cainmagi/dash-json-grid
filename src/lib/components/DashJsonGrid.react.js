@@ -54,7 +54,7 @@ DashJsonGrid.propTypes = {
   style: PropTypes.object,
 
   /**
-   * The JSON object or array to be transformed into a grid table.
+   * The JSON-serializable data to be transformed into a grid table.
    */
   data: PropTypes.oneOfType([
     PropTypes.object,
@@ -71,12 +71,12 @@ DashJsonGrid.propTypes = {
 
   /**
    * Tree-like structure with all keys that needs to be expanded. This structure needs
-   * to be a dictionary mimicing the structure of the data.
+   * to be a `Mapping` mimicing the structure of the data.
    */
   default_expand_key_tree: PropTypes.object,
 
   /**
-   * keyPath captured by the onSelect method of the grid viewer. This value is a
+   * `keyPath` captured by the `onSelect` method of the grid viewer. This value is a
    * sequence of indicies used for locating the element of the selected data.
    *
    * Due to the limitation of the exported functionalities, this value cannot be
@@ -111,7 +111,7 @@ DashJsonGrid.propTypes = {
   search_text: PropTypes.string,
 
   /**
-   * The theme (name) that needs to be applied. If a dictionary is specified, will
+   * The theme (name) that needs to be applied. If a `Mapping` is specified, will
    * customize the color code of each part of grid viewer.
    */
   theme: PropTypes.oneOfType([
@@ -145,27 +145,27 @@ DashJsonGrid.propTypes = {
     ]),
     PropTypes.exact({
       /**
-       * Background color.
+       * Background color of the whole grid view.
        */
       bgColor: PropTypes.string,
       /**
-       * Border color of the whole table.
+       * Border color of the whole grid view.
        */
-      tableBorderColor: PropTypes.string,
+      borderColor: PropTypes.string,
       /**
-       * Background color when this part is highlighted.
+       * Background color when this part is highlighted by the selection.
        */
-      highlightBgColor: PropTypes.string,
+      selectHighlightBgColor: PropTypes.string,
       /**
        * Background color of table cells.
        */
       cellBorderColor: PropTypes.string,
       /**
-       * Text color of JSON keys.
+       * Text color of mapping keys.
        */
-      keyNameColor: PropTypes.string,
+      keyColor: PropTypes.string,
       /**
-       * Text color of array indicies.
+       * Text color of sequence indicies.
        */
       indexColor: PropTypes.string,
       /**
@@ -189,9 +189,9 @@ DashJsonGrid.propTypes = {
        */
       tableHeaderBgColor: PropTypes.string,
       /**
-       * Text color of the table header.
+       * Text color of the icon in the table header.
        */
-      tableHeaderColor: PropTypes.string,
+      tableIconColor: PropTypes.string,
       /**
        * Background color of the part highlighted by the search.
        */

@@ -6,6 +6,14 @@
 
 ### 0.4.0 @ 10/20/2024
 
+#### :mega: New
+
+1. Upgrade the core dependency `react-json-grid` from `v0.7.0` to `v0.9.2`, where several bugs are fixed.
+
+#### :wrench: Fix
+
+1. Fix: Correct some ambiguous descriptions in the docstrings.
+
 #### :floppy_disk: Change
 
 1. Configure `.gitattributes` for specifying the line-breaks of files.

@@ -1569,13 +1569,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redheadphone/react-json-grid@npm:~0.7.0":
-  version: 0.7.0
-  resolution: "@redheadphone/react-json-grid@npm:0.7.0"
+"@redheadphone/react-json-grid@npm:~0.9.2":
+  version: 0.9.2
+  resolution: "@redheadphone/react-json-grid@npm:0.9.2"
   peerDependencies:
     react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/32f29a28d5e3f36f56467152520537205384a3e0e4c57040b7db9e241785c46d38627694c0177a6c455f2f1fce8f8684fc48d92171cc36625abab02fd219f34a
+  checksum: 10c0/a8d7dc28b34d2f7bc79bc576d72c94cacf27ae19278353d8e2b50f3d3fcb8a7c0c05f5668529314a728386612b37c4af2b67773538f21f2fbfcb40eb7ac6d5c3
   languageName: node
   linkType: hard
 
@@ -2940,7 +2940,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.22.3"
     "@plotly/dash-component-plugins": "npm:^1.2.3"
     "@plotly/webpack-dash-dynamic-import": "npm:^1.2.0"
-    "@redheadphone/react-json-grid": "npm:~0.7.0"
+    "@redheadphone/react-json-grid": "npm:~0.9.2"
     babel-eslint: "npm:^10.1.0"
     babel-loader: "npm:^9.1.2"
     copyfiles: "npm:^2.1.1"
