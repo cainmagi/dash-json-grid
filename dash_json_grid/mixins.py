@@ -62,6 +62,40 @@ def sanitize_list_index(index: Any) -> int:
         raise ValueError("Unrecognized index value: {0}".format(index))
 
 
+def _get_item_of_table(table: Sequence[Any], index: Union[int, str]) -> Any:
+    """Suppose that `table` is potentially to be rendered as a table. Use the index to
+    fetch a column or a plain element of it.
+
+    Arguments
+    ---------
+    table: `[Any]`
+        The table to be indexed.
+
+    index: `int | str`
+        The index used for fetching the table data. If `index` is a `int`, `table` will
+        be treated as a plain list and the index will be used for fetching the element.
+        If `index` is a `str`, will try to fetch the table columns.
+
+    Returns
+    -------
+    #1: `Any`
+        The data fetched from the table.
+    """
+    if isinstance(index, int):
+        return table[index]
+    n_items = len(table)
+    cols = collections.OrderedDict(
+        (idx, tb_item[index])
+        for idx, tb_item in enumerate(table)
+        if (isinstance(tb_item, collections.abc.Mapping) and index in tb_item)
+    )
+    if not cols:
+        raise KeyError(index)
+    if len(cols) == n_items:
+        return tuple(cols.values())
+    return cols
+
+
 def get_item_of_object(data: Any, index: Any) -> Any:
     """Run `data[index]` supposing that `data` is abitrary and `index` can be a
     one-value sequence."""
@@ -70,18 +104,7 @@ def get_item_of_object(data: Any, index: Any) -> Any:
             return data[index[0]]
         elif isinstance(data, collections.abc.Sequence):
             index_key = index[0]
-            _missing = object()
-            _res = tuple(
-                (
-                    d_item.get(index_key, _missing)
-                    if isinstance(d_item, collections.abc.Mapping)
-                    else d_item[index_key]
-                )
-                for d_item in data
-            )
-            if _res and any(val is not _missing for val in _res):
-                return tuple((None if val is _missing else val for val in _res))
-            raise KeyError(index_key)
+            return _get_item_of_table(data, index_key)
     else:
         if isinstance(data, collections.abc.Mapping):
             return data[index]
@@ -130,6 +153,14 @@ class _set_item_of_object:
         """Case when `index` is a sequence."""
         index_key = index[0]
         if is_sequence(data):
+            if isinstance(index_key, int):
+                if not isinstance(data, collections.abc.MutableSequence):
+                    raise TypeError(
+                        "Fail to modify the data, because the given data {0} is "
+                        "immutable.".format(data)
+                    )
+                data[index_key] = value
+                return
             _set_item_of_object._set_by_broadcast(data, index_key, value)
         elif isinstance(data, collections.abc.MutableMapping):
             data[index_key] = value
@@ -184,20 +215,52 @@ def set_item_of_object(data: Any, index: Any, value: Any) -> None:
         return _set_item_of_object._call_if_idx_is_scalar(data, index, value)
 
 
+def _pop_item_of_table(table: Sequence[Any], index: Union[int, str]) -> Any:
+    """Suppose that `table` is potentially to be rendered as a table. Use the index to
+    remove and pop a column or a plain element of it.
+
+    Arguments
+    ---------
+    table: `[Any]`
+        The table to be indexed.
+
+    index: `int | str`
+        The index used for poping the table data. If `index` is a `int`, `table` will
+        be treated as a plain list and the index will be used for poping the element.
+        If `index` is a `str`, will try to pop the table columns.
+
+    Returns
+    -------
+    #1: `Any`
+        The data removed and popped from the table.
+    """
+    if isinstance(index, int):
+        if not isinstance(table, collections.abc.MutableSequence):
+            raise ValueError(
+                "Fail to modify the data, because this part of the data is "
+                "immutable: {0}.".format(table)
+            )
+        return table.pop(index)
+    n_items = len(table)
+    cols = collections.OrderedDict(
+        (idx, tb_item.pop(index))
+        for idx, tb_item in enumerate(table)
+        if (isinstance(tb_item, collections.abc.MutableMapping) and index in tb_item)
+    )
+    if not cols:
+        raise KeyError(index)
+    if len(cols) == n_items:
+        return tuple(cols.values())
+    return cols
+
+
 def pop_item_of_object(data: Any, index: Any) -> Any:
     """Run `val = data[index]; del data[index]; return val` supposing that `data` is
     abitrary and `index` can be a one-value sequence."""
     if is_sequence(index):
         index_key = index[0]
         if is_sequence(data):
-            return tuple(
-                (
-                    item.pop(index_key, None)
-                    if isinstance(item, collections.abc.MutableMapping)
-                    else item.pop(index_key)
-                )
-                for item in data
-            )
+            return _pop_item_of_table(data, index_key)
         elif isinstance(data, collections.abc.MutableMapping):
             return data.pop(index_key)
         else:

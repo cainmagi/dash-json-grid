@@ -10,6 +10,7 @@
 
 1. Upgrade the core dependency `react-json-grid` from `v0.7.0` to `v0.9.2`, where several bugs are fixed.
 2. Update the tests to match the new `react-json-grid@0.9.2`.
+3. Make the data routing support the new indexing rule like: `[..., ..., [2]]`, where the last value is an `int` in a one-element list.
 
 #### :wrench: Fix
 
@@ -18,6 +19,7 @@
 #### :floppy_disk: Change
 
 1. Configure `.gitattributes` for specifying the line-breaks of files.
+2. Make the returned column data of `DashJsonGrid.get_data_by_route(...)` or `pop_item_of_object(...)` become `OrderedDict()` if the column data is incomplete.
 
 ### 0.3.4 @ 10/20/2024
 
