@@ -9,6 +9,7 @@
 #### :mega: New
 
 1. Upgrade the core dependency `react-json-grid` from `v0.7.0` to `v0.9.2`, where several bugs are fixed.
+2. Update the tests to match the new `react-json-grid@0.9.2`.
 
 #### :wrench: Fix
 

@@ -130,7 +130,7 @@ class TestUsage:
             )
             viewer: WebElement = dash_duo.find_element("#viewer")
             cell_highlight: WebElement = viewer.find_element(
-                By.XPATH, ".//span[contains(@class, 'styles_search-highlight')]"
+                By.XPATH, ".//span[contains(@class, 'search-highlight')]"
             )
             assert cell_highlight.text == expect_text
             log.info('Confirm the results: "{0}" is searched.'.format(expect_text))
