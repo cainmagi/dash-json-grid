@@ -3,7 +3,7 @@ id: pop_item_of_object
 title: pop_item_of_object
 sidebar_label: pop_item_of_object
 slug: /apis/mixins/pop_item_of_object
-description: 对于任意数据data，取得val = data[index]; del data[index]; return val的结果。
+description: Run val = data[index]; del data[index]; return val supposing that data is abitrary.
 ---
 
 import Tabs from "@theme/Tabs";
@@ -14,45 +14,46 @@ import vsiCheckIcon from "@iconify-icons/codicon/check";
 import InlineIcon from "@site/src/components/InlineIcon";
 import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
 
-<APITopBar type="func" isPrivate={true} source="mixins.py#L292" />
+<APITopBar type="func" isPrivate={true} source="mixins.py#L187" />
 
 ```python
 data_selected: Any = pop_item_of_object(data: Any, index: Any)
 ```
 
-对于任意数据`data`，取得`val = data[index]; del data[index]; return val`的结果，
-其中`index`可以是一个由单元素构成的序列。
+Run `val = data[index]; del data[index]; return val` supposing that `data` is
+abitrary and `index` can be a one-value sequence.
 
 :::warning
 
-注意`index`并非是[路由（`route`）](./Route.mdx)类型。若该值是序列，该序列只能包含单元素。
+Note that `index` is not a [`route`](./Route.mdx). If it is a sequence, it should only
+contain one element.
 
 :::
 
-## 参数 {#arguments}
+## Arguments
 
-### 输入 {#requires}
+### Requires
 
-|  参数   | 类型  |               必选                | <center>说明</center>                                                                     |
-| :-----: | :---: | :-------------------------------: | ----------------------------------------------------------------------------------------- |
-| `data`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | 需要索引的完整数据。                                                                      |
-| `index` | `Any` | <InlineIcon icon={vsiCheckIcon}/> | 用来索引并删除数据某一部分的下标值。该值可以是数字、关键字、或者是形如`[0]`的单元素序列。 |
+| Argument | Type  |             Required              | <center>Description</center>                                                                                                  |
+| :------: | :---: | :-------------------------------: | ----------------------------------------------------------------------------------------------------------------------------- |
+|  `data`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | The whole data to be indexed.                                                                                                 |
+| `index`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | The index to be used for locating the part to be removed. It can be a number, or keyword, or a one-value sequence like `[0]`. |
 
-### 输出 {#returns}
+### Returns
 
-|      参数       | 类型  | <center>说明</center>                                 |
-| :-------------: | :---: | :---------------------------------------------------- |
-| `data_selected` | `Any` | 由`index`定位、并从`data`删除并弹出的`data`的一部分。 |
+|    Argument     | Type  | <center>Description</center>                                                     |
+| :-------------: | :---: | :------------------------------------------------------------------------------- |
+| `data_selected` | `Any` | The part of the `data` located by the given `index` and removed from the `data`. |
 
-## 范例 {#examples}
+## Examples
 
-### <IconObjType type="term"/> 删除完整数据的某部分 {#-remove-a-part-of-the-whole-data}
+### <IconObjType type="term"/> Remove a part of the whole data
 
 <Tabs
   defaultValue="codes"
   values={[
-    { label: '代码', value: 'codes', },
-    { label: '结果', value: 'results', },
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
   ]
 }>
 

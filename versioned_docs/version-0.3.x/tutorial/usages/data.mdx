@@ -1,0 +1,373 @@
+---
+id: data
+sidebar_label: Data
+title: Configuring data
+description: A guide overviewing the supported data rendering methods of DashJsonGrid.
+slug: /usages/data
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import IconExternalLink from "@theme/Icon/ExternalLink";
+
+import ViewOnlyDemoApp from "@site/src/demo/ViewOnly";
+
+# Configuring data
+
+This package contains a sole component named `DashJsonGrid`. To use this component,
+we can start from this minimal example:
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="minimal_example.py" showLineNumbers
+import dash
+import dash_json_grid as djg
+
+
+app = dash.Dash("demo")
+app.layout = djg.DashJsonGrid(
+    # highlight-next-line
+    data=1
+)
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<ViewOnlyDemoApp data={1} theme="default" />
+
+</TabItem>
+
+</Tabs>
+
+## Sanitization
+
+Simply change the `data` property of `DashJsonGrid`, users will be able to view the
+results:
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data=[1]
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<ViewOnlyDemoApp data={1} theme="default" />
+
+</TabItem>
+
+</Tabs>
+
+We can find that the result does not change compared to the minimal example. That's
+because all literal value that is passed to `data` but not a
+[`Sequence`<IconExternalLink/>][link-sequence] or a
+[`Mapping`<IconExternalLink/>][link-mapping] will be automatically converted to
+a sequence with only one element. In other words, `data=1` will be sanitized as
+`data=[1]` implicitly.
+
+:::tip
+
+Dash will not automatically serialize a customized class. Therefore, if the `data` you
+provide contains instances of customized classes, a good way is to convert the
+instances to `str`.
+
+:::
+
+## Render a sequence
+
+The following example modifies the `data` property and renders a sequence.
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data=[1, 2.0, "3", None, True]
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<ViewOnlyDemoApp data={[1, 2.0, "3", null, true]} theme="default" />
+
+</TabItem>
+
+</Tabs>
+
+A sequence containing literal or unstructured values will be rendered as a vertical
+list containing an index column and a value column.
+
+## Render a mapping
+
+The following example modifies the `data` property and renders a mapping.
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data={"key1": 1, "key2": "str", "key3": True, "key4": None}
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<ViewOnlyDemoApp
+  data={{key1: 1, key2: "str", key3: true, key4: null}}
+  theme="default"
+/>
+
+</TabItem>
+
+</Tabs>
+
+A mapping not belonging to a table will be rendered as a vertical list containing a
+key column and a value column.
+
+## Render a table
+
+The following example modifies the `data` property and renders a table.
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data=[
+        {"key1": 1, "key2": "str"},
+        {"key1": True, "key2": None},
+        {"key1": 3.0},
+        {"key1": False, "key2": None, "key3": 4.0},
+        {"key5": "?"},
+    ]
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<ViewOnlyDemoApp
+  data={[
+    {key1: 1, key2: "str"},
+    {key1: true, key2: null},
+    {key1: 3.0},
+    {key1: false, key2: null, key3: 4.0},
+    {key5: "?"},
+  ]}
+  theme="default"
+/>
+
+</TabItem>
+
+</Tabs>
+
+A table will be constructed when a `Sequence` is detected and all of its elements are
+`Mapping`s. In this case, the `Sequence` itself will not be rendered as an indexed list,
+and the members of the sequence will not be rendered as key-value lists. Instead, the
+whole list will be rendered as a table.
+
+The indicies of the table are just corresponding to the elements in the sequence. The
+columns of the table is a [`union`<IconExternalLink/>][link-union] of all appeared
+keywords in all elements. For any row, if some keywords are missing, the value will
+be marked by `undefined`.
+
+## Render the complicated, nested, and multi-level data
+
+The following example shows the performance of rendering the complicated data. It has
+multiple levels, and the table, sequence, and mapping can be nested in each other.
+`DashJsonGrid` will automatically detect how to properly render the data, so the users
+can get rid of formatting the complicated data into nested HTML components.
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data={
+        "literal": 1,
+        "sequence": [1, 2.0, "3", None, True],
+        "mapping": {"key1": 1, "key2": "str", "key3": True, "key4": None},
+        "table": [
+            {"key1": 1, "key2": "str"},
+            {"key1": True, "key2": None},
+            {"key1": 3.0},
+            {"key1": False, "key2": None, "key3": 4.0},
+            {"key5": "?"},
+        ],
+        "not-a-table": [
+            {"val1": 1},
+            2.0,
+            ["a", "b", "c"],
+            [{"key1": ["a"], "key2": 2, "key3": {"val1": True}}],
+            [{"key3": 1}],
+        ],
+    }
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<ViewOnlyDemoApp
+  data={{
+    literal: 1,
+    sequence: [1, 2.0, "3", null, true],
+    mapping: {key1: 1, key2: "str", key3: true, key4: null},
+    table: [
+      {key1: 1, key2: "str"},
+      {key1: true, key2: null},
+      {key1: 3.0},
+      {key1: false, key2: null, key3: 4.0},
+      {key5: "?"},
+    ],
+    "not-a-table": [
+      {val1: 1},
+      2.0,
+      ["a", "b", "c"],
+      [{key1: ["a"], key2: 2, key3: {val1: true}}],
+      [{key3: 1}],
+    ],
+  }}
+  theme="default"
+/>
+
+</TabItem>
+
+</Tabs>
+
+## Alternative initializations
+
+The data can be fed into the component by another two initialization methods.
+
+<Tabs
+  defaultValue="str"
+  values={[
+    { label: 'By a string', value: 'str', },
+    { label: 'By a file', value: 'file', },
+  ]
+}>
+
+<TabItem value="str">
+
+Users can also initialize the component by a JSON string:
+
+```python
+app.layout = dash_json_grid.DashJsonGrid.from_str(
+    json_string: str, ...
+)
+```
+
+By using this method, the first argument `json_string` will be a string that can be
+decoded by a JSON decoder. In this case, `data` should not be used.
+
+</TabItem>
+
+<TabItem value="file">
+
+It is also allowed to use a JSON file to initialize the component directly:
+  
+```python
+app.layout = dash_json_grid.DashJsonGrid.from_file(
+    json_file: str | os.PathLike | IO[str], ...
+)
+```
+
+By using this method, the first argument `json_file` will be path pointing to a JSON
+file or a file-like object. In this case, `data` should not be used.
+
+</TabItem>
+
+</Tabs>
+
+:::warning
+
+Note that `json_string` and `json_file` are translated to `data` during the
+initialization. Therefore, `json_string` or `json_file` will not be properties that can
+be accessed by a callback.
+
+:::
+
+[link-sequence]: https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range
+[link-mapping]: https://docs.python.org/3/library/stdtypes.html#mapping-types-dict
+[link-union]: https://docs.python.org/3/library/stdtypes.html#frozenset.union

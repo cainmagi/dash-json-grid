@@ -5,30 +5,87 @@
 
 import React from "react";
 import Link from "@docusaurus/Link";
+import {useDocsPreferredVersion} from "@docusaurus/theme-common";
+import IconExternalLink from "@theme/Icon/ExternalLink";
 
 import InlineIcon from "../components/InlineIcon";
 import mdiDot from "@iconify-icons/mdi/dot";
 
+const docsPluginId = undefined; // Default docs plugin instance
+
 const variables = {
   repoURL: "https://github.com/cainmagi/dash-json-grid",
   rawURL: "https://raw.githubusercontent.com/cainmagi/dash-json-grid",
-  sourceURL: "https://github.com/cainmagi/dash-json-grid/blob/v0.3.4",
+  sourceVersion: {
+    "0.4.0": "v0.4.0",
+    "0.3.x": "v0.3.4",
+    main: "main",
+  },
+  dependencyVersion: {
+    "0.4.0": "0.9.2",
+    "0.3.x": "0.7.0",
+    main: "0.9.2",
+  },
+};
+
+const useCurrentSourceVersion = (): string => {
+  const versionHook: any = useDocsPreferredVersion(docsPluginId);
+  const versionLabel = versionHook?.preferredVersion?.label;
+  console.log(versionHook);
+  return (
+    variables.sourceVersion[versionLabel] || variables.sourceVersion["main"]
+  );
+};
+
+export type DependencyTagProps = {
+  ver: string;
+};
+
+export const DependencyTag = ({
+  ver = "main",
+}: DependencyTagProps): JSX.Element => {
+  const versionDeps =
+    variables.dependencyVersion[ver] || variables.dependencyVersion["main"];
+  return (
+    <Link
+      href={`https://github.com/RedHeadphone/react-json-grid/tree/v${versionDeps}`}
+    >
+      <code>{`react-json-grid@${versionDeps}`}</code>
+      <IconExternalLink />
+    </Link>
+  );
 };
 
 export const rawURL = (url: string): string => {
   return variables.rawURL + "/" + url;
 };
 
-export const repoURL = (url: string): string => {
-  return variables.repoURL + "/" + url;
+export const repoURL = (url: string | undefined = undefined): string => {
+  return url ? variables.repoURL + "/" + url : variables.repoURL;
+};
+
+export const releaseURL = (ver: string | undefined = undefined): string => {
+  const version = variables.sourceVersion[ver] || useCurrentSourceVersion();
+  if (version === "main") {
+    return variables.repoURL + "/releases/latest";
+  }
+  return variables.repoURL + "/releases/tag/" + version;
 };
 
 export const rootURL = (url: string): string => {
-  return variables.sourceURL + "/" + url;
+  const currentSourceVersion = useCurrentSourceVersion();
+  return variables.repoURL + "/blob/" + currentSourceVersion + "/" + url;
 };
 
 export const sourceURL = (url: string): string => {
-  return variables.sourceURL + "/dash_json_grid/" + url;
+  const currentSourceVersion = useCurrentSourceVersion();
+  return (
+    variables.repoURL +
+    "/blob/" +
+    currentSourceVersion +
+    "/dash_json_grid/" +
+    url
+  );
 };
 
 export type SourceLinkProps = {

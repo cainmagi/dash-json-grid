@@ -59,6 +59,14 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/cainmagi/dash-json-grid/edit/docs/",
           editLocalizedFiles: true,
+          // versions
+          lastVersion: "current",
+          versions: {
+            current: {
+              label: "0.4.0",
+              path: "0.4.0",
+            },
+          },
         },
         theme: {
           customCss: "./src/css/custom.scss",
@@ -90,8 +98,19 @@ const config: Config = {
           label: "APIs",
         },
         {
-          type: 'localeDropdown',
-          position: 'right',
+          type: "docsVersionDropdown",
+          position: "right",
+          dropdownActiveClassDisabled: true,
+          dropdownItemsAfter: [
+            {
+              to: "/versions",
+              label: "All versions",
+            },
+          ],
+        },
+        {
+          type: "localeDropdown",
+          position: "right",
         },
         {
           href: "https://github.com/cainmagi/dash-json-grid",

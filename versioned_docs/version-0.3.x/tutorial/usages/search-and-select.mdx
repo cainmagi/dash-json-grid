@@ -1,0 +1,393 @@
+---
+id: search-and-select
+sidebar_label: Search & Select
+title: Search and select data
+description: A guide showing how to fed the data query and how to collect the selected value.
+slug: /usages/search-and-select
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import IconExternalLink from "@theme/Icon/ExternalLink";
+
+import {
+  getDemoData,
+  SearchOnlyApp,
+  SelectableOnlyApp,
+  OnSelectApp,
+} from "@site/src/demo/InteractiveApps";
+
+# Search and select data
+
+The following guides will show the interactive features of `DashJsonGrid`. Users can
+specify a keyword to highlight the searched text, or collect the keyword that is
+currently selected.
+
+In this section, to reduce the article length, we presume that the data used in the
+following examples is defined as follows:
+
+```python title="data.py" showLineNumbers
+test_data = {
+    "id": "0001",
+    "type": "donut",
+    "name": "Cake",
+    "ppu": 1111.55,
+    "batters": {
+        "batter": [
+            {"id": "1001", "type": "Regular"},
+            {"id": "1002", "type": "Chocolate"},
+            {"id": "1003", "type": "Blueberry"},
+            {"id": "1004", "type": "Devil's Food"},
+        ]
+    },
+    "topping": [
+        {"id": "5001", "type": "None"},
+        {"id": "5002", "type": "Glazed"},
+        {"id": "5005", "type": "Sugar"},
+        {"id": "5007", "type": "Powdered Sugar"},
+        {"id": "5006", "type": "Chocolate with Sprinkles"},
+        {"id": "5003", "type": "Chocolate"},
+        {"id": "5004", "type": "Maple"},
+    ],
+}
+```
+
+## Search and highlight data
+
+The following example uses a [`dcc.Input`<IconExternalLink/>][link-dccinput] component
+to specify the keyword (query) used for searching the data. All values that are
+searched will be highlighted with a special style.
+
+<Tabs
+  defaultValue="server"
+  values={[
+    { label: 'Regular callback', value: 'server', },
+    { label: 'Client-side callback', value: 'client', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="server">
+
+The implementation based on a regular callback.
+
+```python title="search_and_highlight.py" showLineNumbers
+import dash
+from dash import dcc, html
+from dash import Output, Input
+import dash_json_grid as djg
+from data import test_data
+
+
+app = dash.Dash("demo")
+app.layout = html.Div(
+    children=(
+        dcc.Input(id="search", type="text", value=None),
+        djg.DashJsonGrid(
+            id="grid", data=test_data, search_text=None, default_expand_depth=2
+        ),
+    )
+)
+
+
+@app.callback(Output("grid", "search_text"), Input("search", "value"))
+def update_search(value):
+    if not value:
+        return None
+    return value
+
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="client">
+
+This implementation is based on a
+[client-side callback<IconExternalLink/>][link-client].
+Its efficiency is higher and the app can still work even if the server is down.
+
+```python title="search_and_highlight_clientside.py" showLineNumbers
+import dash
+from dash import dcc, html
+from dash import Output, Input
+import dash_json_grid as djg
+from data import test_data
+
+
+app = dash.Dash("demo")
+app.layout = html.Div(
+    children=(
+        dcc.Input(id="search", type="text", value=None),
+        djg.DashJsonGrid(
+            id="grid", data=test_data, search_text=None, default_expand_depth=2
+        ),
+    )
+)
+
+app.clientside_callback(
+    """
+    function(val) {
+        return [null, undefined, ''].includes(val) ? undefined : val;
+    }
+    """,
+    Output("grid", "search_text"),
+    Input("search", "value"),
+)
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<SearchOnlyApp data={getDemoData()} />
+
+</TabItem>
+
+</Tabs>
+
+:::tip
+
+We add a property `default_expand_depth=2` in each example of this section. This
+property makes the rendered nested table expanded to the second level by default.
+See [`DashJsonGrid`](../../apis/DashJsonGrid.mdx#component-properties).
+
+:::
+
+:::info
+
+`search_text` is a set-only property. It means that this property can be only
+set by a callback. The component itself will not fire a callback with an output of
+`search_text` in any case. In other words, `search_text` can only be
+changed by codes but not changed by users' interactions.
+
+:::
+
+## Toggle the selectable option of the component
+
+An option can be used to control whether the component data is selectable. If the
+selectable feature is disabled, even if users click on the data, the data will not
+be selected. Certainly, the callback on the selection will **not** be fired in this
+case.
+
+<Tabs
+  defaultValue="server"
+  values={[
+    { label: 'Regular callback', value: 'server', },
+    { label: 'Client-side callback', value: 'client', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="server">
+
+The implementation based on a regular callback.
+
+```python title="selectable.py" showLineNumbers
+import dash
+from dash import dcc, html
+from dash import Output, Input
+import dash_json_grid as djg
+from data import test_data
+
+
+app = dash.Dash("demo")
+app.layout = html.Div(
+    children=(
+        dcc.Checklist(id="check", options=["Selectable"], value=["Selectable"]),
+        djg.DashJsonGrid(
+            id="grid", data=test_data, highlight_selected=True, default_expand_depth=2
+        ),
+    )
+)
+
+
+@app.callback(
+    Output("grid", "highlight_selected"), Input("check", "value")
+)
+def is_highlighted(val):
+    return isinstance(val, (list, tuple)) and "Selectable" in val
+
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="client">
+
+This implementation is based on a
+[client-side callback<IconExternalLink/>][link-client].
+Its efficiency is higher and the app can still work even if the server is down.
+
+```python title="selectable_clientside.py" showLineNumbers
+import dash
+from dash import dcc, html
+from dash import Output, Input
+import dash_json_grid as djg
+from data import test_data
+
+
+app = dash.Dash("demo")
+app.layout = html.Div(
+    children=(
+        dcc.Checklist(id="check", options=["Selectable"], value=["Selectable"]),
+        djg.DashJsonGrid(
+            id="grid", data=test_data, highlight_selected=True, default_expand_depth=2
+        ),
+    )
+)
+
+app.clientside_callback(
+    """
+    function(val) {
+        return val?.includes && val.includes("Selectable");
+    }
+    """,
+    Output("grid", "highlight_selected"),
+    Input("check", "value"),
+)
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<SelectableOnlyApp data={getDemoData()} />
+
+</TabItem>
+
+</Tabs>
+
+:::info
+
+`highlight_selected` is a set-only property. It means that this property can be only
+set by a callback. The component itself will not fire a callback with an output of
+`highlight_selected` in any case. In other words, `highlight_selected` can only be
+changed by codes but not changed by users' interactions.
+
+:::
+
+## Catch the selected data
+
+The selected value can be catched by a callback. Every time when any data is selected,
+the component property `selected_path` will be able to fire a callback. This property
+shows the path to the currently selected value. Define a callback to process this
+value.
+
+<Tabs
+  defaultValue="server"
+  values={[
+    { label: 'Regular callback', value: 'server', },
+    { label: 'Client-side callback', value: 'client', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="server">
+
+The implementation based on a regular callback.
+
+```python title="catch_selected.py" showLineNumbers
+import json
+import dash
+from dash import dcc, html
+from dash import Output, Input
+import dash_json_grid as djg
+from data import test_data
+
+
+app = dash.Dash("demo")
+app.layout = html.Div(
+    children=(
+        djg.DashJsonGrid(id="grid", data=test_data, default_expand_depth=2),
+        html.P(id="selected-path", children=None),
+    )
+)
+
+
+@app.callback(Output("selected-path", "children"), Input("grid", "selected_path"))
+def forward_selected_path(val):
+    return json.dumps(val)
+
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="client">
+
+This implementation is based on a
+[client-side callback<IconExternalLink/>][link-client].
+Its efficiency is higher and the app can still work even if the server is down.
+
+```python title="catch_selected_clientside.py" showLineNumbers
+import dash
+from dash import dcc, html
+from dash import Output, Input
+import dash_json_grid as djg
+from data import test_data
+
+
+app = dash.Dash("demo")
+app.layout = html.Div(
+    children=(
+        djg.DashJsonGrid(id="grid", data=test_data, default_expand_depth=2),
+        html.P(id="selected-path", children=None),
+    )
+)
+
+app.clientside_callback(
+    """
+    function(val) {
+        return JSON.stringify(val);
+    }
+    """,
+    Output("selected-path", "children"),
+    Input("grid", "selected_path"),
+)
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<OnSelectApp data={getDemoData()} />
+
+</TabItem>
+
+</Tabs>
+
+:::info
+
+`selected_path` is an interact-only property. It means that user interactions can
+change this property and fire a callback. However, configuring this property by
+`Output("grid", "selected_path")` will not change the selected data of the component.
+To avoid any unexpected behaviors, users should not make `selected_path` changed by
+a [`dash.Output`<IconExternalLink/>][link-dashoutput].
+
+:::
+
+[link-client]: https://dash.plotly.com/clientside-callbacks
+[link-dccinput]: https://dash.plotly.com/dash-core-components/input
+[link-dashoutput]: https://dash.plotly.com/basic-callbacks

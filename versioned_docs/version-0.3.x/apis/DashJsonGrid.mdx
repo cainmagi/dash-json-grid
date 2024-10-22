@@ -1,0 +1,483 @@
+---
+id: DashJsonGrid
+title: DashJsonGrid
+sidebar_label: DashJsonGrid
+slug: /apis/DashJsonGrid
+description: DashJsonGrid is a Dash porting version for the React component react-json-grid/JSONGrid.
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import IconExternalLink from "@theme/Icon/ExternalLink";
+
+import vsiCheckIcon from "@iconify-icons/codicon/check";
+import {biSlashLg} from "@site/src/components/icons/BiSlashLg";
+
+import InlineIcon from "@site/src/components/InlineIcon";
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="class" isComponent={true} source="__init__.py#L109" />
+
+```python
+comp = DashJsonGrid(
+    id: str | Mapping,
+    class_name: str,
+    style: Mapping,
+    data: Any,
+    default_expand_depth: int,
+    default_expand_key_tree: Mapping,
+    selected_path: list ,
+    highlight_selected: bool,
+    search_text: str,
+    theme: str | ThemeConfigs,
+    loading_state: LoadingState
+)
+```
+
+DashJsonGrid is a Dash porting version for the React component:
+[`react-json-grid/JSONGrid`<IconExternalLink/>][link-jsongrid]
+
+This component provides a JSON Grid viewer used for viewing complicated and
+unstructured serializable JSON data.
+
+## Component Properties
+
+<Tabs
+  defaultValue="descriptions"
+  values={[
+    { label: 'Descriptions', value: 'descriptions', },
+    { label: 'Properties', value: 'properties', },
+  ]
+}>
+
+<TabItem value="descriptions">
+
+|           Name            |                                 Type                                 | <center>Description</center>                                                                                                                                 |
+| :-----------------------: | :------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|           `id`            |                      `str \| Mapping[str, Any]`                      | The ID of the component. A dictionary-id is used for creating a [pattern-matching callback :book:][dash-pmcallback].                                         |
+|       `class_name`        |                                `str`                                 | The css-class of the component. Use ` ` to separate different names.                                                                                         |
+|          `style`          |                         `Mapping[str, str]`                          | The css-styles which will override styles of the component container.                                                                                        |
+|          `data`           |                                `Any`                                 | The JSON-serializable simple object to be transformed into a grid table.                                                                                     |
+|  `default_expand_depth`   |                                `int`                                 | The depth to which the grid is expanded by default.                                                                                                          |
+| `default_expand_key_tree` |                         `Mapping[Any, Any]`                          | Tree-like structure with all keys that needs to be expanded. This value should be used only when `data` is a `dict`.                                         |
+|      `selected_path`      |                                `list`                                | A sequence of indicies representing the route of the currently selected element. The last value can represent a column or a table if it is a one-value list. |
+|   `highlight_selected`    |                                `bool`                                | Whether to highlight the selected item or not. If disabled, the selection will not trigger callbacks.                                                        |
+|       `search_text`       |                                `str`                                 | The text that needs to be searched in the JSON data.                                                                                                         |
+|          `theme`          | <code>{`str \| `}[ThemeConfigs](./typehints/ThemeConfigs.mdx)</code> | The theme name or the dictionary representing the details of a theme.                                                                                        |
+|      `loading_state`      |         [`LoadingState`<IconExternalLink/>][link-loadstate]          | The loading state set by Dash. This value should not be used by users.                                                                                       |
+
+</TabItem>
+
+<TabItem value="properties">
+
+|           Name            |                                 Type                                 |            Interactive            |              Setable              |             Required              |            Default             |
+| :-----------------------: | :------------------------------------------------------------------: | :-------------------------------: | :-------------------------------: | :-------------------------------: | :----------------------------: |
+|           `id`            |                      `str \| Mapping[str, Any]`                      |                                   |                                   |                                   |           undefined            |
+|       `class_name`        |                                `str`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
+|          `style`          |                         `Mapping[str, str]`                          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
+|          `data`           |                                `Any`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> | <InlineIcon icon={vsiCheckIcon}/> | <InlineIcon icon={biSlashLg}/> |
+|  `default_expand_depth`   |                                `int`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |              `0`               |
+| `default_expand_key_tree` |                         `Mapping[Any, Any]`                          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
+|      `selected_path`      |                                `list`                                | <InlineIcon icon={vsiCheckIcon}/> |                                   |                                   |              `[]`              |
+|   `highlight_selected`    |                                `bool`                                |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |             `True`             |
+|       `search_text`       |                                `str`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
+|          `theme`          | <code>{`str \| `}[ThemeConfigs](./typehints/ThemeConfigs.mdx)</code> |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |          `"default"`           |
+|      `loading_state`      |         [`LoadingState`<IconExternalLink/>][link-loadstate]          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
+
+- "Interactive" means that the property can be changed by users' interactions, thus firing a callback.
+- "Setable" means that changing it by callback `Output(...)` will take effects.
+- "Required" means that the component cannot be initialized if this value is not explicitly provided.
+
+</TabItem>
+
+</Tabs>
+
+## Methods
+
+### <IconObjType type="method"/> `compare_routes`
+
+```python
+flag: bool = mixin.compare_routes(route_1: Route, route_2: Route)
+```
+
+Compare two different routes, where [`Route`](./mixins/Route.mdx) is provided by
+`selected_path`.
+
+The comparison results will not change if the arguments are swapped. This
+method is used for checking whether `route_1` and `route_2` point to the
+same location.
+
+#### Requires
+
+|                                           Argument                                            |             Type              |             Required              | <center>Description</center>                                                                                                                                                                                                                             |
+| :-------------------------------------------------------------------------------------------: | :---------------------------: | :-------------------------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <div style={{marginBottom: "1rem"}}><code>route_1</code></div><div><code>route_2</code></div> | [`Route`](./mixins/Route.mdx) | <InlineIcon icon={vsiCheckIcon}/> | The routes are provided by the `selected_path` callback. Each element represents a index of the routing level sequentially. The last element may be a one-element sequence. In this case, it represents the selected value is a table or a table column. |
+
+#### Returns
+
+| Argument |  Type  | <center>Description</center>                                                |
+| :------: | :----: | :-------------------------------------------------------------------------- |
+|  `flag`  | `bool` | A flag. If `True`, it represents that `route_1` and `route_2` are the same. |
+
+---
+
+### <IconObjType type="method"/> `get_data_by_route`
+
+```python
+data_selected: Any = mixin.get_data_by_route(data: Any, route: Route)
+```
+
+Get the small part of the data by a specific route.
+
+#### Requires
+
+| Argument |             Type              |             Required              | <center>Description</center>                                                                                                                                                           |
+| :------: | :---------------------------: | :-------------------------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  `data`  |             `Any`             | <InlineIcon icon={vsiCheckIcon}/> | The whole data object to be routed.                                                                                                                                                    |
+| `route`  | [`Route`](./mixins/Route.mdx) | <InlineIcon icon={vsiCheckIcon}/> | A sequence of indicies used for locating the specific value in `data`. If the last element of this `route` locates a table column, will locate each value of the column as a sequence. |
+
+#### Returns
+
+|    Argument     | Type  | <center>Description</center>  |
+| :-------------: | :---: | :---------------------------- |
+| `data_selected` | `Any` | The value located by `route`. |
+
+---
+
+### <IconObjType type="method"/> `update_data_by_route`
+
+```python
+data: Any = mixin.update_data_by_route(data: Any, route: Route, val: Any)
+```
+
+Update a specific part of `data` by a route.
+
+If the update fails (for example, maybe the data is immutable), raise a
+`ValueError`.
+
+#### Requires
+
+| Argument |             Type              |             Required              | <center>Description</center>                                                                                                                                                                                      |
+| :------: | :---------------------------: | :-------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  `data`  |             `Any`             | <InlineIcon icon={vsiCheckIcon}/> | The whole data object to be updated.                                                                                                                                                                              |
+| `route`  | [`Route`](./mixins/Route.mdx) | <InlineIcon icon={vsiCheckIcon}/> | A sequence of indicies used for locating the specific value in `data`. If the last element of this `route` locates a table column, will apply the update to each value of the column.                             |
+|  `val`   |             `Any`             | <InlineIcon icon={vsiCheckIcon}/> | The value used for updating the located part of the given dictionary. If a table column is located, this `val` will be broadcasted to each value of the column. If the broadcasting fails, raise an `IndexError`. |
+
+#### Returns
+
+| Argument | Type  | <center>Description</center>                                                                                                    |
+| :------: | :---: | :------------------------------------------------------------------------------------------------------------------------------ |
+|  `data`  | `Any` | The modified `data`. Since `data` is mutable, even if this returned value is not used, the modification will still take effect. |
+
+---
+
+### <IconObjType type="method"/> `delete_data_by_route`
+
+```python
+data_selected: Any = mixin.delete_data_by_route(data: Any, route: Route)
+```
+
+Delete the data part specified by a route.
+
+If the deletion fails (for example, maybe the data is immutable), raise a
+`ValueError`.
+
+#### Requires
+
+| Argument |             Type              |             Required              | <center>Description</center>                                                                                                                                                  |
+| :------: | :---------------------------: | :-------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  `data`  |             `Any`             | <InlineIcon icon={vsiCheckIcon}/> | The whole data object to be modified, where the located part will be deleted.                                                                                                 |
+| `route`  | [`Route`](./mixins/Route.mdx) | <InlineIcon icon={vsiCheckIcon}/> | A sequence of indicies used for locating the specific value in `data`. If the last element of this `route` locates a table column, will pop out the each value of the column. |
+
+#### Returns
+
+|    Argument     | Type  | <center>Description</center>            |
+| :-------------: | :---: | :-------------------------------------- |
+| `data_selected` | `Any` | The data that is deleted and poped out. |
+
+---
+
+### <IconObjType type="method"/> `from_str`
+
+```python
+comp = DashJsonGrid.from_str(json_string: str, *args, **kwargs)
+```
+
+`from_str` is a class method, returning the instance created by this method.
+
+Use a JSON string to initialize the component.
+
+If using this method, users should leave the argument `data` blank because
+this method will load `json_string` and pass it to the `data` argument.
+
+#### Requires
+
+|     Argument      | Type  |             Required              | <center>Description</center>                                                                                                                                                    |
+| :---------------: | :---: | :-------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   `json_string`   | `str` | <InlineIcon icon={vsiCheckIcon}/> | A string where JSON data is encoded.                                                                                                                                            |
+| `*args, **kwargs` | `...` |  <InlineIcon icon={biSlashLg}/>   | The same as the initialization, see [component properties](#component-properties). The exception is `data` which should not be configured because it is replaced by `json_string`. |
+
+#### Returns
+
+| Argument |      Type      | <center>Description</center>                                                                                            |
+| :------: | :------------: | :---------------------------------------------------------------------------------------------------------------------- |
+|  `comp`  | `DashJsonGrid` | The component initialized by `json_string`, where the other details of the component is the same as the initialization. |
+
+---
+
+### <IconObjType type="method"/> `from_file`
+
+```python
+comp = DashJsonGrid.from_file(
+    json_file: str | os.PathLike | IO[str], *args, **kwargs
+)
+```
+
+`from_file` is a class method, returning the instance created by this method.
+
+Use a JSON file to initialize the component.
+
+If using this method, users should leave the argument `data` blank because
+this method will load `json_file` and pass it to the `data` argument.
+
+#### Requires
+
+|     Argument      |              Type               |             Required              | <center>Description</center>                                                                                                                                                                                                               |
+| :---------------: | :-----------------------------: | :-------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|    `json_file`    | `str \| os.PathLike \| IO[str]` | <InlineIcon icon={vsiCheckIcon}/> | <p>If a <code>str \| os.PathLike</code> is provided, will open the file specified by this path and load the file content as the data.</p><p>If an <code>IO[str]</code> is provided, wil load data from this file-like object directly.</p> |
+| `*args, **kwargs` |              `...`              |  <InlineIcon icon={biSlashLg}/>   | The same as the initialization, see [component properties](#component-properties). The exception is `data` which should not be configured because it is replaced by `json_file`.                                                           |
+
+#### Returns
+
+| Argument |      Type      | <center>Description</center>                                                                                          |
+| :------: | :------------: | :-------------------------------------------------------------------------------------------------------------------- |
+|  `comp`  | `DashJsonGrid` | The component initialized by `json_file`, where the other details of the component is the same as the initialization. |
+
+## Examples
+
+### <IconObjType type="term"/> Locate the value by a route
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="get_data_by_route.py" showLineNumbers
+import pprint
+from dash_json_grid import DashJsonGrid
+
+data = {
+    "id": "0001",
+    "type": "donut",
+    "name": "Cake",
+    "ppu": 1111.55,
+    "batters": {
+        "batter": [
+            {"id": "1001", "type": "Regular"},
+            {"id": "1002", "type": "Chocolate"},
+            {"id": "1003", "type": "Blueberry"},
+            {"id": "1004", "type": "Devil's Food"},
+        ]
+    },
+    "topping": [
+        {"id": "5001", "type": "None"},
+        {"id": "5002", "type": "Glazed"},
+        {"id": "5005", "type": "Sugar"},
+        {"id": "5007", "type": "Powdered Sugar"},
+        {"id": "5006", "type": "Chocolate with Sprinkles"},
+        {"id": "5003", "type": "Chocolate"},
+        {"id": "5004", "type": "Maple"},
+    ],
+}
+
+pprint.pprint(DashJsonGrid.get_data_by_route(data, ["batters", "batter", 0, "id"]))
+pprint.pprint(DashJsonGrid.get_data_by_route(data, ["batters", "batter", 0, ["id"]]))
+pprint.pprint(DashJsonGrid.get_data_by_route(data, ["batters", "batter", ["id"]]))
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+```python
+'1001'
+'1001'
+('1001', '1002', '1003', '1004')
+```
+
+</TabItem>
+
+</Tabs>
+
+### <IconObjType type="term"/> Update a table column/row by a route
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="update_data_by_route.py" showLineNumbers
+import pprint
+from dash_json_grid import DashJsonGrid
+
+data = [
+    {"key1": 1, "key2": "str"},
+    {"key1": True, "key2": None},
+    {"key1": 3.0},
+    {"key1": False, "key2": None, "key3": 4.0},
+    {"key5": "?"},
+]
+
+pprint.pprint(DashJsonGrid.update_data_by_route(data, [["key3"]], 1))
+pprint.pprint(DashJsonGrid.update_data_by_route(data, [0], {"only", "test2"}))
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+```python
+[{'key1': 1, 'key2': 'str', 'key3': 1},
+ {'key1': True, 'key2': None, 'key3': 1},
+ {'key1': 3.0, 'key3': 1},
+ {'key1': False, 'key2': None, 'key3': 1},
+ {'key3': 1, 'key5': '?'}]
+[{'only', 'test2'},
+ {'key1': True, 'key2': None, 'key3': 1},
+ {'key1': 3.0, 'key3': 1},
+ {'key1': False, 'key2': None, 'key3': 1},
+ {'key3': 1, 'key5': '?'}]
+```
+
+</TabItem>
+
+</Tabs>
+
+### <IconObjType type="term"/> Delete a table column/row by a route
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="delete_data_by_route.py" showLineNumbers
+import pprint
+from dash_json_grid import DashJsonGrid
+
+data = [
+    {"key1": 1, "key2": "str"},
+    {"key1": True, "key2": None},
+    {"key1": 3.0},
+    {"key1": False, "key2": None, "key3": 4.0},
+    {"key5": "?"},
+]
+
+pprint.pprint(DashJsonGrid.delete_data_by_route(data, [["key3"]]))
+pprint.pprint(data)
+pprint.pprint(DashJsonGrid.delete_data_by_route(data, [0]))
+pprint.pprint(data)
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+```python
+(None, None, None, 4.0, None)
+[{'key1': 1, 'key2': 'str'},
+ {'key1': True, 'key2': None},
+ {'key1': 3.0},
+ {'key1': False, 'key2': None},
+ {'key5': '?'}]
+{'key1': 1, 'key2': 'str'}
+[{'key1': True, 'key2': None},
+ {'key1': 3.0},
+ {'key1': False, 'key2': None},
+ {'key5': '?'}]
+```
+
+:::caution
+
+Running this example may lead to a `KeyError: 'key3'` if you are using
+`dash_json_grid<=0.3.2` because this method can only delete existing keywords before
+the `0.3.3` version.
+
+:::
+
+</TabItem>
+
+</Tabs>
+
+### <IconObjType type="term"/> Check whether a route is as expectation
+
+```python title="callback_compare_routes.py" showLineNumbers
+@app.callback(
+    Output(...),
+    Input("grid", "selected_path")  # "grid" is a DashJsonGrid component
+)
+def check_route(route):
+    if DashJsonGrid.compare_routes(route, [1, "new", ["column"]]):
+        # Will do something only when route is [1, "new", ["column"]]
+        ...
+```
+
+### <IconObjType type="term"/> Get the selected data
+
+```python title="callback_get_selected.py" showLineNumbers
+@app.callback(
+    Output(...),
+    Input("grid", "selected_path"),  # "grid" is a DashJsonGrid component
+    State("grid", "data")
+)
+def show_data(route, data):
+    data_part = DashJsonGrid.get_data_by_route(data, route)
+    ...
+```
+
+### <IconObjType type="term"/> Modify the selected data
+
+```python title="callback_modify_selected.py" showLineNumbers
+@app.callback(
+    Output("grid", "data"),  # "grid" is a DashJsonGrid component
+    Input("grid", "selected_path"),
+    State("grid", "data")
+)
+def modify_data(route, data):
+    data_part = DashJsonGrid.get_data_by_route(data, route)
+    modified_part = ...  # Do some modification
+    DashJsonGrid.update_data_by_route(data, route, modified_part)
+    return data
+    ...
+```
+
+### <IconObjType type="term"/> Delete the selected data
+
+```python title="callback_delete_selected.py" showLineNumbers
+@app.callback(
+    Output("grid", "data"),  # "grid" is a DashJsonGrid component
+    Input("grid", "selected_path"),
+    State("grid", "data")
+)
+def delete_data(route, data):
+    deleted_part = DashJsonGrid.delete_data_by_route(data, route)
+    # deleted_part is the part that is removed from the whole data
+    return data
+```
+
+[link-jsongrid]: https://github.com/RedHeadphone/react-json-grid?tab=readme-ov-file#props
+[link-loadstate]: https://dash.plotly.com/loading-states

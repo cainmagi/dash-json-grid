@@ -3,7 +3,7 @@ id: set_item_of_object
 title: set_item_of_object
 sidebar_label: set_item_of_object
 slug: /apis/mixins/set_item_of_object
-description: 对于任意数据data，赋值data[index] = value。
+description: Run data[index] = value supposing that data is abitrary.
 ---
 
 import Tabs from "@theme/Tabs";
@@ -14,43 +14,46 @@ import vsiCheckIcon from "@iconify-icons/codicon/check";
 import InlineIcon from "@site/src/components/InlineIcon";
 import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
 
-<APITopBar type="func" isPrivate={true} source="mixins.py#L238" />
+<APITopBar type="func" isPrivate={true} source="mixins.py#L172" />
 
 ```python
 set_item_of_object(data: Any, index: Any, value: Any)
 ```
 
-对于任意数据`data`，赋值`data[index] = value`，其中`index`可以是一个由单元素构成的序列。
+Run `data[index] = value` supposing that `data` is abitrary and `index` can be a
+one-value sequence.
 
-若`data`的成员无法被设置，抛出`ValueError`。
+Raise an `ValueError` if the item of `data` cannot be set.
 
-若需要修改的`data`是序列，但`value`无法成功广播到`data`的成员上，抛出`IndexError`。
+Raise an `IndexError` if the item of `data` is a sequence, while `value` cannot
+be broadcast to this item.
 
 :::warning
 
-注意`index`并非是[路由（`route`）](./Route.mdx)类型。若该值是序列，该序列只能包含单元素。
+Note that `index` is not a [`route`](./Route.mdx). If it is a sequence, it should only
+contain one element.
 
 :::
 
-## 参数 {#arguments}
+## Arguments
 
-### 输入 {#requires}
+### Requires
 
-|  参数   | 类型  |               必选                | <center>说明</center>                                                                     |
-| :-----: | :---: | :-------------------------------: | ----------------------------------------------------------------------------------------- |
-| `data`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | 需要索引的完整数据。                                                                      |
-| `index` | `Any` | <InlineIcon icon={vsiCheckIcon}/> | 用来索引并更新数据某一部分的下标值。该值可以是数字、关键字、或者是形如`[0]`的单元素序列。 |
-| `value` | `Any` | <InlineIcon icon={vsiCheckIcon}/> | 用来更新`data`被`index`选中部分的新值。                                                   |
+| Argument | Type  |             Required              | <center>Description</center>                                                                                                   |
+| :------: | :---: | :-------------------------------: | ------------------------------------------------------------------------------------------------------------------------------ |
+|  `data`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | The whole data to be indexed.                                                                                                  |
+| `index`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | The index to be used for locating the part to be modified. It can be a number, or keyword, or a one-value sequence like `[0]`. |
+| `value`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | The new value used for updating the member of `data` located by `index`.                                                       |
 
-## 范例 {#examples}
+## Examples
 
-### <IconObjType type="term"/> 设置完整数据的某部分 {#-set-a-part-of-the-whole-data}
+### <IconObjType type="term"/> Set a part of the whole data
 
 <Tabs
   defaultValue="codes"
   values={[
-    { label: '代码', value: 'codes', },
-    { label: '结果', value: 'results', },
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
   ]
 }>
 

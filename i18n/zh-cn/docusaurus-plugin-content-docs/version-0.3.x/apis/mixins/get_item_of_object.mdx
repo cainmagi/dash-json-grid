@@ -3,7 +3,7 @@ id: get_item_of_object
 title: get_item_of_object
 sidebar_label: get_item_of_object
 slug: /apis/mixins/get_item_of_object
-description: Run data[index] supposing that data is abitrary.
+description: 对于任意数据data，获取data[index]的值。
 ---
 
 import Tabs from "@theme/Tabs";
@@ -14,45 +14,44 @@ import vsiCheckIcon from "@iconify-icons/codicon/check";
 import InlineIcon from "@site/src/components/InlineIcon";
 import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
 
-<APITopBar type="func" isPrivate={true} source="mixins.py#L99" />
+<APITopBar type="func" isPrivate={true} source="mixins.py#L65" />
 
 ```python
 data_selected: Any = get_item_of_object(data: Any, index: Any)
 ```
 
-Run `data[index]` supposing that `data` is abitrary and `index` can be a one-value sequence.
+对于任意数据`data`，获取`data[index]`的值，其中`index`可以是一个由单元素构成的序列。
 
 :::warning
 
-Note that `index` is not a [`route`](./Route.mdx). If it is a sequence, it should only
-contain one element.
+注意`index`并非是[路由（`route`）](./Route.mdx)类型。若该值是序列，该序列只能包含单元素。
 
 :::
 
-## Arguments
+## 参数 {#arguments}
 
-### Requires
+### 输入 {#requires}
 
-| Argument | Type  |             Required              | <center>Description</center>                                                                                               |
-| :------: | :---: | :-------------------------------: | -------------------------------------------------------------------------------------------------------------------------- |
-|  `data`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | The whole data to be indexed.                                                                                              |
-| `index`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | The index to be used for finding a part of the data. It can be a number, or a keyword, or a one-value sequence like `[0]`. |
+|  参数   | 类型  |               必选                | <center>说明</center>                                                               |
+| :-----: | :---: | :-------------------------------: | ----------------------------------------------------------------------------------- |
+| `data`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | 需要索引的完整数据。                                                                |
+| `index` | `Any` | <InlineIcon icon={vsiCheckIcon}/> | 用来索引数据某一部分的下标值。该值可以是数字、关键字、或者是形如`[0]`的单元素序列。 |
 
-### Returns
+### 输出 {#returns}
 
-|    Argument     | Type  | <center>Description</center>                         |
-| :-------------: | :---: | :--------------------------------------------------- |
-| `data_selected` | `Any` | The part of the `data` located by the given `index`. |
+|      参数       | 类型  | <center>说明</center>           |
+| :-------------: | :---: | :------------------------------ |
+| `data_selected` | `Any` | 由`index`定位的`data`的一部分。 |
 
-## Examples
+## 范例 {#examples}
 
-### <IconObjType type="term"/> Get a part of the whole data
+### <IconObjType type="term"/> 获取完整数据的某部分 {#-get-a-part-of-the-whole-data}
 
 <Tabs
   defaultValue="codes"
   values={[
-    { label: 'Codes', value: 'codes', },
-    { label: 'Results', value: 'results', },
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
   ]
 }>
 

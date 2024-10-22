@@ -1,8 +1,4 @@
 {
-  "version.label": {
-    "message": "预览版",
-    "description": "The label for version current"
-  },
   "sidebar.tutorial.category.Usages": {
     "message": "用法",
     "description": "The label for category Usages in sidebar tutorial"
