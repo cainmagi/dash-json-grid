@@ -31,7 +31,6 @@ const variables = {
 const useCurrentSourceVersion = (): string => {
   const versionHook: any = useDocsPreferredVersion(docsPluginId);
   const versionLabel = versionHook?.preferredVersion?.label;
-  console.log(versionHook);
   return (
     variables.sourceVersion[versionLabel] || variables.sourceVersion["main"]
   );

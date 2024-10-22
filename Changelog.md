@@ -15,6 +15,7 @@
 #### :wrench: Fix
 
 1. Fix: Correct a mistake of the HTML usage in the localized version `zh-cn/docs/license`.
+2. Fix: Roll back the path of the current version to `/`. This change ensure that the previous pages will not be gone.
 
 ### 0.3.4 @ 10/20/2024
 
