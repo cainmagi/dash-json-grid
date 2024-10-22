@@ -124,6 +124,41 @@ class _set_item_of_object:
     """Private class implementation for the method `set_item_of_object`."""
 
     @staticmethod
+    def _broadcast_scalar(data: Sequence[Any], index_key: str, value: Any):
+        """Suppose that `data` is formatted like
+        `[{"key": val1, ...}, {"key": val2, ...}, ...]`
+        and `value` is a scalar, broadcast `value` to each item of `data`."""
+        for item in data:
+            if isinstance(item, collections.abc.MutableMapping):
+                item[index_key] = value
+
+    @staticmethod
+    def _broadcast_sequence(data: Sequence[Any], index_key: str, value: Sequence[Any]):
+        """Suppose that `data` is formatted like
+        `[{"key": val1, ...}, {"key": val2, ...}, ...]`
+        and `value` is a sequence, broadcast `value` items to each mapping-like item
+        of `data`."""
+        sub_data = tuple(
+            ditem for ditem in data if isinstance(ditem, collections.abc.MutableMapping)
+        )
+        n_data = len(sub_data)
+        if n_data == len(value):
+            for item, vitem in zip(sub_data, value):
+                item[index_key] = vitem
+            return
+        sub_data = tuple(ditem for ditem in sub_data if index_key in ditem)
+        if len(sub_data) == len(value):
+            for item, vitem in zip(sub_data, value):
+                item[index_key] = vitem
+            return
+        raise IndexError(
+            "The current index {0} locates a table column. However, "
+            'the provided argument "val" does not match the length of '
+            "the valid table rows. len(table_rows)={1} or {2}, len(value)="
+            "{3}.".format(index_key, len(sub_data), n_data, len(value))
+        )
+
+    @staticmethod
     def _set_by_broadcast(data: Sequence[Any], index_key: str, value: Any):
         """Suppose that `data` is formatted like
         `[{"key": val1, ...}, {"key": val2, ...}, ...]`
@@ -139,22 +174,14 @@ class _set_item_of_object:
                 for key, val in value.items():
                     data[key][index_key] = val
                 return
-            for item in data:
-                item[index_key] = value
-        elif len(value) == len(data):
-            for item, vitem in zip(data, value):
-                item[index_key] = vitem
+            _set_item_of_object._broadcast_scalar(data, index_key, value)
+        elif len(value) > 1:
+            _set_item_of_object._broadcast_sequence(data, index_key, value)
         elif len(value) == 1:
             vitem = value[0]
-            for item in data:
-                item[index_key] = vitem
+            _set_item_of_object._broadcast_scalar(data, index_key, vitem)
         else:
-            raise IndexError(
-                "The current index {0} locates a table column. However, "
-                'the provided argument "val" does not match the length of '
-                "the table column. len(located_column)={1}, len(val)="
-                "{2}.".format(index_key, len(data), len(value))
-            )
+            raise ValueError('The provided argument "value" is empty.')
 
     @staticmethod
     def _call_if_idx_is_sequence(data: Any, index: Sequence[Any], value: Any) -> None:
