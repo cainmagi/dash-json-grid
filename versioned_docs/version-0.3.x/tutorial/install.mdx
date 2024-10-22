@@ -18,7 +18,7 @@ import {repoURL} from "@site/src/envs/variables";
 Run the following command to install the package:
 
 ```shell
-pip install dash-json-grid
+pip install dash-json-grid==0.3.4
 ```
 
 ## Extra features
@@ -26,7 +26,7 @@ pip install dash-json-grid
 Specify the optional dependencies to enable more features:
 
 ```shell
-pip install dash-json-grid[option1,option2...]
+pip install dash-json-grid[option1,option2...]==0.3.4
 ```
 
 | Option | <center>Supports</center>                                                                                               |
@@ -64,7 +64,7 @@ If you are using Ubuntu or Debian (Linux), you can use the following script to i
 After that, run the following command to install the developer's version.
 
 ```shell
-git clone https://github.com/cainmagi/dash-json-grid
+git clone -b v0.3.4 https://github.com/cainmagi/dash-json-grid
 cd dash-json-grid
 python -m pip install -r requirements.txt -r requirements-dev.txt
 yarn install
@@ -100,7 +100,7 @@ Note that the browser needs to be Chrome or Chromium. Edge or Opera will not wor
 After that, clone the project and run the tests:
 
 ```shell
-git clone https://github.com/cainmagi/dash-json-grid
+git clone -b v0.3.4 https://github.com/cainmagi/dash-json-grid
 cd dash-json-grid
 python -m pip install -r requirements.txt -r tests/requirements.txt
 yarn install

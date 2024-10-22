@@ -18,7 +18,7 @@ import {repoURL} from "@site/src/envs/variables";
 运行以下命令，安装模块包：
 
 ```shell
-pip install dash-json-grid
+pip install dash-json-grid==0.3.4
 ```
 
 ## 额外功能 {#extra-features}
@@ -26,7 +26,7 @@ pip install dash-json-grid
 透过设置可选依赖项，可以安装更多功能：
 
 ```shell
-pip install dash-json-grid[option1,option2...]
+pip install dash-json-grid[option1,option2...]==0.3.4
 ```
 
 | Option | <center>Supports</center>                                                                                              |
@@ -62,7 +62,7 @@ pip install dash-json-grid[option1,option2...]
 确保一些需要的软件都准备无虞后，运行下列命令安装开发者版本：
 
 ```shell
-git clone https://github.com/cainmagi/dash-json-grid
+git clone -b v0.3.4 https://github.com/cainmagi/dash-json-grid
 cd dash-json-grid
 python -m pip install -r requirements.txt -r requirements-dev.txt
 yarn install
@@ -96,7 +96,7 @@ python -m pip install .[dev]
 确保一些需要的软件都准备无虞后，运行下列命令进行单元测试：
 
 ```shell
-git clone https://github.com/cainmagi/dash-json-grid
+git clone -b v0.3.4 https://github.com/cainmagi/dash-json-grid
 cd dash-json-grid
 python -m pip install -r requirements.txt -r tests/requirements.txt
 yarn install
