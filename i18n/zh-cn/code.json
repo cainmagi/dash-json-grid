@@ -425,5 +425,49 @@
   "demo.viewonly.theme.text": {
     "message": "主题：",
     "description": "Text of the theme selection box, demo: ThemedApp."
+  },
+  "versions.title": {
+    "message": "{title}文档版本",
+    "description": "Title text in the version page."
+  },
+  "versions.current.head": {
+    "message": "当前版本（稳定版）",
+    "description": "Head of the current version."
+  },
+  "versions.current.descr": {
+    "message": "下列为当前最新发布的版本。",
+    "description": "Description of the current version."
+  },
+  "versions.table.version": {
+    "message": "版本",
+    "description": "Table item: version."
+  },
+  "versions.table.docs": {
+    "message": "文档",
+    "description": "Table item: version."
+  },
+  "versions.table.rel": {
+    "message": "发行版",
+    "description": "Table item: release number."
+  },
+  "versions.table.dep": {
+    "message": "核心依赖",
+    "description": "Table item: dependency number."
+  },
+  "versions.prev.head": {
+    "message": "历史版本（不再维护）",
+    "description": "Head of the previous version."
+  },
+  "versions.prev.descr": {
+    "message": "下列为{title}的历史版本。",
+    "description": "Description of the previous version."
+  },
+  "versions.next.head": {
+    "message": "预览版（未发布）",
+    "description": "Head of the next version."
+  },
+  "versions.next.descr": {
+    "message": "下列为正在开发中、还未发布版本的文档。",
+    "description": "Description of the next version."
   }
 }

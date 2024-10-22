@@ -9,6 +9,8 @@
 #### :mega: New
 
 1. Upgrade to the new version `0.4.0`.
+2. Add translations to the new version `0.4.0`.
+3. Add translations related to the new versioning features.
 
 #### :wrench: Fix
 
