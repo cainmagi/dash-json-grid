@@ -11,6 +11,7 @@
 1. Upgrade the core dependency `react-json-grid` from `v0.7.0` to `v0.9.2`, where several bugs are fixed.
 2. Update the tests to match the new `react-json-grid@0.9.2`.
 3. Make the data routing support the new indexing rule like: `[..., ..., [2]]`, where the last value is an `int` in a one-element list.
+4. Allow the `DashJsonGrid.update_data_by_route` accept a mapping value when updating a column. If all keys in this mapping are `int`, will treat the mapping as the index set.
 
 #### :wrench: Fix
 

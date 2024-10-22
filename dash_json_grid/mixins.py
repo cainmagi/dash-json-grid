@@ -131,6 +131,14 @@ class _set_item_of_object:
         these items by broadcasting `value` into `data`.
         """
         if not is_sequence(value):
+            if (
+                isinstance(value, collections.abc.Mapping)
+                and value
+                and all(isinstance(idx, int) for idx in value.keys())
+            ):
+                for key, val in value.items():
+                    data[key][index_key] = val
+                return
             for item in data:
                 item[index_key] = value
         elif len(value) == len(data):
