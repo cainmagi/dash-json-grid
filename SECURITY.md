@@ -9,7 +9,8 @@ React-JSON-Grid.
 
 | Version | Supported          | Available on [PyPI :link:][link-pypi] | React-JSON-Grid  |
 | ------- | ------------------ | ------------------ | ------------------ |
-| `0.3.x`   | :white_check_mark: | :white_check_mark: | [`0.7.0` :link:][link-rjg-070] |
+| `0.4.0`   | :white_check_mark: | :white_check_mark: | [`0.9.2` :link:][link-rjg-092] |
+| `0.3.x`   | :x:                | :white_check_mark: | [`0.7.0` :link:][link-rjg-070] |
 | < `0.3`   | :x:                | :x:                | -                  |
 
 ## Reporting a Vulnerability
@@ -24,4 +25,5 @@ Any vulnerability submitted for a not-supported version will be declined directl
 [link-pypi]:https://pypi.org/project/dash-json-grid
 [link-issue]:https://github.com/cainmagi/dash-json-grid/issues/new?assignees=&labels=vulnerability%2Cto+be+solved&projects=&template=vulnerability_report.yml&title=%5BVUL%5D
 
+[link-rjg-092]:https://github.com/RedHeadphone/react-json-grid/tree/v0.9.2
 [link-rjg-070]:https://github.com/RedHeadphone/react-json-grid/tree/94e0da926a63d3bd810357eac84b871eeea49f00

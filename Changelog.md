@@ -23,6 +23,7 @@
 1. Configure `.gitattributes` for specifying the line-breaks of files.
 2. Make the returned column data of `DashJsonGrid.get_data_by_route(...)` or `pop_item_of_object(...)` become `OrderedDict()` if the column data is incomplete.
 3. Improve the compatibility of `dash_json_grid.DashJsonGrid.update_data_by_route(...)`. Now it can update table data even if it contains invalid rows.
+4. Update the security policy file.
 
 ### 0.3.4 @ 10/20/2024
 
