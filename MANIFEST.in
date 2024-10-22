@@ -16,3 +16,4 @@ include LICENSE
 include package.json
 include version/__init__.py
 include tests/data.json
+include tests/data_incomplete.json

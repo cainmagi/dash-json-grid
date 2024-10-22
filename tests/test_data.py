@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 """
-Usage
+Data
 =====
 @ Dash JSON Grid Viewer - Tests
 
@@ -72,6 +72,7 @@ class TestData:
         self.compare_route(log, ["a", "b", 1], ["a", "b", "1"])
         self.compare_route(log, ["a", "b", "c"], ["a", "B", "c"])
         self.compare_route(log, ["a", "b", "c"], ["a", "b", "c", "d"])
+        self.compare_route(log, ["a", "b", 1], ["a", "b", [1]])
         self.compare_route(log, ["a", "b", "c"], ["a", "B", ["c"]])
 
     def test_data_get_by_route(self, data: Any) -> None:

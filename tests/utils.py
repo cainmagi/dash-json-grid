@@ -57,7 +57,7 @@ def is_eq_mapping(val: Any, ref: Mapping[Any, Any]) -> bool:
     """Safely check whether `val == ref`, where `ref` is a mapping."""
     if not isinstance(val, collections.abc.Mapping):
         return False
-    return val == ref
+    return dict(val) == dict(ref)
 
 
 def is_eq_sequence(val: Any, ref: Sequence[Any]) -> bool:

@@ -1,0 +1,13 @@
+{
+  "unstructured": {
+    "v1": [1, 2, 3],
+    "v2": [1, {"x": 2}]
+  },
+  "table": [
+    {"key1": 1, "key2": "str"},
+    {"key1": true, "key2": null},
+    {"key1": 3.0, "key5": "X"},
+    {"key1": false, "key2": null, "key3": 4.0},
+    {"key1": "VVV", "key5": "?"}
+  ]
+}

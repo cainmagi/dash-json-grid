@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 """
-Usage
-=====
+Initialization
+==============
 @ Dash JSON Grid Viewer - Tests
 
 Author
