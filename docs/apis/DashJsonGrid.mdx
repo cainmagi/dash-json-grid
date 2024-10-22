@@ -11,10 +11,10 @@ import TabItem from "@theme/TabItem";
 import IconExternalLink from "@theme/Icon/ExternalLink";
 
 import vsiCheckIcon from "@iconify-icons/codicon/check";
-import {biSlashLg} from "@site/src/components/icons/BiSlashLg";
+import { biSlashLg } from "@site/src/components/icons/BiSlashLg";
 
 import InlineIcon from "@site/src/components/InlineIcon";
-import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+import APITopBar, { IconObjType } from "@site/src/components/APITopBar";
 
 <APITopBar type="class" isComponent={true} source="__init__.py#L109" />
 
@@ -339,7 +339,9 @@ data = [
 ]
 
 pprint.pprint(DashJsonGrid.update_data_by_route(data, [["key3"]], 1))
-pprint.pprint(DashJsonGrid.update_data_by_route(data, [0], {"only", "test2"}))
+pprint.pprint(DashJsonGrid.update_data_by_route(data, [0], {"only": "test2"}))
+pprint.pprint(DashJsonGrid.update_data_by_route(data, [["key5"]], {4: "NEW-Key5Val"}))
+pprint.pprint(DashJsonGrid.update_data_by_route(data, [["key5"]], "Update-all"))
 ```
 
 </TabItem>
@@ -352,11 +354,21 @@ pprint.pprint(DashJsonGrid.update_data_by_route(data, [0], {"only", "test2"}))
  {'key1': 3.0, 'key3': 1},
  {'key1': False, 'key2': None, 'key3': 1},
  {'key3': 1, 'key5': '?'}]
-[{'only', 'test2'},
+[{'only': 'test2'},
  {'key1': True, 'key2': None, 'key3': 1},
  {'key1': 3.0, 'key3': 1},
  {'key1': False, 'key2': None, 'key3': 1},
  {'key3': 1, 'key5': '?'}]
+[{'only': 'test2'},
+ {'key1': True, 'key2': None, 'key3': 1},
+ {'key1': 3.0, 'key3': 1},
+ {'key1': False, 'key2': None, 'key3': 1},
+ {'key3': 1, 'key5': 'NEW-Key5Val'}]
+[{'key5': 'Update-all', 'only': 'test2'},
+ {'key1': True, 'key2': None, 'key3': 1, 'key5': 'Update-all'},
+ {'key1': 3.0, 'key3': 1, 'key5': 'Update-all'},
+ {'key1': False, 'key2': None, 'key3': 1, 'key5': 'Update-all'},
+ {'key3': 1, 'key5': 'Update-all'}]
 ```
 
 </TabItem>
@@ -398,7 +410,7 @@ pprint.pprint(data)
 <TabItem value="results">
 
 ```python
-(None, None, None, 4.0, None)
+OrderedDict({3: 4.0})
 [{'key1': 1, 'key2': 'str'},
  {'key1': True, 'key2': None},
  {'key1': 3.0},
@@ -410,14 +422,6 @@ pprint.pprint(data)
  {'key1': False, 'key2': None},
  {'key5': '?'}]
 ```
-
-:::caution
-
-Running this example may lead to a `KeyError: 'key3'` if you are using
-`dash_json_grid<=0.3.2` because this method can only delete existing keywords before
-the `0.3.3` version.
-
-:::
 
 </TabItem>
 

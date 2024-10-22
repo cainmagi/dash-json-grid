@@ -331,7 +331,7 @@ data = [
 ]
 
 pprint.pprint(DashJsonGrid.update_data_by_route(data, [["key3"]], 1))
-pprint.pprint(DashJsonGrid.update_data_by_route(data, [0], {"only", "test2"}))
+pprint.pprint(DashJsonGrid.update_data_by_route(data, [0], {"only": "test2"}))
 ```
 
 </TabItem>
@@ -344,7 +344,7 @@ pprint.pprint(DashJsonGrid.update_data_by_route(data, [0], {"only", "test2"}))
  {'key1': 3.0, 'key3': 1},
  {'key1': False, 'key2': None, 'key3': 1},
  {'key3': 1, 'key5': '?'}]
-[{'only', 'test2'},
+[{'only': 'test2'},
  {'key1': True, 'key2': None, 'key3': 1},
  {'key1': 3.0, 'key3': 1},
  {'key1': False, 'key2': None, 'key3': 1},

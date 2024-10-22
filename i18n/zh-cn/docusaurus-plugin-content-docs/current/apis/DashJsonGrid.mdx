@@ -331,7 +331,9 @@ data = [
 ]
 
 pprint.pprint(DashJsonGrid.update_data_by_route(data, [["key3"]], 1))
-pprint.pprint(DashJsonGrid.update_data_by_route(data, [0], {"only", "test2"}))
+pprint.pprint(DashJsonGrid.update_data_by_route(data, [0], {"only": "test2"}))
+pprint.pprint(DashJsonGrid.update_data_by_route(data, [["key5"]], {4: "NEW-Key5Val"}))
+pprint.pprint(DashJsonGrid.update_data_by_route(data, [["key5"]], "Update-all"))
 ```
 
 </TabItem>
@@ -344,11 +346,21 @@ pprint.pprint(DashJsonGrid.update_data_by_route(data, [0], {"only", "test2"}))
  {'key1': 3.0, 'key3': 1},
  {'key1': False, 'key2': None, 'key3': 1},
  {'key3': 1, 'key5': '?'}]
-[{'only', 'test2'},
+[{'only': 'test2'},
  {'key1': True, 'key2': None, 'key3': 1},
  {'key1': 3.0, 'key3': 1},
  {'key1': False, 'key2': None, 'key3': 1},
  {'key3': 1, 'key5': '?'}]
+[{'only': 'test2'},
+ {'key1': True, 'key2': None, 'key3': 1},
+ {'key1': 3.0, 'key3': 1},
+ {'key1': False, 'key2': None, 'key3': 1},
+ {'key3': 1, 'key5': 'NEW-Key5Val'}]
+[{'key5': 'Update-all', 'only': 'test2'},
+ {'key1': True, 'key2': None, 'key3': 1, 'key5': 'Update-all'},
+ {'key1': 3.0, 'key3': 1, 'key5': 'Update-all'},
+ {'key1': False, 'key2': None, 'key3': 1, 'key5': 'Update-all'},
+ {'key3': 1, 'key5': 'Update-all'}]
 ```
 
 </TabItem>
@@ -390,7 +402,7 @@ pprint.pprint(data)
 <TabItem value="results">
 
 ```python
-(None, None, None, 4.0, None)
+OrderedDict({3: 4.0})
 [{'key1': 1, 'key2': 'str'},
  {'key1': True, 'key2': None},
  {'key1': 3.0},
@@ -402,13 +414,6 @@ pprint.pprint(data)
  {'key1': False, 'key2': None},
  {'key5': '?'}]
 ```
-
-:::caution
-
-使用`dash_json_grid<=0.3.2`时，运行该范例会触发`KeyError: 'key3'`。因为`0.3.3`版之前，
-该方法只能删除存在于原数据之中的关键字。
-
-:::
 
 </TabItem>
 

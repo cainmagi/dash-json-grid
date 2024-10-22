@@ -16,16 +16,18 @@
 
 1. Fix: Correct a mistake of the HTML usage in the localized version `zh-cn/docs/license`.
 2. Fix: Roll back the path of the current version to `/`. This change ensure that the previous pages will not be gone.
+3. Fix: Correct a typo in the examples of `docs/apis/DashJsonGrid`.
 
 #### :floppy_disk: Change
 
 1. For the legacy doc `0.3.x`, make the guides related to the installation specified to the corresponding version.
+2. Adjust the examples of `docs/apis/DashJsonGrid`.
 
 ### 0.3.4 @ 10/20/2024
 
 #### :wrench: Fix
 
-1. Fix: Correct some translation mistakes in the `zh-cn` doc of`docs/apis/DashJsonGrid`.
+1. Fix: Correct some translation mistakes in the `zh-cn` doc of `docs/apis/DashJsonGrid`.
 
 #### :floppy_disk: Change
 
