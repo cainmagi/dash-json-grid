@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.4.1 @ 10/22/2024
+
+#### :floppy_disk: Change
+
+1. Exempt the old documents from the search list.
+
 ### 0.4.0 @ 10/22/2024
 
 #### :mega: New
