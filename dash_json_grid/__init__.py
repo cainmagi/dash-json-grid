@@ -123,14 +123,14 @@ class DashJsonGrid(_DashJsonGrid, _MixinDataRoute, _MixinFile):
         Often used with CSS to style elements with common properties.
 
     - data (dict | list | number | string | boolean; required):
-        The JSON object or array to be transformed into a grid table.
+        The JSON-serializable data to be transformed into a grid table.
 
     - default_expand_depth (number; default 0):
         The depth to which the grid is expanded by default.
 
     - default_expand_key_tree (dict; optional):
         Tree-like structure with all keys that needs to be expanded. This
-        structure needs to be a dictionary mimicing the structure of the
+        structure needs to be a `Mapping` mimicing the structure of the
         data.
 
     - highlight_selected (boolean; default True):
@@ -155,45 +155,45 @@ class DashJsonGrid(_DashJsonGrid, _MixinDataRoute, _MixinFile):
         The text that needs to be searched in the JSON data.
 
     - selected_path (list; optional):
-        keyPath captured by the onSelect method of the grid viewer. This
-        value is a sequence of indicies used for locating the element of
-        the selected data. Due to the limitation of the exported
+        `keyPath` captured by the `onSelect` method of the grid viewer.
+        This value is a sequence of indicies used for locating the element
+        of the selected data. Due to the limitation of the exported
         functionalities, this value cannot be reset by the callback. In
         other words, using it with callbacks.Output will not take effects.
 
     - style (dict; optional):
         Defines CSS styles which will override styles previously set.
 
-    - theme (dict; default 'default'):
-        The theme (name) that needs to be applied. If a dictionary is
+    - theme (dict; default "default"):
+        The theme (name) that needs to be applied. If a `Mapping` is
         specified, will customize the color code of each part of grid
         viewer.
 
-        `theme` is a a value equal to: 'default', 'dracula', 'monokai',
-        'oceanicPark', 'panda', 'gruvboxMaterial', 'tokyoNight', 'remedy',
-        'atlanticNight', 'defaultLight', 'defaultLight2', 'slime',
-        'spacegray', 'blueberryDark', 'nord', 'nightOwl', 'oneMonokai',
-        'cobaltNext', 'shadesOfPurple', 'codeBlue', 'softEra',
-        'atomMaterial', 'evaDark', 'moonLight', 'inherit', 'unset' | dict
+        `theme` is a a value equal to: "default", "dracula", "monokai",
+        "oceanicPark", "panda", "gruvboxMaterial", "tokyoNight", "remedy",
+        "atlanticNight", "defaultLight", "defaultLight2", "slime",
+        "spacegray", "blueberryDark", "nord", "nightOwl", "oneMonokai",
+        "cobaltNext", "shadesOfPurple", "codeBlue", "softEra",
+        "atomMaterial", "evaDark", "moonLight", "inherit", "unset" | dict
         with keys:
 
         - bgColor (string; optional):
-            Background color.
+            Background color of the whole grid view.
 
         - booleanColor (string; optional):
             Text color of boolean variables.
 
+        - borderColor (string; optional):
+            Border color of the whole grid view.
+
         - cellBorderColor (string; optional):
             Background color of table cells.
 
-        - highlightBgColor (string; optional):
-            Background color when this part is highlighted.
-
         - indexColor (string; optional):
-            Text color of array indicies.
+            Text color of sequence indicies.
 
-        - keyNameColor (string; optional):
-            Text color of JSON keys.
+        - keyColor (string; optional):
+            Text color of mapping keys.
 
         - numberColor (string; optional):
             Text color of numeric values.
@@ -204,17 +204,18 @@ class DashJsonGrid(_DashJsonGrid, _MixinDataRoute, _MixinFile):
         - searchHighlightBgColor (string; optional):
             Background color of the part highlighted by the search.
 
+        - selectHighlightBgColor (string; optional):
+            Background color when this part is highlighted by the
+            selection.
+
         - stringColor (string; optional):
             Text color of strings.
-
-        - tableBorderColor (string; optional):
-            Border color of the whole table.
 
         - tableHeaderBgColor (string; optional):
             Background color of the table header.
 
-        - tableHeaderColor (string; optional):
-            Text color of the table header."""
+        - tableIconColor (string; optional):
+            Text color of the icon in the table header."""
 
 
 for _component in __all__:

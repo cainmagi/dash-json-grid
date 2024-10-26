@@ -78,7 +78,6 @@ DashJsonGrid.propTypes = {
   /**
    * `keyPath` captured by the `onSelect` method of the grid viewer. This value is a
    * sequence of indicies used for locating the element of the selected data.
-   *
    * Due to the limitation of the exported functionalities, this value cannot be
    * reset by the callback. In other words, using it with callbacks.Output will
    * not take effects.
@@ -153,10 +152,6 @@ DashJsonGrid.propTypes = {
        */
       borderColor: PropTypes.string,
       /**
-       * Background color when this part is highlighted by the selection.
-       */
-      selectHighlightBgColor: PropTypes.string,
-      /**
        * Background color of table cells.
        */
       cellBorderColor: PropTypes.string,
@@ -192,6 +187,10 @@ DashJsonGrid.propTypes = {
        * Text color of the icon in the table header.
        */
       tableIconColor: PropTypes.string,
+      /**
+       * Background color when this part is highlighted by the selection.
+       */
+      selectHighlightBgColor: PropTypes.string,
       /**
        * Background color of the part highlighted by the search.
        */

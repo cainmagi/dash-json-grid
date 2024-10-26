@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.4.1 @ 10/26/2024
+
+#### :wrench: Fix
+
+1. Fix: Update the docstring of the component and the typehint `ThemeConfigs` to the newest version.
+
 ### 0.4.0 @ 10/21/2024
 
 #### :mega: New
