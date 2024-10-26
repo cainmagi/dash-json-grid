@@ -138,17 +138,22 @@ class _set_item_of_object:
         `[{"key": val1, ...}, {"key": val2, ...}, ...]`
         and `value` is a sequence, broadcast `value` items to each mapping-like item
         of `data`."""
-        sub_data = tuple(
+        _sub_data = tuple(
             ditem for ditem in data if isinstance(ditem, collections.abc.MutableMapping)
         )
-        n_data = len(sub_data)
+        n_data = len(_sub_data)
         if n_data == len(value):
+            for item, vitem in zip(_sub_data, value):
+                item[index_key] = vitem
+            return
+        sub_data = tuple(ditem for ditem in _sub_data if index_key in ditem)
+        if len(sub_data) == len(value):
             for item, vitem in zip(sub_data, value):
                 item[index_key] = vitem
             return
-        sub_data = tuple(ditem for ditem in sub_data if index_key in ditem)
-        if len(sub_data) == len(value):
-            for item, vitem in zip(sub_data, value):
+        elif n_data > 1 and len(value) == 1:
+            vitem = value[0]
+            for item in _sub_data:
                 item[index_key] = vitem
             return
         raise IndexError(
@@ -175,11 +180,8 @@ class _set_item_of_object:
                     data[key][index_key] = val
                 return
             _set_item_of_object._broadcast_scalar(data, index_key, value)
-        elif len(value) > 1:
+        elif len(value) > 0:
             _set_item_of_object._broadcast_sequence(data, index_key, value)
-        elif len(value) == 1:
-            vitem = value[0]
-            _set_item_of_object._broadcast_scalar(data, index_key, vitem)
         else:
             raise ValueError('The provided argument "value" is empty.')
 

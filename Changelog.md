@@ -10,6 +10,10 @@
 
 1. Fix: Update the docstring of the component and the typehint `ThemeConfigs` to the newest version.
 
+#### :floppy_disk: Change
+
+1. Change the behavior of `DashJsonGrid.update_data_by_route(...)`. When a column is specified, a length-one sequence is provided, and the number available items of the column is also one, will broadcast the one available value rather than broadcasting all the sequence item to all columns.
+
 ### 0.4.0 @ 10/21/2024
 
 #### :mega: New

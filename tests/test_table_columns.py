@@ -137,7 +137,7 @@ class TestTableColumns:
         data_deleted = dash_json_grid.DashJsonGrid.delete_data_by_route(
             test_data, [["key3"]]
         )
-        assert utils.is_eq_mapping(data_deleted, {3: 4.0})
+        assert utils.is_eq_mapping(data_deleted, {3: ref_data[3]["key3"]})
         assert all("key3" not in ditem for ditem in test_data)
         assert not all("key3" not in ditem for ditem in ref_data)
         log.info(
@@ -153,6 +153,16 @@ class TestTableColumns:
         log.info(
             "Successfully add the data back to the table. The value is: "
             "{0}".format(data_deleted)
+        )
+
+        dash_json_grid.DashJsonGrid.update_data_by_route(test_data, [["key3"]], (5.0,))
+        data_routed = dash_json_grid.DashJsonGrid.get_data_by_route(
+            test_data, [["key3"]]
+        )
+        assert utils.is_eq(data_routed, {3: 5.0})
+        log.info(
+            "Successfully update a column with one value. The value is: "
+            "{0}".format(data_routed)
         )
 
         dash_json_grid.DashJsonGrid.update_data_by_route(
