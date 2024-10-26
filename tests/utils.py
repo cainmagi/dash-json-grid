@@ -35,6 +35,7 @@ __all__ = (
     "is_eq_mapping",
     "is_eq_sequence",
     "is_mapping_with_keys",
+    "docstring_space_remove",
     "attribute_value_neq",
     "wait_for_the_attribute_value_neq",
     "wait_for_dcc_loading",
@@ -79,6 +80,28 @@ def is_mapping_with_keys(val: Any, keys: Sequence[Any]) -> bool:
     if not isinstance(val, collections.abc.Mapping):
         return False
     return set(val.keys()) == set(keys)
+
+
+def docstring_space_remove(obj: Any) -> str:
+    """Get the docstring of an object, with the leading/trailing spaces removed.
+
+    Arguments
+    ---------
+    obj: `Any`
+        The object containing a docstring.
+
+    Returns
+    -------
+    #1: `str`
+        The normalized docstring of `obj` where the leading/trailing spaces are
+        removed.
+    """
+    doc = getattr(obj, "__doc__", None)
+    if not doc:
+        return ""
+    if not isinstance(doc, str):
+        return ""
+    return "".join(line.strip() for line in doc.splitlines())
 
 
 class attribute_value_neq:

@@ -6,6 +6,10 @@
 
 ### 0.4.1 @ 10/26/2024
 
+#### :mega: New
+
+1. Add a test for validating that the docstring of the main component is consistent with that of the auto-generated component.
+
 #### :wrench: Fix
 
 1. Fix: Update the docstring of the component and the typehint `ThemeConfigs` to the newest version.
