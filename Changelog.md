@@ -10,6 +10,10 @@
 
 1. Upgrade to the new version `0.4.1`.
 
+#### :wrench: Fix
+
+1. Fix: Synchronize the code references to the newest version.
+
 #### :floppy_disk: Change
 
 1. Exempt the old documents from the search list.
