@@ -6,6 +6,10 @@
 
 ### 0.4.1 @ 10/22/2024
 
+#### :mega: New
+
+1. Upgrade to the new version `0.4.1`.
+
 #### :floppy_disk: Change
 
 1. Exempt the old documents from the search list.

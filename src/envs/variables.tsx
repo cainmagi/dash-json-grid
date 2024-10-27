@@ -17,12 +17,12 @@ const variables = {
   repoURL: "https://github.com/cainmagi/dash-json-grid",
   rawURL: "https://raw.githubusercontent.com/cainmagi/dash-json-grid",
   sourceVersion: {
-    "0.4.0": "v0.4.0",
+    "0.4.1": "v0.4.1",
     "0.3.x": "v0.3.4",
     main: "main",
   },
   dependencyVersion: {
-    "0.4.0": "0.9.2",
+    "0.4.1": "0.9.2",
     "0.3.x": "0.7.0",
     main: "0.9.2",
   },

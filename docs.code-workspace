@@ -43,7 +43,8 @@
       "editor.tabSize": 2
     },
     "[mdx]": {
-      "editor.defaultFormatter": "unifiedjs.vscode-mdx"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.tabSize": 2
     },
     "python.languageServer": "Pylance",
     "python.analysis.typeCheckingMode": "standard",
