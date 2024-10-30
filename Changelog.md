@@ -6,6 +6,10 @@
 
 ### 0.4.1 @ 10/30/2024
 
+#### :wrench: Fix
+
+1. Fix: Correct small typos in `docs/apis/typehints/ThemeConfigs`.
+
 #### :floppy_disk: Change
 
 1. Migrate the version control of the source references to the newest version.
