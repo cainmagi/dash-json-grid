@@ -121,7 +121,7 @@ function Version() {
                     </Link>
                   </td>
                   <td align="center">
-                    <Link href={releaseURL(latestVersion.label)}>
+                    <Link href={releaseURL(latestVersion.label || "main")}>
                       <InlineIcon icon={octTag16} />
                     </Link>
                   </td>
@@ -202,7 +202,7 @@ function Version() {
                       </Link>
                     </td>
                     <td align="center">
-                      <Link href={releaseURL(version.label)}>
+                      <Link href={releaseURL(version.label || "main")}>
                         <InlineIcon icon={octTag16} />
                       </Link>
                     </td>

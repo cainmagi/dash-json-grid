@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.4.1 @ 10/30/2024
+
+#### :floppy_disk: Change
+
+1. Migrate the version control of the source references to the newest version.
+
 ### 0.4.1 @ 10/22/2024
 
 #### :mega: New
