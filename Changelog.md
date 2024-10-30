@@ -9,6 +9,7 @@
 #### :wrench: Fix
 
 1. Fix: Correct small typos in `docs/apis/typehints/ThemeConfigs`.
+2. Fix: `zh-cn` document cannot handle the line break correctly. Remove the unexpected line breaks.
 
 #### :floppy_disk: Change
 
