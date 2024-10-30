@@ -14,6 +14,7 @@
 #### :floppy_disk: Change
 
 1. Migrate the version control of the source references to the newest version.
+2. Change some links to the Chinese version for `zh-cn` docs.
 
 ### 0.4.1 @ 10/22/2024
 
