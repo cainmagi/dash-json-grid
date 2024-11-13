@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.4.2 @ 11/13/2024
+
+#### :floppy_disk: Change
+
+1. Bump the core dependencies to the newest version.
+
 ### 0.4.1 @ 10/30/2024
 
 #### :wrench: Fix
