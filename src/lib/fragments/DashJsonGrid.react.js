@@ -12,6 +12,7 @@
  */
 
 import React, {Component} from "react";
+import {type} from "ramda";
 
 import JSONGrid from "@redheadphone/react-json-grid";
 
@@ -69,13 +70,14 @@ export default class DashJsonGrid extends Component {
    *    configured, the other one should be undefined.
    */
   getTheme(theme) {
-    if (typeof theme === "object") {
+    const themeType = type(theme);
+    if (themeType === "Object") {
       return {
         themeName: undefined,
         customTheme: theme,
       };
     }
-    if (typeof theme === "string") {
+    if (themeType === "String") {
       if (theme === "inherit" || theme == "unset") {
         return {
           themeName: undefined,
