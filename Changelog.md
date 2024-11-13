@@ -6,6 +6,10 @@
 
 ### 0.4.2 @ 11/13/2024
 
+#### :mega: New
+
+1. Add tests for passing an empty value to the `data` property.
+
 #### :wrench: Fix
 
 1. Fix: Improve the sanitization of the input data. Previously, the sanitization does not work correctly if the `data` is specified by `None`.
