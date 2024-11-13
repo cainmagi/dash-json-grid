@@ -9,7 +9,7 @@ React-JSON-Grid.
 
 | Version | Supported          | Available on [PyPI :link:][link-pypi] | React-JSON-Grid  |
 | ------- | ------------------ | ------------------ | ------------------ |
-| `0.4.0`   | :white_check_mark: | :white_check_mark: | [`0.9.2` :link:][link-rjg-092] |
+| `0.4.x`   | :white_check_mark: | :white_check_mark: | [`0.9.2` :link:][link-rjg-092] |
 | `0.3.x`   | :x:                | :white_check_mark: | [`0.7.0` :link:][link-rjg-070] |
 | < `0.3`   | :x:                | :x:                | -                  |
 

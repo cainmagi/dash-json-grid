@@ -122,7 +122,7 @@ class DashJsonGrid(_DashJsonGrid, _MixinDataRoute, _MixinFile):
     - class_name (string; optional):
         Often used with CSS to style elements with common properties.
 
-    - data (dict | list | number | string | boolean; required):
+    - data (a value equal to: null | dict | list | number | string | boolean; required):
         The JSON-serializable data to be transformed into a grid table.
 
     - default_expand_depth (number; default 0):

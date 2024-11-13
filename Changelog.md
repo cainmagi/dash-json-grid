@@ -18,6 +18,7 @@
 
 1. The `callback` is replaced by `app.callback` in `usage.py`.
 2. The issue and PR templates are adjusted, and the vulnerability issue tempate is removed because we decide to use a different way to accept vulnerability reports.
+3. Make the package information updated to `v0.4.2`.
 
 ### 0.4.1 @ 10/26/2024
 
