@@ -9,6 +9,7 @@
 #### :floppy_disk: Change
 
 1. Bump the core dependencies to the newest version.
+2. Upgrade to the new version `0.4.2`.
 
 ### 0.4.1 @ 10/30/2024
 
