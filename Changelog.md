@@ -10,6 +10,10 @@
 
 1. Add explanations of using `default_expand_key_tree` in `docs/usages/data`.
 
+#### :wrench: Fix
+
+1. Fix: Fix a not translated text in the `zh-cn` doc: `docs/usages/data`.
+
 #### :floppy_disk: Change
 
 1. Bump the core dependencies to the newest version.
