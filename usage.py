@@ -18,7 +18,7 @@ python usage.py
 """
 
 import dash
-from dash import Dash, dcc, callback, html, Input, Output, State
+from dash import Dash, dcc, html, Input, Output, State
 import dash_json_grid
 
 app = Dash(__name__)
@@ -140,21 +140,21 @@ app.layout = html.Div(
 )
 
 
-@callback(Output("viewer", "theme"), Input("theme", "value"))
+@app.callback(Output("viewer", "theme"), Input("theme", "value"))
 def update_theme(value):
     if not value:
         return dash.no_update
     return value
 
 
-@callback(Output("viewer", "search_text"), Input("search", "value"))
+@app.callback(Output("viewer", "search_text"), Input("search", "value"))
 def update_search(value):
     if not value:
         return None
     return value
 
 
-@callback(
+@app.callback(
     Output("selected-path", "children"),
     Output("selected-val", "children"),
     Output("viewer", "data"),

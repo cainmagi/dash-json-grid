@@ -10,6 +10,10 @@
 
 1. Fix: Improve the sanitization of the input data. Previously, the sanitization does not work correctly if the `data` is specified by `None`.
 
+#### :floppy_disk: Change
+
+1. The `callback` is replaced by `app.callback` in `usage.py`.
+
 ### 0.4.1 @ 10/26/2024
 
 #### :mega: New
