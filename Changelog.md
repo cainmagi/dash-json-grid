@@ -9,6 +9,7 @@
 #### :mega: New
 
 1. Add tests for passing an empty value to the `data` property.
+2. Add SCSS styles when the property `highighlight_selected == False`. This change make the cursor become normal if the grid elements are not selectable.
 
 #### :wrench: Fix
 

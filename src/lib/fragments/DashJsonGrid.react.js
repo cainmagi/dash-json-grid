@@ -13,11 +13,14 @@
 
 import React, {Component} from "react";
 import {type} from "ramda";
+import clsx from "clsx/lite";
 
 import JSONGrid from "@redheadphone/react-json-grid";
 
 import {propTypes, defaultProps} from "../components/DashJsonGrid.react";
 import {isArray, sanitizeData} from "../utils";
+
+import styles from "./DashJsonGrid.module.scss";
 
 /**
  * DashJsonGrid is a Dash porting version for the React component:
@@ -144,7 +147,11 @@ export default class DashJsonGrid extends Component {
     return (
       <div
         id={id}
-        className={class_name}
+        className={clsx(
+          styles["js-grid-container"],
+          !highlight_selected && styles["no-select"],
+          class_name
+        )}
         style={style}
         data-dash-is-loading={
           (loading_state && loading_state.is_loading) || undefined

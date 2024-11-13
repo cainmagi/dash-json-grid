@@ -1,0 +1,26 @@
+.js-grid-container {
+  overflow-x: auto;
+  width: 100%;
+
+  & > div > table {
+    margin-bottom: 0;
+
+    :global {
+      tr:not(.highlight) {
+        background-color: transparent;
+
+        &:nth-child(2n) {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  &.no-select {
+    & > div:global(.json-grid-container) {
+      :global(.obj) {
+        cursor: initial;
+      }
+    }
+  }
+}
