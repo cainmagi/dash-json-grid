@@ -142,14 +142,14 @@ class DashJsonGrid(_DashJsonGrid, _MixinDataRoute, _MixinFile):
 
         `loading_state` is a dict with keys:
 
-        - component_name (string; optional):
-            Holds the name of the component that is loading.
-
         - is_loading (boolean; optional):
             Determines if the component is loading or not.
 
         - prop_name (string; optional):
             Holds which property is loading.
+
+        - component_name (string; optional):
+            Holds the name of the component that is loading.
 
     - search_text (string; optional):
         The text that needs to be searched in the JSON data.
@@ -180,42 +180,42 @@ class DashJsonGrid(_DashJsonGrid, _MixinDataRoute, _MixinFile):
         - bgColor (string; optional):
             Background color of the whole grid view.
 
-        - booleanColor (string; optional):
-            Text color of boolean variables.
-
         - borderColor (string; optional):
             Border color of the whole grid view.
 
         - cellBorderColor (string; optional):
             Background color of table cells.
 
-        - indexColor (string; optional):
-            Text color of sequence indicies.
-
         - keyColor (string; optional):
             Text color of mapping keys.
+
+        - indexColor (string; optional):
+            Text color of sequence indicies.
 
         - numberColor (string; optional):
             Text color of numeric values.
 
-        - objectColor (string; optional):
-            Text color of unrecognized objects.
-
-        - searchHighlightBgColor (string; optional):
-            Background color of the part highlighted by the search.
-
-        - selectHighlightBgColor (string; optional):
-            Background color when this part is highlighted by the
-            selection.
+        - booleanColor (string; optional):
+            Text color of boolean variables.
 
         - stringColor (string; optional):
             Text color of strings.
+
+        - objectColor (string; optional):
+            Text color of unrecognized objects.
 
         - tableHeaderBgColor (string; optional):
             Background color of the table header.
 
         - tableIconColor (string; optional):
-            Text color of the icon in the table header."""
+            Text color of the icon in the table header.
+
+        - selectHighlightBgColor (string; optional):
+            Background color when this part is highlighted by the
+            selection.
+
+        - searchHighlightBgColor (string; optional):
+            Background color of the part highlighted by the search."""
 
 
 for _component in __all__:

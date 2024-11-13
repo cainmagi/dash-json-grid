@@ -13,6 +13,7 @@
 #### :wrench: Fix
 
 1. Fix: Improve the sanitization of the input data. Previously, the sanitization does not work correctly if the `data` is specified by `None`.
+2. Fix: The comparison of the docstring may fail because different versions of `dash` may produce docstrings in different order. Make the docstring comparison more robust.
 
 #### :floppy_disk: Change
 

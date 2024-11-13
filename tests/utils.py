@@ -20,8 +20,10 @@ from typing import Optional, Any
 
 try:
     from typing import Sequence, Mapping
+    from typing import FrozenSet
 except ImportError:
     from collections.abc import Sequence, Mapping
+    from builtins import frozenset as FrozenSet
 
 
 from dash.testing.composite import DashComposite
@@ -82,7 +84,7 @@ def is_mapping_with_keys(val: Any, keys: Sequence[Any]) -> bool:
     return set(val.keys()) == set(keys)
 
 
-def docstring_space_remove(obj: Any) -> str:
+def docstring_space_remove(obj: Any) -> FrozenSet[str]:
     """Get the docstring of an object, with the leading/trailing spaces removed.
 
     Arguments
@@ -98,10 +100,10 @@ def docstring_space_remove(obj: Any) -> str:
     """
     doc = getattr(obj, "__doc__", None)
     if not doc:
-        return ""
+        return frozenset(("",))
     if not isinstance(doc, str):
-        return ""
-    return "".join(line.strip() for line in doc.splitlines())
+        return frozenset(("",))
+    return frozenset(line.strip() for line in doc.splitlines())
 
 
 class attribute_value_neq:
