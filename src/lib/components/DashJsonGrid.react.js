@@ -57,6 +57,7 @@ DashJsonGrid.propTypes = {
    * The JSON-serializable data to be transformed into a grid table.
    */
   data: PropTypes.oneOfType([
+    PropTypes.oneOf([null]),
     PropTypes.object,
     PropTypes.array,
     PropTypes.number,

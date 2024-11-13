@@ -11,14 +11,22 @@
  * https://github.com/RedHeadphone/react-json-grid
  */
 
+import {type} from "ramda";
+
 export const isArray =
   Array.isArray ||
   ((value) => {
-    return value instanceof Array;
+    return type(value) === "Array";
   });
 
 export const sanitizeData = (data) => {
-  if (["object", "array"].includes(typeof data)) {
+  const dataType = type(data);
+
+  if (["Null", "Undefined"].includes(dataType)) {
+    return {};
+  }
+
+  if (["Object", "Array"].includes(dataType)) {
     return data;
   }
 

@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.4.2 @ 11/13/2024
+
+#### :wrench: Fix
+
+1. Fix: Improve the sanitization of the input data. Previously, the sanitization does not work correctly if the `data` is specified by `None`.
+
 ### 0.4.1 @ 10/26/2024
 
 #### :mega: New
