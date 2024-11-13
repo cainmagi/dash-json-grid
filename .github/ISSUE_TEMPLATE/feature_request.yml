@@ -44,7 +44,7 @@ body:
     attributes:
       label: Dash JSON Grid Viewer version
       description: >-
-        e.g. 0.3.3
+        e.g. 0.x.x
     validations:
       required: true
 
