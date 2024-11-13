@@ -316,6 +316,68 @@ The dash app is expected to render the following result:
 
 </Tabs>
 
+### Expand a part of the data
+
+For a complicated `data` property like the above example, it may be necessary to expand
+a small part of the data by default. The following example shows how to configure this
+partial expanding feature by the property `default_expand_key_tree`:
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data=...,
+    default_expand_key_tree={"not-a-table": {"2": True}}
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<ViewOnlyDemoApp
+  data={{
+    literal: 1,
+    sequence: [1, 2.0, "3", null, true],
+    mapping: {key1: 1, key2: "str", key3: true, key4: null},
+    table: [
+      {key1: 1, key2: "str"},
+      {key1: true, key2: null},
+      {key1: 3.0},
+      {key1: false, key2: null, key3: 4.0},
+      {key5: "?"},
+    ],
+    "not-a-table": [
+      {val1: 1},
+      2.0,
+      ["a", "b", "c"],
+      [{key1: ["a"], key2: 2, key3: {val1: true}}],
+      [{key3: 1}],
+    ],
+  }}
+  defaultExpandKeyTree={{"not-a-table": {"2": true}}}
+  theme="default"
+/>
+
+</TabItem>
+
+</Tabs>
+
+Note that the leaf node of `default_expand_key_tree` should be boolean values. Any
+leaf node set by `True` will let that route expanded.
+
 ## Alternative initializations
 
 The data can be fed into the component by another two initialization methods.
@@ -346,7 +408,7 @@ decoded by a JSON decoder. In this case, `data` should not be used.
 <TabItem value="file">
 
 It is also allowed to use a JSON file to initialize the component directly:
-  
+
 ```python
 app.layout = dash_json_grid.DashJsonGrid.from_file(
     json_file: str | os.PathLike | IO[str], ...

@@ -44,12 +44,14 @@ type AppProps = {
       }
     | string;
   customTheme?: customeThemeType;
+  defaultExpandKeyTree?: Object;
 };
 
 const App = ({
   data,
   theme = {light: "remedy", dark: "moonLight"},
   customTheme = {},
+  defaultExpandKeyTree,
 }: AppProps): JSX.Element => {
   const {colorMode, setColorMode} = useColorMode();
 
@@ -83,6 +85,7 @@ const App = ({
           data={sanitizeData(data)}
           theme={valTheme}
           customTheme={valCustomTheme}
+          defaultExpandKeyTree={defaultExpandKeyTree}
         />
       </div>
     </div>

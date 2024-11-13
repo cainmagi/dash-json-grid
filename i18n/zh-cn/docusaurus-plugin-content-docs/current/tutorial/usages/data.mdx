@@ -296,6 +296,65 @@ Dash应用应当呈现出以下结果：
 
 </Tabs>
 
+### 展开数据的一部分 {#expand-a-part-of-the-data}
+
+处理形如上例中的复杂`data`属性时，有可能需要默认展开其中的一小部分。下例展示了如何透过属性`default_expand_key_tree`设置这种部分展开的特性：
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data=...,
+    default_expand_key_tree={"not-a-table": {"2": True}}
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<ViewOnlyDemoApp
+  data={{
+    literal: 1,
+    sequence: [1, 2.0, "3", null, true],
+    mapping: {key1: 1, key2: "str", key3: true, key4: null},
+    table: [
+      {key1: 1, key2: "str"},
+      {key1: true, key2: null},
+      {key1: 3.0},
+      {key1: false, key2: null, key3: 4.0},
+      {key5: "?"},
+    ],
+    "not-a-table": [
+      {val1: 1},
+      2.0,
+      ["a", "b", "c"],
+      [{key1: ["a"], key2: 2, key3: {val1: true}}],
+      [{key3: 1}],
+    ],
+  }}
+  defaultExpandKeyTree={{"not-a-table": {"2": true}}}
+  theme="default"
+/>
+
+</TabItem>
+
+</Tabs>
+
+注意`default_expand_key_tree`的叶子节点需要是二值量。设置为`True`的叶子节点，将展开对应的路由。
+
 ## 其他初始化组件的方法 {#alternative-initializations}
 
 在初始化组件的时候，数据还可以通过另外两种方式传递给组件。

@@ -6,6 +6,10 @@
 
 ### 0.4.2 @ 11/13/2024
 
+#### :mega: New
+
+1. Add explanations of using `default_expand_key_tree` in `docs/usages/data`.
+
 #### :floppy_disk: Change
 
 1. Bump the core dependencies to the newest version.
