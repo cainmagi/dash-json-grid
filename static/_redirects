@@ -1,0 +1,6 @@
+# FALLBACK: PUT THIS LAST (rules above are more important)
+# Redirect each country sub-path to appropriate localized 404 file
+# Note: the 404 won't be served if the path match an existing static file
+# Note: useless for /* => Netlify already serve /404.html
+# See https://docs.netlify.com/routing/redirects/redirect-options/#custom-404-page-handling
+/zh-cn/*          /zh-cn/404          404

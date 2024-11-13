@@ -13,6 +13,7 @@
 #### :wrench: Fix
 
 1. Fix: Fix a not translated text in the `zh-cn` doc: `docs/usages/data`.
+2. Fix: Attempt to make the GitPage correctly redirect to the 404 pages for specific localizations.
 
 #### :floppy_disk: Change
 
