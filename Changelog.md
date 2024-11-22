@@ -9,6 +9,7 @@
 #### :wrench: Fix
 
 1. Fix: Fix a severe bug of importing the components in a wrong list. Now the scope is limited to the auto-generated codes.
+2. Fix: Correct the path of submitting a vulnerability issue in the security policy.
 
 ### 0.4.2 @ 11/13/2024
 

@@ -23,7 +23,7 @@ template and let me know what to expect if the vulnerability is accepted or decl
 Any vulnerability submitted for a not-supported version will be declined directly.
 
 [link-pypi]:https://pypi.org/project/dash-json-grid
-[link-issue]:https://github.com/cainmagi/dash-json-grid/issues/new?assignees=&labels=vulnerability%2Cto+be+solved&projects=&template=vulnerability_report.yml&title=%5BVUL%5D
+[link-issue]:https://github.com/cainmagi/dash-json-grid/security/advisories/new
 
 [link-rjg-092]:https://github.com/RedHeadphone/react-json-grid/tree/v0.9.2
 [link-rjg-070]:https://github.com/RedHeadphone/react-json-grid/tree/94e0da926a63d3bd810357eac84b871eeea49f00
