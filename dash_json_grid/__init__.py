@@ -31,6 +31,7 @@ from . import mixins
 
 # noinspection PyUnresolvedReferences
 from ._imports_ import DashJsonGrid as _DashJsonGrid
+from ._imports_ import __all__ as __import_all__
 from .mixins import MixinDataRoute as _MixinDataRoute, MixinFile as _MixinFile
 from .typehints import ThemeConfigs
 
@@ -218,6 +219,6 @@ class DashJsonGrid(_DashJsonGrid, _MixinDataRoute, _MixinFile):
             Background color of the part highlighted by the search."""
 
 
-for _component in __all__:
+for _component in __import_all__:
     setattr(locals()[_component], "_js_dist", _js_dist)
     setattr(locals()[_component], "_css_dist", _css_dist)

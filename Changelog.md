@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.4.3 @ 11/22/2024
+
+#### :wrench: Fix
+
+1. Fix: Fix a severe bug of importing the components in a wrong list. Now the scope is limited to the auto-generated codes.
+
 ### 0.4.2 @ 11/13/2024
 
 #### :mega: New
