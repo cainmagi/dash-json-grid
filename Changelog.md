@@ -12,6 +12,10 @@
 2. Fix: Correct the path of submitting a vulnerability issue in the security policy.
 3. Fix: Correct wrong (old) version numbers in contributing guide.
 
+#### :floppy_disk: Change
+
+1. Bump `Yarn` version from `4.5.1` to `4.5.2`.
+
 ### 0.4.2 @ 11/13/2024
 
 #### :mega: New
