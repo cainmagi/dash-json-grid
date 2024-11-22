@@ -18,12 +18,12 @@ const variables = {
   repoURL: "https://github.com/cainmagi/dash-json-grid",
   rawURL: "https://raw.githubusercontent.com/cainmagi/dash-json-grid",
   sourceVersion: {
-    "0.4.2": "v0.4.2",
+    "0.4.3": "v0.4.3",
     "0.3.x": "v0.3.4",
     main: "main",
   },
   dependencyVersion: {
-    "0.4.2": "0.9.2",
+    "0.4.3": "0.9.2",
     "0.3.x": "0.7.0",
     main: "0.9.2",
   },
@@ -45,7 +45,7 @@ const variables = {
     },
     main: {
       ".": "__init__.py",
-      DashJsonGrid: "__init__.py#L109",
+      DashJsonGrid: "__init__.py#L110",
       mixins: "mixins.py",
       "mixins.get_item_of_object": "mixins.py#L99",
       "mixins.is_sequence": "mixins.py#L48",

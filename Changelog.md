@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.4.3 @ 11/22/2024
+
+#### :floppy_disk: Change
+
+1. Upgrade to the new version `0.4.3`.
+
 ### 0.4.2 @ 11/13/2024
 
 #### :mega: New
