@@ -65,7 +65,7 @@ This step may take a little bit long. After successfully building the image, you
 Run the following command to start the tests.
 
 ``` sh
-docker run -it --rm dash-json-grid:0.3.0 --with-dash
+docker run -it --rm dash-json-grid:latest --with-dash
 ```
 
 If the codes have not been modified, you suppose to see the the messages like this:
@@ -79,13 +79,13 @@ It shows that all unit tests get passed.
 We have prepared a pure `React` demo and a `Dash` demo, respectively. Run this command to launch the react demo:
 
 ``` sh
-docker run -it --rm -p 8080:8080 dash-json-grid:0.3.0 --react
+docker run -it --rm -p 8080:8080 dash-json-grid:latest --react
 ```
 
 Or run the following command to launch the dash demo:
 
 ``` sh
-docker run -it --rm -p 8080:8080 dash-json-grid:0.3.0 --demo
+docker run -it --rm -p 8080:8080 dash-json-grid:latest --demo
 ```
 
 When the demo is running, you should be able to access the demo by
@@ -103,7 +103,7 @@ git clone https://github.com/cainmagi/dash-json-grid
 Then, you can run the docker container and mount the newly cloned Git folder to the container:
 
 ``` sh
-docker run -it --rm -v <path-to-the-project>:/workdir -p 8080:8080 dash-json-grid:0.3.0 --bash
+docker run -it --rm -v <path-to-the-project>:/workdir -p 8080:8080 dash-json-grid:latest --bash
 ```
 
 When the container is running, you should be able to see that your are in the container's console.
