@@ -9,6 +9,7 @@
 #### :floppy_disk: Change
 
 1. Upgrade to the new version `0.4.3`.
+2. Bump the `yarn` version from `4.5.1` to `4.5.2`.
 
 ### 0.4.2 @ 11/13/2024
 
