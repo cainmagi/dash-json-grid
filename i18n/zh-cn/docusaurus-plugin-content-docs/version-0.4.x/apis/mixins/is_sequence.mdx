@@ -1,0 +1,78 @@
+---
+id: is_sequence
+title: is_sequence
+sidebar_label: is_sequence
+slug: /apis/mixins/is_sequence
+description: 检查某值val是否是序列。
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+import vsiCheckIcon from "@iconify-icons/codicon/check";
+
+import InlineIcon from "@site/src/components/InlineIcon";
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="func" isPrivate={true} source="mixins.is_sequence" />
+
+```python
+flag: TypeGuard[Sequence[Any]] = is_sequence(val: Any)
+```
+
+检查某值`val`是否是序列。
+
+## 参数 {#arguments}
+
+### 输入 {#requires}
+
+| 参数  | 类型  |               必选                | <center>说明</center> |
+| :---: | :---: | :-------------------------------: | --------------------- |
+| `val` | `Any` | <InlineIcon icon={vsiCheckIcon}/> | 要验证的值。          |
+
+### 输出 {#returns}
+
+|  参数  |  类型  | <center>说明</center>                           |
+| :----: | :----: | :---------------------------------------------- |
+| `flag` | `bool` | 若输出`True`，则`val`的类型是序列，反之则不是。 |
+
+## 范例 {#examples}
+
+### <IconObjType type="term"/> 检查对象是否是序列 {#-check-whether-an-object-is-a-sequence-or-not}
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="check_is_sequence.py" showLineNumbers
+from dash_json_grid.mixins import is_sequence
+
+
+print(is_sequence(1))
+print(is_sequence([1]))
+print(is_sequence({"d": 1}))
+print(is_sequence({"d": 1}.keys()))
+print(is_sequence(tuple({"d": 1}.keys())))
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+```python
+False
+True
+False
+False
+True
+```
+
+</TabItem>
+
+</Tabs>

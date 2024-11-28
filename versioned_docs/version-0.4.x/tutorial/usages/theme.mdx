@@ -1,0 +1,319 @@
+---
+id: theme
+sidebar_label: Theme
+title: Configuring the theme
+description: A guide showing the ways of configuring the component theme.
+slug: /usages/theme
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import IconExternalLink from "@theme/Icon/ExternalLink";
+
+import ViewOnlyDemoApp, {ThemedApp} from "@site/src/demo/ViewOnly";
+
+# Configuring the theme
+
+Considering a component without any specific configurations, by default, the theme
+will be configured as `"default"`.
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="not_themed_example.py" showLineNumbers
+import dash
+import dash_json_grid as djg
+
+
+app = dash.Dash("demo")
+app.layout = djg.DashJsonGrid(
+    data=[
+        {"key1": 1, "key2": "str"},
+        {"key1": True, "key2": None},
+        {"key1": 3.0},
+        {"key1": False, "key2": None, "key3": 4.0},
+        {"key5": "?"},
+    ]
+)
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<ViewOnlyDemoApp
+  data={[
+    {key1: 1, key2: "str"},
+    {key1: true, key2: null},
+    {key1: 3.0},
+    {key1: false, key2: null, key3: 4.0},
+    {key5: "?"},
+  ]}
+  theme="default"
+/>
+
+</TabItem>
+
+</Tabs>
+
+## Specify a theme by a name
+
+The theme can be spcified by a theme name (`str`). Given the above example, we only
+need to add one property `theme="moonLight"` to make the theme different.
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data=[
+        {"key1": 1, "key2": "str"},
+        {"key1": True, "key2": None},
+        {"key1": 3.0},
+        {"key1": False, "key2": None, "key3": 4.0},
+        {"key5": "?"},
+    ],
+    # highlight-next-line
+    theme="moonLight",
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<ViewOnlyDemoApp
+  data={[
+    {key1: 1, key2: "str"},
+    {key1: true, key2: null},
+    {key1: 3.0},
+    {key1: false, key2: null, key3: 4.0},
+    {key5: "?"},
+  ]}
+  theme="moonLight"
+/>
+
+</TabItem>
+
+</Tabs>
+
+The available theme names are
+
+```python
+[
+    "default", "dracula", "monokai", "oceanicPark", "panda",
+    "gruvboxMaterial", "tokyoNight", "remedy", "atlanticNight",
+    "defaultLight", "defaultLight2", "slime", "spacegray",
+    "blueberryDark", "nord", "nightOwl", "oneMonokai", "cobaltNext",
+    "shadesOfPurple", "codeBlue", "softEra", "atomMaterial",
+    "evaDark", "moonLight", "unset", "inherit"
+]
+```
+
+The following small demo can be used as a tool to quick overviewing each theme:
+
+<ThemedApp
+  data={[
+    {key1: 1, key2: "str"},
+    {key1: true, key2: null},
+    {key1: 3.0},
+    {key1: false, key2: null, key3: 4.0},
+    {key5: "?"},
+  ]}
+/>
+
+## Specify a theme by a dictionary
+
+To customize any special styles of the themes, users can specify the following typed
+dictionary:
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data=[
+        {"key1": 1, "key2": "str"},
+        {"key1": True, "key2": None},
+        {"key1": 3.0},
+        {"key1": False, "key2": None, "key3": 4.0},
+        {"key5": "?"},
+    ],
+    # highlight-start
+    theme=djg.ThemeConfigs(
+        bgColor="#f5f5f5",
+        booleanColor="#007acc",
+        borderColor="#d3d3d3",
+        cellBorderColor="#c0c0c0",
+        indexColor="#666666",
+        keyColor="#333333",
+        numberColor="#007acc",
+        objectColor="#333333",
+        searchHighlightBgColor="#cccccc",
+        selectHighlightBgColor="#e0e0e0",
+        stringColor="#2ca22c",
+        tableHeaderBgColor="#dddddd",
+        tableIconColor="#333333",
+    ),
+    # highlight-end
+)
+...
+```
+
+where the highlighted [`djg.ThemeConfigs(...)`](../../apis/typehints/ThemeConfigs.mdx)
+is a [`TypedDict`<IconExternalLink/>][link-typeddict].
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<ViewOnlyDemoApp
+  data={[
+    {key1: 1, key2: "str"},
+    {key1: true, key2: null},
+    {key1: 3.0},
+    {key1: false, key2: null, key3: 4.0},
+    {key5: "?"},
+  ]}
+  customTheme={{
+    bgColor: "#f5f5f5",
+    booleanColor: "#007acc",
+    cellBorderColor: "#c0c0c0",
+    selectHighlightBgColor: "#e0e0e0",
+    indexColor: "#666666",
+    keyColor: "#333333",
+    numberColor: "#007acc",
+    objectColor: "#333333",
+    searchHighlightBgColor: "#cccccc",
+    stringColor: "#2ca22c",
+    borderColor: "#d3d3d3",
+    tableHeaderBgColor: "#dddddd",
+    tableIconColor: "#333333",
+  }}
+/>
+
+</TabItem>
+
+</Tabs>
+
+## Specify a theme by `theme=inherit` and a global stylesheet
+
+If users prefer to provide the styles by a global CSS/SCSS stylesheet, a good approach
+is to let `theme=inherit` and specify the theme properties like this:
+
+```css
+body .special-djg-style {
+  --jg-bg-color: #fff;
+  --jg-border-color: #a5a5a5;
+  --jg-cell-border-color: #ddd;
+  --jg-key-color: #32373b;
+  --jg-index-color: #00f;
+  --jg-number-color: #007acc;
+  --jg-boolean-color: #00f;
+  --jg-string-color: #a31515;
+  --jg-object-color: #00009f;
+  --jg-table-header-bg-color: #ddd;
+  --jg-table-icon-color: #333;
+  --jg-select-highlight-bg-color: #c1def133;
+  --jg-search-highlight-bg-color: #8885;
+}
+```
+
+After that, the component can be specified like this:
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+# highlight-next-line
+from dash import html
+...
+app.layout = html.Div(
+    # highlight-next-line
+    className="special-djg-style",
+    children=djg.DashJsonGrid(
+        data=[
+            {"key1": 1, "key2": "str"},
+            {"key1": True, "key2": None},
+            {"key1": 3.0},
+            {"key1": False, "key2": None, "key3": 4.0},
+            {"key5": "?"},
+        ],
+        # highlight-next-line
+        theme="inherit",
+    )
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+The dash app is expected to render the following result:
+
+<div className="special-djg-style">
+  <ViewOnlyDemoApp
+    data={[
+      {key1: 1, key2: "str"},
+      {key1: true, key2: null},
+      {key1: 3.0},
+      {key1: false, key2: null, key3: 4.0},
+      {key5: "?"},
+    ]}
+    theme="inherit"
+  />
+</div>
+
+</TabItem>
+
+</Tabs>
+
+:::info
+
+Using `"inherit" | "unset"` is a new feature provided by dash-json-grid since `v0.3.2`.
+The original component (`react-json-grid`) does not support this feature yet.
+
+:::
+
+[link-typeddict]: https://docs.python.org/3/library/typing.html#typing.TypedDict

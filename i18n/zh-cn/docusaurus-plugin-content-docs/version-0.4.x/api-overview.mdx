@@ -1,0 +1,53 @@
+---
+id: api-overview
+sidebar_label: 总览
+title: API总览
+description: 对所有API的总览。
+slug: /apis
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+
+import IconExternalLink from "@theme/Icon/ExternalLink";
+import ThemedImage from "@theme/ThemedImage";
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+# API 总览
+
+<APITopBar type="package" source="." />
+
+本组件包是对React项目[React JSON Grid<IconExternalLink/>][git-react-json-grid]的Dash移植版。用以提供复杂JSON对象/数组（对应为Python字典/列表）的结构化、嵌套化网格视图。
+
+<div className="mb-default">
+  <ThemedImage
+    alt="Docusaurus themed image"
+    sources={{
+      light: useBaseUrl("/img/overview-light.svg"),
+      dark: useBaseUrl("/img/overview-dark.svg"),
+    }}
+  />
+</div>
+
+上图展示了整个模块的大体结构。其中，核心功能是`DashJsonGrid`组件。该组件还合并了来自插件（mixins）的一些功能。
+
+## 模块 {#modules}
+
+|                                            成员                                            | <center>说明</center>                                  |
+| :----------------------------------------------------------------------------------------: | :----------------------------------------------------- |
+|    [<IconObjType type="module" hasText={true} text="mixins"/>](./apis/mixins/index.mdx)    | 插件的定义。这些插件用来扩展自动生成的`dash`组件功能。 |
+| [<IconObjType type="module" hasText={true} text="typehints"/>](./apis/typehints/index.mdx) | 项目中使用的额外类型标记。                             |
+
+## 类 {#classes}
+
+|                                           成员                                            | <center>说明</center>                                                                                           |
+| :---------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------- |
+| [<IconObjType type="class" hasText={true} text="DashJsonGrid"/>](./apis/DashJsonGrid.mdx) | `DashJsonGrid`组件是对React项目[`react-json-grid/JSONGrid`<IconExternalLink/>][link-jsongrid]的Dash移植版。 |
+
+## 别名 {#aliases}
+
+|                             成员                              | <center>别名取自</center>                                         |
+| :-----------------------------------------------------------: | :---------------------------------------------------------------- |
+| <IconObjType type="type" hasText={true} text="ThemeConfigs"/> | [`djg.typehints.ThemeConfigs`](./apis/typehints/ThemeConfigs.mdx) |
+
+[git-react-json-grid]: https://github.com/RedHeadphone/react-json-grid
+[link-jsongrid]: https://github.com/RedHeadphone/react-json-grid?tab=readme-ov-file#props

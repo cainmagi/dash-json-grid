@@ -1,0 +1,56 @@
+---
+id: api-overview
+sidebar_label: Overview
+title: Overview of APIs
+description: The overview of all APIs.
+slug: /apis
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+
+import IconExternalLink from "@theme/Icon/ExternalLink";
+import ThemedImage from "@theme/ThemedImage";
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+# Overview of APIs
+
+<APITopBar type="package" source="." />
+
+Dash porting version of the react project
+[React JSON Grid<IconExternalLink/>][git-react-json-grid]. Provide structured and
+nested grid table view of complicated JSON objects/arrays.
+
+<div className="mb-default">
+  <ThemedImage
+    alt="Docusaurus themed image"
+    sources={{
+      light: useBaseUrl("/img/overview-light.svg"),
+      dark: useBaseUrl("/img/overview-dark.svg"),
+    }}
+  />
+</div>
+
+This graph shows the high-level overview of the whole package. The core component is
+`DashJsonGrid` which has been already modified by merging mixins.
+
+## Modules
+
+|                                           Member                                           | <center>Description</center>                                                                       |
+| :----------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------- |
+|    [<IconObjType type="module" hasText={true} text="mixins"/>](./apis/mixins/index.mdx)    | The mixins used for extending the functionalities of the automatically generated `dash` component. |
+| [<IconObjType type="module" hasText={true} text="typehints"/>](./apis/typehints/index.mdx) | Extra typehints used by this project.                                                              |
+
+## Classes
+
+|                                          Member                                           | <center>Description</center>                                                                                                     |
+| :---------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------- |
+| [<IconObjType type="class" hasText={true} text="DashJsonGrid"/>](./apis/DashJsonGrid.mdx) | DashJsonGrid is a Dash porting version for the React component： [`react-json-grid/JSONGrid`<IconExternalLink/>][link-jsongrid]. |
+
+## Aliases
+
+|                            Member                             | <center>Alias of</center>                                         |
+| :-----------------------------------------------------------: | :---------------------------------------------------------------- |
+| <IconObjType type="type" hasText={true} text="ThemeConfigs"/> | [`djg.typehints.ThemeConfigs`](./apis/typehints/ThemeConfigs.mdx) |
+
+[git-react-json-grid]: https://github.com/RedHeadphone/react-json-grid
+[link-jsongrid]: https://github.com/RedHeadphone/react-json-grid?tab=readme-ov-file#props

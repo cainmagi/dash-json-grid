@@ -1,0 +1,72 @@
+---
+id: sanitize_list_index
+title: sanitize_list_index
+sidebar_label: sanitize_list_index
+slug: /apis/mixins/sanitize_list_index
+description: 尝试确保某下标index的类型为int。
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+import vsiCheckIcon from "@iconify-icons/codicon/check";
+
+import InlineIcon from "@site/src/components/InlineIcon";
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="func" isPrivate={true} source="mixins.sanitize_list_index" />
+
+```python
+index: int = sanitize_list_index(index: Any)
+```
+
+尝试确保某下标`index`的类型为`int`。若失败，抛出`ValueError`。
+
+## 参数 {#arguments}
+
+### 输入 {#requires}
+
+|  参数   | 类型  |               必选                | <center>说明</center> |
+| :-----: | :---: | :-------------------------------: | --------------------- |
+| `index` | `Any` | <InlineIcon icon={vsiCheckIcon}/> | 要处理的值。          |
+
+### 输出 {#returns}
+
+|  参数   | 类型  | <center>说明</center> |
+| :-----: | :---: | :-------------------- |
+| `index` | `int` | 处理后的`index`。     |
+
+## 范例 {#examples}
+
+### <IconObjType type="term"/> 可靠化处理某下标值 {#-sanitize-an-index}
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="sanitize_an_index.py" showLineNumbers
+from dash_json_grid.mixins import sanitize_list_index
+
+
+print(repr(1), repr(sanitize_list_index(1)))
+print(repr("10"), repr(sanitize_list_index("10")))
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+```python
+1 1
+'10' 10
+```
+
+</TabItem>
+
+</Tabs>

@@ -1,0 +1,59 @@
+{
+  "tutorial": [
+    "introduction",
+    "tutorial/install",
+    {
+      "type": "category",
+      "label": "Usages",
+      "collapsed": false,
+      "link": {
+        "type": "generated-index",
+        "title": "How to use DashJsonGrid",
+        "slug": "/category/usages",
+        "description": "Simple guides for showing the basic usages of this component."
+      },
+      "items": [
+        "tutorial/usages/data",
+        "tutorial/usages/theme",
+        "tutorial/usages/search-and-select"
+      ]
+    },
+    "tutorial/examples",
+    "license"
+  ],
+  "apis": [
+    "api-overview",
+    {
+      "type": "category",
+      "label": "mixins",
+      "collapsed": true,
+      "link": {
+        "type": "doc",
+        "id": "apis/mixins/index"
+      },
+      "items": [
+        "apis/mixins/Route",
+        "apis/mixins/is_sequence",
+        "apis/mixins/sanitize_list_index",
+        "apis/mixins/get_item_of_object",
+        "apis/mixins/set_item_of_object",
+        "apis/mixins/pop_item_of_object",
+        "apis/mixins/MixinDataRoute",
+        "apis/mixins/MixinFile"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "typehints",
+      "collapsed": true,
+      "link": {
+        "type": "doc",
+        "id": "apis/typehints/index"
+      },
+      "items": [
+        "apis/typehints/ThemeConfigs"
+      ]
+    },
+    "apis/DashJsonGrid"
+  ]
+}

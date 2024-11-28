@@ -1,0 +1,58 @@
+---
+id: MixinFile
+title: MixinFile
+sidebar_label: MixinFile
+slug: /apis/mixins/MixinFile
+description: Mixin of providing file loading functionalities.
+---
+
+import vsiCheckIcon from "@iconify-icons/codicon/check";
+
+import InlineIcon from "@site/src/components/InlineIcon";
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="class" isMixin={true} source="mixins.MixinFile" />
+
+```python
+mixin = MixinFile()
+```
+
+Mixin of providing file loading functionalities.
+
+## Methods
+
+### <IconObjType type="method"/> `from_str`
+
+```python
+mixin = MixinFile.from_str(json_string: str, *args, **kwargs)
+```
+
+`from_str` is a class method, returning the instance created by this method.
+
+Use a JSON string to initialize the component.
+
+If using this method, users should leave the argument `data` blank because
+this method will load `json_string` and pass it to the `data` argument.
+
+To find more details about the arguments, see
+[`DashJsonGrid`](../DashJsonGrid.mdx#-from_str).
+
+---
+
+### <IconObjType type="method"/> `from_file`
+
+```python
+mixin = MixinFile.from_file(
+    json_file: str | os.PathLike | IO[str], *args, **kwargs
+)
+```
+
+`from_file` is a class method, returning the instance created by this method.
+
+Use a JSON file to initialize the component.
+
+If using this method, users should leave the argument `data` blank because
+this method will load `json_file` and pass it to the `data` argument.
+
+To find more details about the arguments, see
+[`DashJsonGrid`](../DashJsonGrid.mdx#-from_file).

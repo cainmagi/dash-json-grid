@@ -26,7 +26,8 @@ const sidebars: SidebarsConfig = {
         type: "generated-index",
         title: "How to use DashJsonGrid",
         slug: "/category/usages",
-        description: "Simple guides for showing the basic usages of this component.",
+        description:
+          "Simple guides for showing the basic usages of this component.",
       },
       items: [
         "tutorial/usages/data",
@@ -34,7 +35,16 @@ const sidebars: SidebarsConfig = {
         "tutorial/usages/search-and-select",
       ],
     },
-    "tutorial/examples",
+    {
+      type: "category",
+      label: "Examples",
+      collapsed: true,
+      link: {
+        type: "doc",
+        id: "tutorial/examples/index",
+      },
+      items: ["tutorial/examples/editor"],
+    },
     "license",
   ],
 
@@ -69,7 +79,7 @@ const sidebars: SidebarsConfig = {
       },
       items: ["apis/typehints/ThemeConfigs"],
     },
-    "apis/DashJsonGrid"
+    "apis/DashJsonGrid",
   ],
 };
 

@@ -1,0 +1,78 @@
+---
+id: is_sequence
+title: is_sequence
+sidebar_label: is_sequence
+slug: /apis/mixins/is_sequence
+description: Check whether val is a sequence or not.
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+import vsiCheckIcon from "@iconify-icons/codicon/check";
+
+import InlineIcon from "@site/src/components/InlineIcon";
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="func" isPrivate={true} source="mixins.is_sequence" />
+
+```python
+flag: TypeGuard[Sequence[Any]] = is_sequence(val: Any)
+```
+
+Check whether `val` is a sequence or not.
+
+## Arguments
+
+### Requires
+
+| Argument | Type  |             Required              | <center>Description</center> |
+| :------: | :---: | :-------------------------------: | ---------------------------- |
+|  `val`   | `Any` | <InlineIcon icon={vsiCheckIcon}/> | The value to be verified.    |
+
+### Returns
+
+| Argument |  Type  | <center>Description</center>                              |
+| :------: | :----: | :-------------------------------------------------------- |
+|  `flag`  | `bool` | If this value is `True`, `val` is a sequence, vice versa. |
+
+## Examples
+
+### <IconObjType type="term"/> Check whether an object is a sequence or not
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: 'Codes', value: 'codes', },
+    { label: 'Results', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="check_is_sequence.py" showLineNumbers
+from dash_json_grid.mixins import is_sequence
+
+
+print(is_sequence(1))
+print(is_sequence([1]))
+print(is_sequence({"d": 1}))
+print(is_sequence({"d": 1}.keys()))
+print(is_sequence(tuple({"d": 1}.keys())))
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+```python
+False
+True
+False
+False
+True
+```
+
+</TabItem>
+
+</Tabs>

@@ -1,0 +1,478 @@
+---
+id: DashJsonGrid
+title: DashJsonGrid
+sidebar_label: DashJsonGrid
+slug: /apis/DashJsonGrid
+description: DashJsonGrid组件是对React项目react-json-grid/JSONGrid的Dash移植版。
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import IconExternalLink from "@theme/Icon/ExternalLink";
+
+import vsiCheckIcon from "@iconify-icons/codicon/check";
+import {biSlashLg} from "@site/src/components/icons/BiSlashLg";
+
+import InlineIcon from "@site/src/components/InlineIcon";
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="class" isComponent={true} source="DashJsonGrid" />
+
+```python
+comp = DashJsonGrid(
+    id: str | Mapping,
+    class_name: str,
+    style: Mapping,
+    data: Any,
+    default_expand_depth: int,
+    default_expand_key_tree: Mapping,
+    selected_path: list ,
+    highlight_selected: bool,
+    search_text: str,
+    theme: str | ThemeConfigs,
+    loading_state: LoadingState
+)
+```
+
+`DashJsonGrid`组件是对React项目[`react-json-grid/JSONGrid`<IconExternalLink/>][link-jsongrid]的Dash移植版。
+
+该组件针对复杂、无固定结构、可序列化的JSON数据，提供了网格视图可视化。
+
+## 组件属性 {#component-properties}
+
+<Tabs
+  defaultValue="descriptions"
+  values={[
+    { label: '描述', value: 'descriptions', },
+    { label: '参数', value: 'properties', },
+  ]
+}>
+
+<TabItem value="descriptions">
+
+|           名称            |                                 类型                                 | <center>说明</center>                                                                                                                    |
+| :-----------------------: | :------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------- |
+|           `id`            |                      `str \| Mapping[str, Any]`                      | 组件ID。若设置为字典，则该ID用于[模式匹配callback :book:][dash-pmcallback].                                                          |
+|       `class_name`        |                                `str`                                 | 组件的CSS类。使用` `分隔不同的类。                                                                                                     |
+|          `style`          |                         `Mapping[str, str]`                          | 组件的CSS样式。这些样式用于覆盖组件容器的默认样式。.                                                                                   |
+|          `data`           |                                `Any`                                 | 用来转换成网格视图的数据，其支持JSON序列化。                                                                                           |
+|  `default_expand_depth`   |                                `int`                                 | 无用户交互时，默认状态下网格展开的深度。                                                                                                 |
+| `default_expand_key_tree` |                         `Mapping[Any, Any]`                          | 需要展开的所有关键字，这些关键字定义成树状结构，且只能在`data`是映射（`Mapping`）的情况下生效。                                          |
+|      `selected_path`      |                                `list`                                | 用来表示当前选中元素的路由，该路由是按顺序排列的下标组成的序列，其中最后一个值可以是一个只含单值的列表，以表示选中的是表格、或表格的列。 |
+|   `highlight_selected`    |                                `bool`                                | 用来控制是否允许被选中的区域高亮。禁用该值会阻止由用户选择发出的 callback。                                                              |
+|       `search_text`       |                                `str`                                 | 用来在JSON数据中搜索、高亮数据时，进行快速查询的关键字。                                                                               |
+|          `theme`          | <code>{`str \| `}[ThemeConfigs](./typehints/ThemeConfigs.mdx)</code> | 主题名称、或包含主题详细信息的字典。                                                                                                     |
+|      `loading_state`      |         [`LoadingState`<IconExternalLink/>][link-loadstate]          | Dash的加载状态字典。用户不应手动设置该值。                                                                                              |
+
+</TabItem>
+
+<TabItem value="properties">
+
+|           名称            |                                 类型                                 |              可交互               |              可设置               |               必选                |             默认值             |
+| :-----------------------: | :------------------------------------------------------------------: | :-------------------------------: | :-------------------------------: | :-------------------------------: | :----------------------------: |
+|           `id`            |                      `str \| Mapping[str, Any]`                      |                                   |                                   |                                   |           undefined            |
+|       `class_name`        |                                `str`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
+|          `style`          |                         `Mapping[str, str]`                          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
+|          `data`           |                                `Any`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> | <InlineIcon icon={vsiCheckIcon}/> | <InlineIcon icon={biSlashLg}/> |
+|  `default_expand_depth`   |                                `int`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |              `0`               |
+| `default_expand_key_tree` |                         `Mapping[Any, Any]`                          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
+|      `selected_path`      |                                `list`                                | <InlineIcon icon={vsiCheckIcon}/> |                                   |                                   |              `[]`              |
+|   `highlight_selected`    |                                `bool`                                |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |             `True`             |
+|       `search_text`       |                                `str`                                 |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
+|          `theme`          | <code>{`str \| `}[ThemeConfigs](./typehints/ThemeConfigs.mdx)</code> |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |          `"default"`           |
+|      `loading_state`      |         [`LoadingState`<IconExternalLink/>][link-loadstate]          |                                   | <InlineIcon icon={vsiCheckIcon}/> |                                   |           undefined            |
+
+- “可交互”指的是，用户交互可以改变该属性、并触发callback。
+- “可设置”指的是，透过callback的`Output(...)`修改该值会产生实际效果。
+- “必选”指的是，初始化组件时，必须向组件传递值，否则组件无法初始化。
+
+</TabItem>
+
+</Tabs>
+
+## 方法 {#methods}
+
+### <IconObjType type="method"/> `compare_routes` {#-compare_routes}
+
+```python
+flag: bool = mixin.compare_routes(route_1: Route, route_2: Route)
+```
+
+比对两个不同的路由，其中[`Route`](./mixins/Route.mdx)数据类型的参数即`selected_path`的值。
+
+交换输入参数的位置，比对结果不变。该方法可以检测`route_1`和`route_2`是否指向同一位置。
+
+#### 输入 {#requires}
+
+|                                             参数                                              |             类型              |               必选                | <center>说明</center>                                                                                                                                     |
+| :-------------------------------------------------------------------------------------------: | :---------------------------: | :-------------------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <div style={{marginBottom: "1rem"}}><code>route_1</code></div><div><code>route_2</code></div> | [`Route`](./mixins/Route.mdx) | <InlineIcon icon={vsiCheckIcon}/> | `selected_path`触发callback时提供的路由。各元素为按照路由的先后次序排列的下标。末位元素可能是一个单元素序列，以用来表示被选中的区域是表格、或表格的列。 |
+
+#### 输出 {#returns}
+
+|  参数  |  类型  | <center>说明</center>                                        |
+| :----: | :----: | :----------------------------------------------------------- |
+| `flag` | `bool` | 二值量。取`True`时，表示`route_1`和`route_2`指向的位置相同。 |
+
+---
+
+### <IconObjType type="method"/> `get_data_by_route` {#-get_data_by_route}
+
+```python
+data_selected: Any = mixin.get_data_by_route(data: Any, route: Route)
+```
+
+透过某路由来获得其对应的区域的部分数据。
+
+#### 输入 {#requires-1}
+
+|  参数   |             类型              |               必选                | <center>说明</center>                                                                                                           |
+| :-----: | :---------------------------: | :-------------------------------: | ------------------------------------------------------------------------------------------------------------------------------- |
+| `data`  |             `Any`             | <InlineIcon icon={vsiCheckIcon}/> | 用来进行路由的完整数据。                                                                                                        |
+| `route` | [`Route`](./mixins/Route.mdx) | <InlineIcon icon={vsiCheckIcon}/> | 用来定位`data`数据的某一特定部分的路由，由数据各级下标构成。若末位元素`route`定位到表格的列，则输出由列中的每个元素构成的序列。 |
+
+#### 输出 {#returns-1}
+
+|      参数       | 类型  | <center>说明</center>     |
+| :-------------: | :---: | :------------------------ |
+| `data_selected` | `Any` | 由`route`选中的部分数据。 |
+
+---
+
+### <IconObjType type="method"/> `update_data_by_route` {#-update_data_by_route}
+
+```python
+data: Any = mixin.update_data_by_route(data: Any, route: Route, val: Any)
+```
+
+按照路由定位数据的某一部分、并更新该部分的值。
+
+设若更新失败（譬如，数据被设置成不可变的情况下），则抛出`ValueError`。
+
+#### 输入 {#requires-2}
+
+|  参数   |             类型              |               必选                | <center>说明</center>                                                                                                                       |
+| :-----: | :---------------------------: | :-------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data`  |             `Any`             | <InlineIcon icon={vsiCheckIcon}/> | 将要更新的完整数据。                                                                                                                        |
+| `route` | [`Route`](./mixins/Route.mdx) | <InlineIcon icon={vsiCheckIcon}/> | 用来定位`data`数据的某一特定部分的路由，由数据各级下标构成。若末位元素`route`定位到表格的列，则透过广播更新列中的每个元素。                 |
+|  `val`  |             `Any`             | <InlineIcon icon={vsiCheckIcon}/> | 更新给定数据的某一部分时，用来替换原数据的新值。若将要更新的数据是表格列，该`val`值可以被广播到列的各个值上。若广播失败，抛出`IndexError`。 |
+
+#### 输出 {#returns-2}
+
+|  参数  | 类型  | <center>说明</center>                                                                            |
+| :----: | :---: | :----------------------------------------------------------------------------------------------- |
+| `data` | `Any` | 更新后的`data`。由于`data`本身是可变的，即使这个返回值没有被实际用到，对数据的修改依然是有效的。 |
+
+---
+
+### <IconObjType type="method"/> `delete_data_by_route` {#-delete_data_by_route}
+
+```python
+data_selected: Any = mixin.delete_data_by_route(data: Any, route: Route)
+```
+
+按照路由定位数据的某一部分、并删除该部分的值。
+
+设若删除失败（譬如，数据被设置成不可变的情况下），则抛出`ValueError`。
+
+#### 输入 {#requires-3}
+
+|  参数   |             类型              |               必选                | <center>说明</center>                                                                                                                 |
+| :-----: | :---------------------------: | :-------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `data`  |             `Any`             | <InlineIcon icon={vsiCheckIcon}/> | 将要修改的完整数据，其中被选中的部分会被删除。                                                                                        |
+| `route` | [`Route`](./mixins/Route.mdx) | <InlineIcon icon={vsiCheckIcon}/> | 用来定位`data`数据的某一特定部分的路由，由数据各级下标构成。若末位元素`route`定位到表格的列，则移除并弹出由列中的每个元素构成的序列。 |
+
+#### 输出 {#returns-3}
+
+|      参数       | 类型  | <center>说明</center>        |
+| :-------------: | :---: | :--------------------------- |
+| `data_selected` | `Any` | 被删除并从数据中弹出的部分。 |
+
+---
+
+### <IconObjType type="method"/> `from_str` {#-from_str}
+
+```python
+comp = DashJsonGrid.from_str(json_string: str, *args, **kwargs)
+```
+
+`from_str`是类方法，该方法初始化并返回一个实例。
+
+使用JSON格式的字符串以初始化该组件。
+
+使用该方法时，参数`data`需要留空，该方法会透过载入`json_string`将值传递给参数`data`。
+
+#### 输入 {#requires-4}
+
+|       参数        | 类型  |               必选                | <center>说明</center>                                                                                        |
+| :---------------: | :---: | :-------------------------------: | ------------------------------------------------------------------------------------------------------------ |
+|   `json_string`   | `str` | <InlineIcon icon={vsiCheckIcon}/> | 由JSON数据编码的字符串。                                                                                   |
+| `*args, **kwargs` | `...` |  <InlineIcon icon={biSlashLg}/>   | 与初始化的参数相同，参见[组件属性](#component-properties)。唯一例外的是`data`，因为`json_string`取代了该值。 |
+
+#### 输出 {#returns-4}
+
+|  参数  |      类型      | <center>说明</center>                                           |
+| :----: | :------------: | :-------------------------------------------------------------- |
+| `comp` | `DashJsonGrid` | 由`json_string`初始化的组件，其他的细节和常规初始化的组件相同。 |
+
+---
+
+### <IconObjType type="method"/> `from_file` {#-from_file}
+
+```python
+comp = DashJsonGrid.from_file(
+    json_file: str | os.PathLike | IO[str], *args, **kwargs
+)
+```
+
+`from_file`是类方法，该方法初始化并返回一个实例。
+
+使用JSON文件以初始化该组件。
+
+使用该方法时，参数`data`需要留空，该方法会透过载入`json_file`将值传递给参数`data`。
+
+#### 输入 {#requires-5}
+
+|       参数        |              类型               |               必选                | <center>说明</center>                                                                                                                                                           |
+| :---------------: | :-----------------------------: | :-------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|    `json_file`    | `str \| os.PathLike \| IO[str]` | <InlineIcon icon={vsiCheckIcon}/> | <p>设若给定的参数类型是<code>str \| os.PathLike</code>，该参数将作为载入文件的路径，文件内容载入为传入数据。</p><p>设若该值是<code>IO[str]</code>，则直接载入该类文件对象。</p> |
+| `*args, **kwargs` |              `...`              |  <InlineIcon icon={biSlashLg}/>   | 与初始化的参数相同，参见[组件属性](#component-properties)。唯一例外的是`data`，因为`json_file`取代了该值。                                                                      |
+
+#### 输出 {#returns-5}
+
+|  参数  |      类型      | <center>说明</center>                                         |
+| :----: | :------------: | :------------------------------------------------------------ |
+| `comp` | `DashJsonGrid` | 由`json_file`初始化的组件，其他的细节和常规初始化的组件相同。 |
+
+## 范例 {#examples}
+
+### <IconObjType type="term"/> 以路由定位值 {#-locate-the-value-by-a-route}
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="get_data_by_route.py" showLineNumbers
+import pprint
+from dash_json_grid import DashJsonGrid
+
+data = {
+    "id": "0001",
+    "type": "donut",
+    "name": "Cake",
+    "ppu": 1111.55,
+    "batters": {
+        "batter": [
+            {"id": "1001", "type": "Regular"},
+            {"id": "1002", "type": "Chocolate"},
+            {"id": "1003", "type": "Blueberry"},
+            {"id": "1004", "type": "Devil's Food"},
+        ]
+    },
+    "topping": [
+        {"id": "5001", "type": "None"},
+        {"id": "5002", "type": "Glazed"},
+        {"id": "5005", "type": "Sugar"},
+        {"id": "5007", "type": "Powdered Sugar"},
+        {"id": "5006", "type": "Chocolate with Sprinkles"},
+        {"id": "5003", "type": "Chocolate"},
+        {"id": "5004", "type": "Maple"},
+    ],
+}
+
+pprint.pprint(DashJsonGrid.get_data_by_route(data, ["batters", "batter", 0, "id"]))
+pprint.pprint(DashJsonGrid.get_data_by_route(data, ["batters", "batter", 0, ["id"]]))
+pprint.pprint(DashJsonGrid.get_data_by_route(data, ["batters", "batter", ["id"]]))
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+```python
+'1001'
+'1001'
+('1001', '1002', '1003', '1004')
+```
+
+</TabItem>
+
+</Tabs>
+
+### <IconObjType type="term"/> 以路由更新表格的列/行 {#-update-a-table-columnrow-by-a-route}
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="update_data_by_route.py" showLineNumbers
+import pprint
+from dash_json_grid import DashJsonGrid
+
+data = [
+    {"key1": 1, "key2": "str"},
+    {"key1": True, "key2": None},
+    {"key1": 3.0},
+    {"key1": False, "key2": None, "key3": 4.0},
+    {"key5": "?"},
+]
+
+pprint.pprint(DashJsonGrid.update_data_by_route(data, [["key3"]], 1))
+pprint.pprint(DashJsonGrid.update_data_by_route(data, [0], {"only": "test2"}))
+pprint.pprint(DashJsonGrid.update_data_by_route(data, [["key5"]], {4: "NEW-Key5Val"}))
+pprint.pprint(DashJsonGrid.update_data_by_route(data, [["key5"]], "Update-all"))
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+```python
+[{'key1': 1, 'key2': 'str', 'key3': 1},
+ {'key1': True, 'key2': None, 'key3': 1},
+ {'key1': 3.0, 'key3': 1},
+ {'key1': False, 'key2': None, 'key3': 1},
+ {'key3': 1, 'key5': '?'}]
+[{'only': 'test2'},
+ {'key1': True, 'key2': None, 'key3': 1},
+ {'key1': 3.0, 'key3': 1},
+ {'key1': False, 'key2': None, 'key3': 1},
+ {'key3': 1, 'key5': '?'}]
+[{'only': 'test2'},
+ {'key1': True, 'key2': None, 'key3': 1},
+ {'key1': 3.0, 'key3': 1},
+ {'key1': False, 'key2': None, 'key3': 1},
+ {'key3': 1, 'key5': 'NEW-Key5Val'}]
+[{'key5': 'Update-all', 'only': 'test2'},
+ {'key1': True, 'key2': None, 'key3': 1, 'key5': 'Update-all'},
+ {'key1': 3.0, 'key3': 1, 'key5': 'Update-all'},
+ {'key1': False, 'key2': None, 'key3': 1, 'key5': 'Update-all'},
+ {'key3': 1, 'key5': 'Update-all'}]
+```
+
+</TabItem>
+
+</Tabs>
+
+### <IconObjType type="term"/> 以路由删除表格的列/行 {#-delete-a-table-columnrow-by-a-route}
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="delete_data_by_route.py" showLineNumbers
+import pprint
+from dash_json_grid import DashJsonGrid
+
+data = [
+    {"key1": 1, "key2": "str"},
+    {"key1": True, "key2": None},
+    {"key1": 3.0},
+    {"key1": False, "key2": None, "key3": 4.0},
+    {"key5": "?"},
+]
+
+pprint.pprint(DashJsonGrid.delete_data_by_route(data, [["key3"]]))
+pprint.pprint(data)
+pprint.pprint(DashJsonGrid.delete_data_by_route(data, [0]))
+pprint.pprint(data)
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+```python
+OrderedDict({3: 4.0})
+[{'key1': 1, 'key2': 'str'},
+ {'key1': True, 'key2': None},
+ {'key1': 3.0},
+ {'key1': False, 'key2': None},
+ {'key5': '?'}]
+{'key1': 1, 'key2': 'str'}
+[{'key1': True, 'key2': None},
+ {'key1': 3.0},
+ {'key1': False, 'key2': None},
+ {'key5': '?'}]
+```
+
+</TabItem>
+
+</Tabs>
+
+### <IconObjType type="term"/> 检查路由是否合乎期望 {#-check-whether-a-route-is-as-expectation}
+
+```python title="callback_compare_routes.py" showLineNumbers
+@app.callback(
+    Output(...),
+    Input("grid", "selected_path")  # "grid"是DashJsonGrid组件
+)
+def check_route(route):
+    if DashJsonGrid.compare_routes(route, [1, "new", ["column"]]):
+        # 当且仅当[1, "new", ["column"]]时，进行某些处理
+        ...
+```
+
+### <IconObjType type="term"/> 获取选中的数据 {#-get-the-selected-data}
+
+```python title="callback_get_selected.py" showLineNumbers
+@app.callback(
+    Output(...),
+    Input("grid", "selected_path"),  # "grid"是DashJsonGrid组件
+    State("grid", "data")
+)
+def show_data(route, data):
+    data_part = DashJsonGrid.get_data_by_route(data, route)
+    ...
+```
+
+### <IconObjType type="term"/> 修改选中的数据 {#-modify-the-selected-data}
+
+```python title="callback_modify_selected.py" showLineNumbers
+@app.callback(
+    Output("grid", "data"),  # "grid"是DashJsonGrid组件
+    Input("grid", "selected_path"),
+    State("grid", "data")
+)
+def modify_data(route, data):
+    data_part = DashJsonGrid.get_data_by_route(data, route)
+    modified_part = ...  # 做一些修改
+    DashJsonGrid.update_data_by_route(data, route, modified_part)
+    return data
+    ...
+```
+
+### <IconObjType type="term"/> 删除选中的数据 {#-delete-the-selected-data}
+
+```python title="callback_delete_selected.py" showLineNumbers
+@app.callback(
+    Output("grid", "data"),  # "grid"是DashJsonGrid组件
+    Input("grid", "selected_path"),
+    State("grid", "data")
+)
+def delete_data(route, data):
+    deleted_part = DashJsonGrid.delete_data_by_route(data, route)
+    # deleted_part是从完整数据中移除的部分
+    return data
+```
+
+[link-jsongrid]: https://github.com/RedHeadphone/react-json-grid?tab=readme-ov-file#props
+[link-loadstate]: https://dash.plotly.com/loading-states

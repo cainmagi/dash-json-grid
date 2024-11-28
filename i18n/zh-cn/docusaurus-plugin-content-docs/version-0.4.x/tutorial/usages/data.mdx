@@ -1,0 +1,408 @@
+---
+id: data
+sidebar_label: 设置数据
+title: 设置JSON数据
+description: 介绍DashJsonGrid支持的各种数据渲染方式。
+slug: /usages/data
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import IconExternalLink from "@theme/Icon/ExternalLink";
+
+import ViewOnlyDemoApp from "@site/src/demo/ViewOnly";
+
+# 设置JSON数据
+
+本模块包只包含一个单独的组件`DashJsonGrid`。以下最小范例展示了如何上手使用该组件：
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="minimal_example.py" showLineNumbers
+import dash
+import dash_json_grid as djg
+
+
+app = dash.Dash("demo")
+app.layout = djg.DashJsonGrid(
+    # highlight-next-line
+    data=1
+)
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+Dash应用应当呈现出以下结果：
+
+<ViewOnlyDemoApp data={1} theme="default" />
+
+</TabItem>
+
+</Tabs>
+
+## 数据整理 {#sanitization}
+
+只需简单修改`DashJsonGrid`的参数`data`，即可观察到以下效果：
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data=[1]
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+Dash应用应当呈现出以下结果：
+
+<ViewOnlyDemoApp data={1} theme="default" />
+
+</TabItem>
+
+</Tabs>
+
+可以确认，相比上面的最小范例，此处的结果并未有任何变化。这是因为，所有传入`data`、却又不属于[序列（`Sequence`）<IconExternalLink/>][link-sequence]抑或[映射（`Mapping`）<IconExternalLink/>][link-mapping]的字面量，都会被自动转换成一个只含单元素的序列。换言之，`data=1`会被隐式整理为`data=[1]`。
+
+:::tip
+
+Dash 不会自动将一个定制的类序列化（serialize）。因此，如果`data`的结构中需要包含了定制类型的数据，建议将这些数据转换成`str`类型。
+
+:::
+
+## 渲染一个序列 {#render-a-sequence}
+
+下例修改了`data`参数，并渲染了一个序列。
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data=[1, 2.0, "3", None, True]
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+Dash应用应当呈现出以下结果：
+
+<ViewOnlyDemoApp data={[1, 2.0, "3", null, true]} theme="default" />
+
+</TabItem>
+
+</Tabs>
+
+包含字面量或没有固定结构值的序列、会被渲染成纵向展开的列表。其中第一列显示序列下标、第二列显示序列的值。
+
+## 渲染一个映射 {#render-a-mapping}
+
+下例修改了`data`参数，并渲染了一个映射。
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data={"key1": 1, "key2": "str", "key3": True, "key4": None}
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+Dash应用应当呈现出以下结果：
+
+<ViewOnlyDemoApp
+  data={{key1: 1, key2: "str", key3: true, key4: null}}
+  theme="default"
+/>
+
+</TabItem>
+
+</Tabs>
+
+不属于表格成员的映射、会被渲染成纵向展开的列表。其中第一行代表映射关键字，第二行代表映射的值。
+
+## 渲染一张表格 {#render-a-table}
+
+下例修改了`data`参数，并渲染了一张表格。
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data=[
+        {"key1": 1, "key2": "str"},
+        {"key1": True, "key2": None},
+        {"key1": 3.0},
+        {"key1": False, "key2": None, "key3": 4.0},
+        {"key5": "?"},
+    ]
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+Dash应用应当呈现出以下结果：
+
+<ViewOnlyDemoApp
+  data={[
+    {key1: 1, key2: "str"},
+    {key1: true, key2: null},
+    {key1: 3.0},
+    {key1: false, key2: null, key3: 4.0},
+    {key5: "?"},
+  ]}
+  theme="default"
+/>
+
+</TabItem>
+
+</Tabs>
+
+当检查到一个序列（`Sequence`）所有的成员都是映射（`Mapping`）类型时，该序列会被渲染成一张表格，而非将序列本身渲染成带下标的列表的同时、将序列成员渲染成关键字列表。
+
+表格的下标、对应了序列的下标。而表格的列名，对应的是序列中所有成员关键字的[并集（`union`）<IconExternalLink/>][link-union]。设若某行的数据中不存在某个关键字，对应的值将会被标记为未定义（`undefined`）。
+
+## 渲染复杂、结构化的多级数据 {#render-the-complicated-nested-and-multi-level-data}
+
+下例展示了渲染复杂数据的效果。所用的多级数据中，表格、序列、和映射相互随意嵌套。`DashJsonGrid`能自动检查出如何妥善地渲染各级数据，从而帮助用户摆脱了手动将数据处理成多级HTML组件的繁琐过程。
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data={
+        "literal": 1,
+        "sequence": [1, 2.0, "3", None, True],
+        "mapping": {"key1": 1, "key2": "str", "key3": True, "key4": None},
+        "table": [
+            {"key1": 1, "key2": "str"},
+            {"key1": True, "key2": None},
+            {"key1": 3.0},
+            {"key1": False, "key2": None, "key3": 4.0},
+            {"key5": "?"},
+        ],
+        "not-a-table": [
+            {"val1": 1},
+            2.0,
+            ["a", "b", "c"],
+            [{"key1": ["a"], "key2": 2, "key3": {"val1": True}}],
+            [{"key3": 1}],
+        ],
+    }
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+Dash应用应当呈现出以下结果：
+
+<ViewOnlyDemoApp
+  data={{
+    literal: 1,
+    sequence: [1, 2.0, "3", null, true],
+    mapping: {key1: 1, key2: "str", key3: true, key4: null},
+    table: [
+      {key1: 1, key2: "str"},
+      {key1: true, key2: null},
+      {key1: 3.0},
+      {key1: false, key2: null, key3: 4.0},
+      {key5: "?"},
+    ],
+    "not-a-table": [
+      {val1: 1},
+      2.0,
+      ["a", "b", "c"],
+      [{key1: ["a"], key2: 2, key3: {val1: true}}],
+      [{key3: 1}],
+    ],
+  }}
+  theme="default"
+/>
+
+</TabItem>
+
+</Tabs>
+
+### 展开数据的一部分 {#expand-a-part-of-the-data}
+
+处理形如上例中的复杂`data`属性时，有可能需要默认展开其中的一小部分。下例展示了如何透过属性`default_expand_key_tree`设置这种部分展开的特性：
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python showLineNumbers
+...
+app.layout = djg.DashJsonGrid(
+    data=...,
+    default_expand_key_tree={"not-a-table": {"2": True}}
+)
+...
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+Dash应用应当呈现出以下结果：
+
+<ViewOnlyDemoApp
+  data={{
+    literal: 1,
+    sequence: [1, 2.0, "3", null, true],
+    mapping: {key1: 1, key2: "str", key3: true, key4: null},
+    table: [
+      {key1: 1, key2: "str"},
+      {key1: true, key2: null},
+      {key1: 3.0},
+      {key1: false, key2: null, key3: 4.0},
+      {key5: "?"},
+    ],
+    "not-a-table": [
+      {val1: 1},
+      2.0,
+      ["a", "b", "c"],
+      [{key1: ["a"], key2: 2, key3: {val1: true}}],
+      [{key3: 1}],
+    ],
+  }}
+  defaultExpandKeyTree={{"not-a-table": {"2": true}}}
+  theme="default"
+/>
+
+</TabItem>
+
+</Tabs>
+
+注意`default_expand_key_tree`的叶子节点需要是二值量。设置为`True`的叶子节点，将展开对应的路由。
+
+## 其他初始化组件的方法 {#alternative-initializations}
+
+在初始化组件的时候，数据还可以通过另外两种方式传递给组件。
+
+<Tabs
+  defaultValue="str"
+  values={[
+    { label: '透过字符串', value: 'str', },
+    { label: '透过文件', value: 'file', },
+  ]
+}>
+
+<TabItem value="str">
+
+用户还可以用JSON字符串初始化组件：
+
+```python
+app.layout = dash_json_grid.DashJsonGrid.from_str(
+    json_string: str, ...
+)
+```
+
+使用该方法时，第一个参数`json_string`需要是可以被JSON解码的字符串。并且，参数`data`不可设置。
+
+</TabItem>
+
+<TabItem value="file">
+
+还可以直接使用JSON文件来初始化组件：
+
+```python
+app.layout = dash_json_grid.DashJsonGrid.from_file(
+    json_file: str | os.PathLike | IO[str], ...
+)
+```
+
+使用该方法时，第一个参数`json_file`可以是指向JSON文件的路径、或者类文件对象。并且，参数`data`不可设置。
+
+</TabItem>
+
+</Tabs>
+
+:::warning
+
+使用上述初始化时，`json_string`以及`json_file`会被自动转换为`data`。因此，`json_string`或`json_file`不可作为 callback 访问的组件属性。
+
+:::
+
+[link-sequence]: https://docs.python.org/zh-cn/3/library/stdtypes.html#sequence-types-list-tuple-range
+[link-mapping]: https://docs.python.org/zh-cn/3/library/stdtypes.html#mapping-types-dict
+[link-union]: https://docs.python.org/zh-cn/3/library/stdtypes.html#frozenset.union

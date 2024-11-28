@@ -1,0 +1,364 @@
+---
+id: search-and-select
+sidebar_label: 搜索和选择
+title: 搜索和选择数据
+description: 介绍如何传递参数给数据检索、以及如何获取被选中的数据。
+slug: /usages/search-and-select
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import IconExternalLink from "@theme/Icon/ExternalLink";
+
+import {
+  getDemoData,
+  SearchOnlyApp,
+  SelectableOnlyApp,
+  OnSelectApp,
+} from "@site/src/demo/InteractiveApps";
+
+# 搜索和选择数据
+
+接下来的指南展示了`DashJsonGrid`的交互功能。这些交互允许透过搜索关键字高亮数据，以及获取当前被用户选中的数据。
+
+为了节约篇幅，本章所用的范例中，都将数据预设为了以下值：
+
+```python title="data.py" showLineNumbers
+test_data = {
+    "id": "0001",
+    "type": "donut",
+    "name": "Cake",
+    "ppu": 1111.55,
+    "batters": {
+        "batter": [
+            {"id": "1001", "type": "Regular"},
+            {"id": "1002", "type": "Chocolate"},
+            {"id": "1003", "type": "Blueberry"},
+            {"id": "1004", "type": "Devil's Food"},
+        ]
+    },
+    "topping": [
+        {"id": "5001", "type": "None"},
+        {"id": "5002", "type": "Glazed"},
+        {"id": "5005", "type": "Sugar"},
+        {"id": "5007", "type": "Powdered Sugar"},
+        {"id": "5006", "type": "Chocolate with Sprinkles"},
+        {"id": "5003", "type": "Chocolate"},
+        {"id": "5004", "type": "Maple"},
+    ],
+}
+```
+
+## 搜索并高亮数据 {#search-and-highlight-data}
+
+下例透过[`dcc.Input`<IconExternalLink/>][link-dccinput]组件、设置了查询关键字、以搜索数据。所有搜索到的结果，都会高亮为特殊的样式。
+
+<Tabs
+  defaultValue="server"
+  values={[
+    { label: '普通callback', value: 'server', },
+    { label: '客户端callback', value: 'client', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="server">
+
+该实现基于普通的callback。
+
+```python title="search_and_highlight.py" showLineNumbers
+import dash
+from dash import dcc, html
+from dash import Output, Input
+import dash_json_grid as djg
+from data import test_data
+
+
+app = dash.Dash("demo")
+app.layout = html.Div(
+    children=(
+        dcc.Input(id="search", type="text", value=None),
+        djg.DashJsonGrid(
+            id="grid", data=test_data, search_text=None, default_expand_depth=2
+        ),
+    )
+)
+
+
+@app.callback(Output("grid", "search_text"), Input("search", "value"))
+def update_search(value):
+    if not value:
+        return None
+    return value
+
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="client">
+
+该实现基于[客户端callback<IconExternalLink/>][link-client]，其效率比寻常的callback更高，并能在服务器宕机的情况下、仍然正常工作。
+
+```python title="search_and_highlight_clientside.py" showLineNumbers
+import dash
+from dash import dcc, html
+from dash import Output, Input
+import dash_json_grid as djg
+from data import test_data
+
+
+app = dash.Dash("demo")
+app.layout = html.Div(
+    children=(
+        dcc.Input(id="search", type="text", value=None),
+        djg.DashJsonGrid(
+            id="grid", data=test_data, search_text=None, default_expand_depth=2
+        ),
+    )
+)
+
+app.clientside_callback(
+    """
+    function(val) {
+        return [null, undefined, ''].includes(val) ? undefined : val;
+    }
+    """,
+    Output("grid", "search_text"),
+    Input("search", "value"),
+)
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+Dash应用应当呈现出以下结果：
+
+<SearchOnlyApp data={getDemoData()} />
+
+</TabItem>
+
+</Tabs>
+
+:::tip
+
+本章的范例中，都添加了参数`default_expand_depth=2`。该参数令嵌套数据、在没有用户交互的默认情况下，渲染为展开到第二级。详情请参详[`DashJsonGrid`](../../apis/DashJsonGrid.mdx#component-properties)。
+
+:::
+
+:::info
+
+`search_text`是“仅可设置（set-only）”属性。这指的是，该属性只能被callback重新设置。组件本身无论如何都不会发起以该值为输入的callback。换言之，`search_text`仅能通过代码修改，不可被用户交互改变。
+
+:::
+
+## 控制组件的单击选择数据功能 {#toggle-the-selectable-option-of-the-component}
+
+可以通过属性控制组件、决定用户是否可以选中渲染出的数据。如果“可选择（selectable）”功能关闭，即使用户单击数据，数据也不会被选中。自然，这种情况下也**不会**发出任何callback。
+
+<Tabs
+  defaultValue="server"
+  values={[
+    { label: '普通callback', value: 'server', },
+    { label: '客户端callback', value: 'client', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="server">
+
+该实现基于普通的callback。
+
+```python title="selectable.py" showLineNumbers
+import dash
+from dash import dcc, html
+from dash import Output, Input
+import dash_json_grid as djg
+from data import test_data
+
+
+app = dash.Dash("demo")
+app.layout = html.Div(
+    children=(
+        dcc.Checklist(id="check", options=["Selectable"], value=["Selectable"]),
+        djg.DashJsonGrid(
+            id="grid", data=test_data, highlight_selected=True, default_expand_depth=2
+        ),
+    )
+)
+
+
+@app.callback(
+    Output("grid", "highlight_selected"), Input("check", "value")
+)
+def is_highlighted(val):
+    return isinstance(val, (list, tuple)) and "Selectable" in val
+
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="client">
+
+该实现基于[客户端callback<IconExternalLink/>][link-client]，其效率比寻常的callback更高，并能在服务器宕机的情况下、仍然正常工作。
+
+```python title="selectable_clientside.py" showLineNumbers
+import dash
+from dash import dcc, html
+from dash import Output, Input
+import dash_json_grid as djg
+from data import test_data
+
+
+app = dash.Dash("demo")
+app.layout = html.Div(
+    children=(
+        dcc.Checklist(id="check", options=["Selectable"], value=["Selectable"]),
+        djg.DashJsonGrid(
+            id="grid", data=test_data, highlight_selected=True, default_expand_depth=2
+        ),
+    )
+)
+
+app.clientside_callback(
+    """
+    function(val) {
+        return val?.includes && val.includes("Selectable");
+    }
+    """,
+    Output("grid", "highlight_selected"),
+    Input("check", "value"),
+)
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+Dash应用应当呈现出以下结果：
+
+<SelectableOnlyApp data={getDemoData()} />
+
+</TabItem>
+
+</Tabs>
+
+:::info
+
+`highlight_selected`是“仅可设置（set-only）”属性。这指的是，该属性只能被callback重新设置。组件本身无论如何都不会发起以该值为输入的callback。换言之，`highlight_selected`仅能通过代码修改，不可被用户交互改变。
+
+:::
+
+## 捕获选中的数据 {#catch-the-selected-data}
+
+可以透过callback捕获选中的值。每当有数据被选中时，组件属性`selected_path`都会发起一次callback。该属性用来标识当前被选中的值、在整个数据中的访问路径。用户可以定义callback来处理该值。
+
+<Tabs
+  defaultValue="server"
+  values={[
+    { label: '普通callback', value: 'server', },
+    { label: '客户端callback', value: 'client', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="server">
+
+该实现基于普通的callback。
+
+```python title="catch_selected.py" showLineNumbers
+import json
+import dash
+from dash import dcc, html
+from dash import Output, Input
+import dash_json_grid as djg
+from data import test_data
+
+
+app = dash.Dash("demo")
+app.layout = html.Div(
+    children=(
+        djg.DashJsonGrid(id="grid", data=test_data, default_expand_depth=2),
+        html.P(id="selected-path", children=None),
+    )
+)
+
+
+@app.callback(Output("selected-path", "children"), Input("grid", "selected_path"))
+def forward_selected_path(val):
+    return json.dumps(val)
+
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="client">
+
+该实现基于[客户端callback<IconExternalLink/>][link-client]，其效率比寻常的callback更高，并能在服务器宕机的情况下、仍然正常工作。
+
+```python title="catch_selected_clientside.py" showLineNumbers
+import dash
+from dash import dcc, html
+from dash import Output, Input
+import dash_json_grid as djg
+from data import test_data
+
+
+app = dash.Dash("demo")
+app.layout = html.Div(
+    children=(
+        djg.DashJsonGrid(id="grid", data=test_data, default_expand_depth=2),
+        html.P(id="selected-path", children=None),
+    )
+)
+
+app.clientside_callback(
+    """
+    function(val) {
+        return JSON.stringify(val);
+    }
+    """,
+    Output("selected-path", "children"),
+    Input("grid", "selected_path"),
+)
+
+if __name__ == "__main__":
+    app.run()
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+Dash应用应当呈现出以下结果：
+
+<OnSelectApp data={getDemoData()} />
+
+</TabItem>
+
+</Tabs>
+
+:::info
+
+`selected_path`是“仅可交互（interact-only）”属性。这指的是，该属性只能透过用户交互触发callback。相比之下，用形如`Output("grid", "selected_path")`的方法，透过callback更新该数据，将不会产生任何效果，亦即、不会改变被选中的数据。为了规避这种预期外的情况，用户不应透过[`dash.Output`<IconExternalLink/>][link-dashoutput]来修改`selected_path`。
+
+:::
+
+[link-client]: https://dash.plotly.com/clientside-callbacks
+[link-dccinput]: https://dash.plotly.com/dash-core-components/input
+[link-dashoutput]: https://dash.plotly.com/basic-callbacks

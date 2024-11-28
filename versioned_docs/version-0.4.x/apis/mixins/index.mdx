@@ -1,0 +1,37 @@
+---
+id: index
+title: mixins
+sidebar_label: mixins
+slug: /apis/mixins
+description: The mixins used for extending the functionalities of the automatically generated dash component.
+---
+
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="module" isPrivate={true} source="mixins" />
+
+The mixins used for extending the functionalities of the automatically generated dash
+component.
+
+## Typehints
+
+|                                Member                                 | <center>Description</center>                           |
+| :-------------------------------------------------------------------: | :----------------------------------------------------- |
+| [<IconObjType type="type" hasText={true} text="Route"/>](./Route.mdx) | The typehint of the route provided by `selected_path`. |
+
+## Functions
+
+|                                              Member                                               | <center>Description</center>                                                            |
+| :-----------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------- |
+|         [<IconObjType type="func" hasText={true} text="is_sequence"/>](./is_sequence.mdx)         | Check whether `val` is a sequence or not.                                               |
+| [<IconObjType type="func" hasText={true} text="sanitize_list_index"/>](./sanitize_list_index.mdx) | Try to ensure `index` to be a `int`.                                                    |
+|  [<IconObjType type="func" hasText={true} text="get_item_of_object"/>](./get_item_of_object.mdx)  | Run `data[index]` supposing that `data` is abitrary.                                    |
+|  [<IconObjType type="func" hasText={true} text="set_item_of_object"/>](./set_item_of_object.mdx)  | Run `data[index] = value` supposing that `data` is abitrary.                            |
+|  [<IconObjType type="func" hasText={true} text="pop_item_of_object"/>](./pop_item_of_object.mdx)  | Run `val = data[index]; del data[index]; return val` supposing that `data` is abitrary. |
+
+## Classes
+
+|                                          Member                                          | <center>Description</center>                     |
+| :--------------------------------------------------------------------------------------: | :----------------------------------------------- |
+| [<IconObjType type="class" hasText={true} text="MixinDataRoute"/>](./MixinDataRoute.mdx) | Mixin of providing data routing functionalities. |
+|      [<IconObjType type="class" hasText={true} text="MixinFile"/>](./MixinFile.mdx)      | Mixin of providing file loading functionalities. |

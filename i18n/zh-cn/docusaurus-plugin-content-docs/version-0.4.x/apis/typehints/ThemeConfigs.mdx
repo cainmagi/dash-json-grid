@@ -1,0 +1,63 @@
+---
+id: ThemeConfigs
+title: ThemeConfigs
+sidebar_label: ThemeConfigs
+slug: /apis/typehints/ThemeConfigs
+description: 用来定制主题的详细配置。
+---
+
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="type" source="typehints.ThemeConfigs" />
+
+```python
+ThemeConfigs(
+    bgColor: NotRequired[str],
+    booleanColor: NotRequired[str],
+    borderColor: NotRequired[str],
+    cellBorderColor: NotRequired[str],
+    indexColor: NotRequired[str],
+    keyColor: NotRequired[str],
+    numberColor: NotRequired[str],
+    objectColor: NotRequired[str],
+    searchHighlightBgColor: NotRequired[str],
+    selectHighlightBgColor: NotRequired[str],
+    stringColor: NotRequired[str],
+    tableHeaderBgColor: NotRequired[str],
+    tableIconColor: NotRequired[str],
+)
+```
+
+`ThemeConfigs`是`TypedDict`.
+
+用来定制主题的详细配置。
+
+## 别名 {#aliases}
+
+该类型可以按以下方式之一获取
+
+```python
+import dash_json_grid as djg
+
+
+djg.ThemeConfigs
+djg.typehints.ThemeConfigs
+```
+
+## 关键字 {#keywords}
+
+|          关键字          | 类型  | 必选 | <center>说明</center>                |
+| :----------------------: | :---: | :--: | :----------------------------------- |
+|        `bgColor`         | `str` |      | 整个网格视图的背景颜色。             |
+|      `booleanColor`      | `str` |      | `bool`类型数据的文字颜色。           |
+|      `borderColor`       | `str` |      | 整个网格视图边框的颜色。             |
+|    `cellBorderColor`     | `str` |      | 表格单元的背景颜色。                 |
+|       `indexColor`       | `str` |      | 序列下标的文字颜色。                 |
+|        `keyColor`        | `str` |      | 映射关键字的文字颜色。               |
+|      `numberColor`       | `str` |      | 数值类型数据的文字颜色。             |
+|      `objectColor`       | `str` |      | 无法识别对象的文字颜色。             |
+| `searchHighlightBgColor` | `str` |      | 搜索关键字时，被搜索高亮的背景颜色。 |
+| `selectHighlightBgColor` | `str` |      | 选中某部分时，其高亮状态背景色。     |
+|      `stringColor`       | `str` |      | 字符串类型数据的文字颜色。           |
+|   `tableHeaderBgColor`   | `str` |      | 表头部分的背景颜色。                 |
+|     `tableIconColor`     | `str` |      | 表头部分的图标文字颜色。             |

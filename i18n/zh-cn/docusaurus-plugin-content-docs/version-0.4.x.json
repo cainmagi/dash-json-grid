@@ -3,10 +3,6 @@
     "message": "用法",
     "description": "The label for category Usages in sidebar tutorial"
   },
-  "sidebar.tutorial.category.Examples": {
-    "message": "范例",
-    "description": "The label for category Examples in sidebar tutorial"
-  },
   "sidebar.tutorial.category.Usages.link.generated-index.title": {
     "message": "学习使用DashJsonGrid",
     "description": "The generated-index page title for category Usages in sidebar tutorial"

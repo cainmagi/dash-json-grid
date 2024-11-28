@@ -1,0 +1,74 @@
+---
+id: MixinDataRoute
+title: MixinDataRoute
+sidebar_label: MixinDataRoute
+slug: /apis/mixins/MixinDataRoute
+description: 用来提供数据路由功能的插件。
+---
+
+import vsiCheckIcon from "@iconify-icons/codicon/check";
+
+import InlineIcon from "@site/src/components/InlineIcon";
+import APITopBar, { IconObjType } from "@site/src/components/APITopBar";
+
+<APITopBar type="class" isMixin={true} source="mixins.MixinDataRoute" />
+
+```python
+mixin = MixinDataRoute()
+```
+
+用来提供数据路由功能的插件。
+
+## 方法 {#methods}
+
+### <IconObjType type="method"/> `compare_routes` {#-compare_routes}
+
+```python
+flag: bool = mixin.compare_routes(route_1: Route, route_2: Route)
+```
+
+比对两个不同的路由，其中[`Route`](./Route.mdx)数据类型的参数即`selected_path`的值。
+
+交换输入参数的位置，比对结果不变。该方法可以检测`route_1`和`route_2`是否指向同一位置。
+
+关于参数，详情请参见[`DashJsonGrid`](../DashJsonGrid.mdx#-compare_routes)。
+
+---
+
+### <IconObjType type="method"/> `get_data_by_route` {#-get_data_by_route}
+
+```python
+data_selected: Any = mixin.get_data_by_route(data: Any, route: Route)
+```
+
+透过某路由来获得其对应的区域的部分数据。
+
+关于参数，详情请参见[`DashJsonGrid`](../DashJsonGrid.mdx#-get_data_by_route)。
+
+---
+
+### <IconObjType type="method"/> `update_data_by_route` {#-update_data_by_route}
+
+```python
+data: Any = mixin.update_data_by_route(data: Any, route: Route, val: Any)
+```
+
+按照路由定位数据的某一部分、并更新该部分的值。
+
+设若更新失败（譬如，数据被设置成不可变的情况下），则抛出`ValueError`。
+
+关于参数，详情请参见[`DashJsonGrid`](../DashJsonGrid.mdx#-update_data_by_route)。
+
+---
+
+### <IconObjType type="method"/> `delete_data_by_route` {#-delete_data_by_route}
+
+```python
+data_selected: Any = mixin.delete_data_by_route(data: Any, route: Route)
+```
+
+按照路由定位数据的某一部分、并删除该部分的值。
+
+设若删除失败（譬如，数据被设置成不可变的情况下），则抛出`ValueError`。
+
+关于参数，详情请参见[`DashJsonGrid`](../DashJsonGrid.mdx#-delete_data_by_route)。

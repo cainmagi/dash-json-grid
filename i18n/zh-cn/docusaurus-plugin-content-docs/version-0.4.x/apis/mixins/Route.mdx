@@ -1,0 +1,19 @@
+---
+id: Route
+title: Route
+sidebar_label: Route
+slug: /apis/mixins/Route
+description: 对路由的类型标记，路由取自selected_path属性。
+---
+
+import APITopBar, { IconObjType } from "@site/src/components/APITopBar";
+
+<APITopBar type="type" source="mixins.Route" />
+
+```python
+Route = Sequence[str | int | Sequence[str | int]]
+```
+
+`Route`是`str`，`int`，和`Sequence[str | int]`的`Union`。
+
+`Route`用来标记组件属性`selected_path`提供的路由（亦称为`keyPath`）。

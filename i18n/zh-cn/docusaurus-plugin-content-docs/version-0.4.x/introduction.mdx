@@ -1,0 +1,113 @@
+---
+id: introduction
+title: 简介
+description: 介绍Dash JSON Grid。Dash JSON Grid是单Dash组件包，用以提供复杂JSON数据的网格视图。
+slug: /
+---
+
+import IconExternalLink from "@theme/Icon/ExternalLink";
+
+import InlineIcon from "@site/src/components/InlineIcon";
+import octClock16 from "@iconify-icons/octicon/clock-16";
+import octLaw16 from "@iconify-icons/octicon/law-16";
+import octRepoForked16 from "@iconify-icons/octicon/repo-forked-16";
+import octShareAndroid16 from "@iconify-icons/octicon/share-android-16";
+import octiconShield16 from "@iconify-icons/octicon/shield-16";
+
+import {rawURL, repoURL} from "@site/src/envs/variables";
+import DarkButton from "@site/src/components/DarkButton";
+import DemoApp, {getDemoData, AppVer} from "@site/src/demo/App";
+
+# 简介
+
+Dash JSON Grid是一个[Dash组件<IconExternalLink/>][link-dash-component]包。
+
+本组件包是对React项目[React JSON Grid<IconExternalLink/>][git-react-json-grid]的Dash移植版。用以提供复杂JSON对象/数组（对应为Python字典/列表）的结构化、嵌套化网格视图。
+
+以下两图对比了原React项目和本项目的范例。由于本项目仅仅是原React组件的Dash封装，它们的效果可以视作是等价的。
+
+|                                      React JSON Grid                                       |                                      Dash JSON Grid                                      |
+| :----------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: |
+| <img alt="demo-react" className="ondark-inv" src={rawURL("main/display/demo-react.png")}/> | <img alt="demo-dash" className="ondark-inv" src={rawURL("main/display/demo-dash.png")}/> |
+
+## React JSON Grid的简单范例 {#a-simple-live-demo-of-react-json-grid}
+
+:::warning
+
+注意此处的范例纯粹是用React JSON Grid写就。Dash JSON Grid仅仅是React JSON Grid的封装，因此可以认为Dash JSON Grid能实现和以下范例相同的效果。然而，由于以下范例是由文档的全局依赖项<AppVer/>构建，其与旧版的Dash JSON Grid所依赖的版本可能不同，故而，该范例未必能确切地和你正在检索的Dash JSON Grid版本对应上。
+
+:::
+
+<DemoApp data={getDemoData()} />
+
+## 鸣谢 {#acknowledgements}
+
+- [RedHeadphone/react-json-grid<IconExternalLink/>][git-react-json-grid]：
+  本项目的原始React版本。
+- [jsongrid.com<IconExternalLink/>][link-json-grid]：
+  启发了React JSON Grid的网格视图设计和风格
+- [kevincobain2000/json-to-html-table<IconExternalLink/>][git-json-to-html]：
+  启发了React JSON Grid的项目架构
+
+## 相关材料 {#related-materials}
+
+更新手记：
+
+<p>
+  {
+    <DarkButton to={repoURL("blob/main/Changelog.md")} icon={octClock16}>
+      更新手记
+    </DarkButton>
+  }
+</p>
+
+本项目的许可证：
+
+<p>
+  {
+    <DarkButton to={repoURL("blob/main/LICENSE")} icon={octLaw16}>
+      MIT协议
+    </DarkButton>
+  }
+</p>
+
+合作与贡献指南：
+
+<p>
+  {
+    <DarkButton
+      to={repoURL("blob/main/CONTRIBUTING.md")}
+      icon={octRepoForked16}
+    >
+      贡献本项目
+    </DarkButton>
+  }
+</p>
+
+贡献者利用规约：
+
+<p>
+  {
+    <DarkButton
+      to={repoURL("blob/main/CODE_OF_CONDUCT.md")}
+      icon={octShareAndroid16}
+    >
+      利用规约
+    </DarkButton>
+  }
+</p>
+
+漏洞防治与安全策略：
+
+<p>
+  {
+    <DarkButton to={repoURL("blob/main/SECURITY.md")} icon={octiconShield16}>
+      安全策略
+    </DarkButton>
+  }
+</p>
+
+[git-react-json-grid]: https://github.com/RedHeadphone/react-json-grid
+[git-json-to-html]: https://github.com/kevincobain2000/json-to-html-table
+[link-json-grid]: https://jsongrid.com/json-grid
+[link-dash-component]:https://dash.plotly.com/plugins

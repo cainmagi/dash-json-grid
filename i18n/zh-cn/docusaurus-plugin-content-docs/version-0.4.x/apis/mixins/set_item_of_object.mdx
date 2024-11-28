@@ -1,0 +1,114 @@
+---
+id: set_item_of_object
+title: set_item_of_object
+sidebar_label: set_item_of_object
+slug: /apis/mixins/set_item_of_object
+description: 对于任意数据data，赋值data[index] = value。
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+import vsiCheckIcon from "@iconify-icons/codicon/check";
+
+import InlineIcon from "@site/src/components/InlineIcon";
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="func" isPrivate={true} source="mixins.set_item_of_object" />
+
+```python
+set_item_of_object(data: Any, index: Any, value: Any)
+```
+
+对于任意数据`data`，赋值`data[index] = value`，其中`index`可以是一个由单元素构成的序列。
+
+若`data`的成员无法被设置，抛出`ValueError`。
+
+若需要修改的`data`是序列，但`value`无法成功广播到`data`的成员上，抛出`IndexError`。
+
+:::warning
+
+注意`index`并非是[路由（`route`）](./Route.mdx)类型。若该值是序列，该序列只能包含单元素。
+
+:::
+
+## 参数 {#arguments}
+
+### 输入 {#requires}
+
+|  参数   | 类型  |               必选                | <center>说明</center>                                                                     |
+| :-----: | :---: | :-------------------------------: | ----------------------------------------------------------------------------------------- |
+| `data`  | `Any` | <InlineIcon icon={vsiCheckIcon}/> | 需要索引的完整数据。                                                                      |
+| `index` | `Any` | <InlineIcon icon={vsiCheckIcon}/> | 用来索引并更新数据某一部分的下标值。该值可以是数字、关键字、或者是形如`[0]`的单元素序列。 |
+| `value` | `Any` | <InlineIcon icon={vsiCheckIcon}/> | 用来更新`data`被`index`选中部分的新值。                                                   |
+
+## 范例 {#examples}
+
+### <IconObjType type="term"/> 设置完整数据的某部分 {#-set-a-part-of-the-whole-data}
+
+<Tabs
+  defaultValue="codes"
+  values={[
+    { label: '代码', value: 'codes', },
+    { label: '结果', value: 'results', },
+  ]
+}>
+
+<TabItem value="codes">
+
+```python title="set_a_part_of_data.py" showLineNumbers
+import pprint
+from dash_json_grid.mixins import set_item_of_object
+
+data = {
+    "id": "0001",
+    "type": "donut",
+    "name": "Cake",
+    "ppu": 1111.55,
+    "batters": {
+        "batter": [
+            {"id": "1001", "type": "Regular"},
+            {"id": "1002", "type": "Chocolate"},
+            {"id": "1003", "type": "Blueberry"},
+            {"id": "1004", "type": "Devil's Food"},
+        ]
+    },
+    "topping": [
+        {"id": "5001", "type": "None"},
+        {"id": "5002", "type": "Glazed"},
+        {"id": "5005", "type": "Sugar"},
+        {"id": "5007", "type": "Powdered Sugar"},
+        {"id": "5006", "type": "Chocolate with Sprinkles"},
+        {"id": "5003", "type": "Chocolate"},
+        {"id": "5004", "type": "Maple"},
+    ],
+}
+
+route = "batters"
+
+set_item_of_object(data, route, 0)
+pprint.pprint(data)
+```
+
+</TabItem>
+
+<TabItem value="results">
+
+```python
+{'batters': 0,
+ 'id': '0001',
+ 'name': 'Cake',
+ 'ppu': 1111.55,
+ 'topping': [{'id': '5001', 'type': 'None'},
+             {'id': '5002', 'type': 'Glazed'},
+             {'id': '5005', 'type': 'Sugar'},
+             {'id': '5007', 'type': 'Powdered Sugar'},
+             {'id': '5006', 'type': 'Chocolate with Sprinkles'},
+             {'id': '5003', 'type': 'Chocolate'},
+             {'id': '5004', 'type': 'Maple'}],
+ 'type': 'donut'}
+```
+
+</TabItem>
+
+</Tabs>

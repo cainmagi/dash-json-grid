@@ -1,0 +1,36 @@
+---
+id: index
+title: mixins
+sidebar_label: mixins
+slug: /apis/mixins
+description: 插件的定义。这些插件用来扩展自动生成的dash组件功能。
+---
+
+import APITopBar, {IconObjType} from "@site/src/components/APITopBar";
+
+<APITopBar type="module" isPrivate={true} source="mixins" />
+
+插件的定义。这些插件用来扩展自动生成的`dash`组件功能。
+
+## 类型标记 {#typehints}
+
+|                                 成员                                  | <center>说明</center>                           |
+| :-------------------------------------------------------------------: | :---------------------------------------------- |
+| [<IconObjType type="type" hasText={true} text="Route"/>](./Route.mdx) | 对路由的类型标记，路由取自`selected_path`属性。 |
+
+## 函数 {#functions}
+
+|                                               成员                                                | <center>说明</center>                                                            |
+| :-----------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------- |
+|         [<IconObjType type="func" hasText={true} text="is_sequence"/>](./is_sequence.mdx)         | 检查某值`val`是否是序列。                                                        |
+| [<IconObjType type="func" hasText={true} text="sanitize_list_index"/>](./sanitize_list_index.mdx) | 尝试确保某下标`index`的类型为`int`。                                             |
+|  [<IconObjType type="func" hasText={true} text="get_item_of_object"/>](./get_item_of_object.mdx)  | 对于任意数据`data`，获取`data[index]`的值。                                      |
+|  [<IconObjType type="func" hasText={true} text="set_item_of_object"/>](./set_item_of_object.mdx)  | 对于任意数据`data`，赋值`data[index] = value`。                                  |
+|  [<IconObjType type="func" hasText={true} text="pop_item_of_object"/>](./pop_item_of_object.mdx)  | 对于任意数据`data`，取得`val = data[index]; del data[index]; return val`的结果。 |
+
+## 类 {#classes}
+
+|                                           成员                                           | <center>说明</center>        |
+| :--------------------------------------------------------------------------------------: | :--------------------------- |
+| [<IconObjType type="class" hasText={true} text="MixinDataRoute"/>](./MixinDataRoute.mdx) | 用来提供数据路由功能的插件。 |
+|      [<IconObjType type="class" hasText={true} text="MixinFile"/>](./MixinFile.mdx)      | 用来提供文件加载功能的插件。 |
