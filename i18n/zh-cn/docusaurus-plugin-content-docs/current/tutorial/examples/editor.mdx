@@ -6,6 +6,9 @@ description: A demo of a JSON editor based on selecting a part of the JSON data 
 slug: /examples/editor
 ---
 
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 import IconExternalLink from "@theme/Icon/ExternalLink";
 import mdiLanguagePython from "@iconify-icons/mdi/language-python";
 
@@ -13,3 +16,308 @@ import DarkButton from "@site/src/components/DarkButton";
 import {rootURL} from "@site/src/envs/variables";
 
 # 利用`dash-json-grid`构建一个JSON编辑器
+
+本文解释了以下脚本的设计思路：
+
+<p>
+  <DarkButton to={rootURL("examples/editor.py")} icon={mdiLanguagePython}>
+    {"editor.py"}
+  </DarkButton>
+</p>
+
+该范例可以独立运行。运行之前，需要安装额外的依赖包：
+
+```shell
+pip install dash-json-grid[example]
+```
+
+以上命令用来安装下列包：
+
+- [**Dash Bootstrap Components**<IconExternalLink/>][link-dbc]: 用来在本范例中、提供全局样式和模态（对话框）窗口。
+- [**Dash Ace**<IconExternalLink/>][link-dace]: 用来在本范例中、提供代码（JSON数据）编辑器。
+
+安装完成后，可以下载本范例脚本，并直接运行即可。
+Then this script can be downloaded and run indepdently.
+
+|                      一个利用`dash-json-grid`实现 JSON 编辑器的范例                       |
+| :---------------------------------------------------------------------------------------: |
+| <img alt="demo-editor" className="ondark-inv" src={useBaseUrl('/img/demo-editor.webp')}/> |
+
+该范例展示了以下特性：
+
+- 一个透过使用`dash-json-grid`实现的、用来修改JSON数据的应用。
+- 每当页面刷新时，数据重置为初始状态。
+- 选中所展示数据的任何一部分，将唤起一个对话框。
+- 在对话框中，用户可以修改或删除选中的数据，并决定是否要确认这些修改。要删除数据，用户只需要令编辑器留空即可。
+
+## 定义布局 {#define-the-layout}
+
+在该范例中，布局主要包含两部分：
+
+<Tabs
+  defaultValue="viewer"
+  values={[
+    { label: '第一部分：展示器', value: 'viewer', },
+    { label: '第二部分：编辑器', value: 'editor', },
+  ]
+}>
+
+<TabItem value="viewer">
+
+```python showLineNumbers
+dcc.Loading(
+    className="mb-2",
+    delay_show=500,
+    children=djg.DashJsonGrid(
+        id="viewer",
+        data=test_data,
+        # highlight-next-line
+        highlight_selected=True,
+        theme="defaultLight",
+    ),
+)
+```
+
+</TabItem>
+
+<TabItem value="editor">
+
+```python showLineNumbers
+dbc.Modal(
+    id="editor",
+    is_open=False,
+    size="xl",
+    children=(
+        dbc.ModalHeader(dbc.ModalTitle("Editor")),
+        dbc.ModalBody(
+            children=(
+                da.DashAceEditor(
+                    id="editor-text",
+                    className="mb-2",
+                    width="100%",
+                    height="400px",
+                    value="",
+                    theme="github",
+                    # highlight-next-line
+                    mode="json",
+                    tabSize=2,
+                    placeholder=(
+                        "Leave this editor blank if you want to delete the "
+                        "data."
+                    ),
+                    enableBasicAutocompletion=False,
+                    enableLiveAutocompletion=False,
+                ),
+                dbc.Alert(
+                    children="",
+                    id="editor-alert",
+                    color="danger",
+                    duration=5000,
+                    is_open=False,
+                ),
+            )
+        ),
+        dbc.ModalFooter(
+            children=(
+                dbc.Button(
+                    children="Confirm",
+                    id="editor-confirm-btn",
+                    color="primary",
+                    className="ms-auto",
+                    n_clicks=0,
+                ),
+                dbc.Button(
+                    children="Cancel",
+                    id="editor-cancel-btn",
+                    color="danger",
+                    n_clicks=0,
+                ),
+            )
+        ),
+    ),
+),
+```
+
+</TabItem>
+
+</Tabs>
+
+其中，定义了以下组件：
+
+- [`djg.DashJsonGrid`](../../apis/DashJsonGrid.mdx): 本项目提供的JSON显示工具。
+- [`dbc.Modal`<IconExternalLink/>][link-dbc-modal]: 只在用户选中JSON显示器的一部分时弹出的对话框。
+- [`da.DashAceEditor`<IconExternalLink/>][link-dace]: 用来修改JSON数据的代码编辑器。
+- [`dbc.Alert`<IconExternalLink/>][link-dbc-alert]: 只在修改JSON数据出错时，弹出的警告条。
+
+## 定义callback {#define-the-callbacks}
+
+该范例中定义了三个callback：
+
+```python showLineNumbers
+@app.callback(
+    Output("editor", "is_open"),
+    # 需要以下Output来确保每次点击都能唤起对话框。
+    Output("viewer", "selected_path"),
+    Input("viewer", "selected_path"),
+    # 由于不希望在修改失败的时候关闭对话框，于是使用"editor-alert"取代"editor-confirm-btn"。
+    Input("editor-alert", "children"),
+    Input("editor-cancel-btn", "n_clicks"),
+    prevent_initial_call=True,
+)
+def toggle_editor(
+    route: djg.mixins.Route, altert_text: Optional[str], n_clicks_cancel: int
+):
+    trigger_id = dash.ctx.triggered_id
+    if trigger_id == "viewer":
+        if route and not djg.DashJsonGrid.compare_routes(route, []):
+            return True, dash.no_update
+    elif trigger_id == "editor-alert":
+        if not altert_text:
+            return False, []
+    elif trigger_id == "editor-cancel-btn":
+        if n_clicks_cancel:
+            return False, []
+
+    return dash.no_update, dash.no_update
+```
+
+第一个callback用来控制对话框的显示与否。以下三个callback输入可以触发该callback：
+
+- `viewer`: 当显示器的一部分被选中时，打开对话框。
+- `editor-alert`: 当警告条的文字被重设、而又没有提供任何警告文字时，这表示修改顺利完成。由此关闭对话框。若警告文字存在，则不关闭对话框。
+- `editor-cancel-btn`: 当点击<kbd>Cancel</kbd>（取消）按钮时，关闭对话框。
+
+注意该callback还有第二个输出。该输出用来在每次对话框关闭时，确保`selected_path`的值重置。默认情况下，`selected_path`只会在它的值改变时触发callback。因此，将该值重置、可以确保即使用户反复点击显示器的同一部分，也能触发callback。
+
+---
+
+第二个callback决定了修改数据时的行为。
+
+```python showLineNumbers
+@app.callback(
+    Output("viewer", "data"),
+    Output("editor-alert", "is_open"),
+    Output("editor-alert", "children"),
+    Input("editor-confirm-btn", "n_clicks"),
+    State("editor-text", "value"),
+    State("viewer", "selected_path"),
+    State("viewer", "data"),
+    prevent_initial_call=True,
+)
+def confirm_data_change(
+    n_clicks_confirm: int, modified_data: str, route: djg.mixins.Route, data: Any
+):
+    if not n_clicks_confirm:
+        return dash.no_update, dash.no_update, dash.no_update
+
+    if not route:
+        return dash.no_update, dash.no_update, dash.no_update
+
+    if not modified_data:
+        # 这一try-except块略过了试图删除"undefined"值时触发的错误。
+        try:
+            djg.DashJsonGrid.delete_data_by_route(data, route)
+        except (KeyError, IndexError):
+            pass
+        # 当整个数据都被删除时，显示器将无法选中。因此，不允许这种情况出现。
+        if not data:
+            return dash.no_update, True, "Error: It is not allowed to delete all data."
+        return data, "", False
+
+    # 这一try-except块用来在用户提供了无效JSON数据时，向用户提示错误。
+    try:
+        decoded_modified_data = json.loads(modified_data)
+    except json.JSONDecodeError as exc:
+        logging.error(exc, stack_info=True)
+        return (
+            dash.no_update,
+            True,
+            "{0}: {1}.".format(exc.__class__.__name__, str(exc)),
+        )
+
+    if "selected_data" not in decoded_modified_data:
+        # 这一try-except块略过了试图删除"undefined"值时触发的错误。
+        try:
+            djg.DashJsonGrid.delete_data_by_route(data, route)
+        except (KeyError, IndexError):
+            pass
+        # 当整个数据都被删除时，显示器将无法选中。因此，不允许这种情况出现。
+        if not data:
+            return dash.no_update, True, "Error: It is not allowed to delete all data."
+        return data, "", False
+
+    # 在用户所修改的数据不匹配原数据格式时，向用户提示错误。例如，当一个表格的列被选中时，
+    # 若用户提供的数据包含了和原数据不匹配的行数，则此处将会触发一个错误。
+    try:
+        djg.DashJsonGrid.update_data_by_route(
+            data, route, decoded_modified_data["selected_data"]
+        )
+    except (KeyError, IndexError, TypeError, ValueError) as exc:
+        logging.error(exc, stack_info=True)
+        return (
+            dash.no_update,
+            True,
+            "{0}: {1}.".format(exc.__class__.__name__, str(exc)),
+        )
+
+    # 当整个数据都被删除时，显示器将无法选中。因此，不允许这种情况出现。
+    if not data:
+        return dash.no_update, True, "Error: It is not allowed to delete all data."
+
+    return data, "", False
+```
+
+这一callback只在点击<kbd>Confirm</kbd>（确认）按钮、且对话框打开时触发。它的输出指向了两个组件：若修改成功，则使用修改后的数据、取代`viewer`的原数据。若修改失败，则将callback抛出的错误信息，展示到警告条组件`editor-alert`上。
+
+修改数据的过程已然考虑到了各种特殊情形。这一过程可以总结如下：
+
+- 当对话框打开时，数据会格式化为如下形式的JSON字典：
+  <div className="child-mb-0">
+  ```json
+  {"selected_data": ...}
+  ```
+  </div>
+  其中`...`是所选中的数据。
+- 若文字框留空、或原数据中的关键字`selected_data`被移除，则尝试删除选中的数据。
+- 若删除数据、会导致整个数据变为空，则会展示错误信息、并取消修改。这是因为将`viewer`的数据设置为空、会导致其再也无法选中。
+- 考虑了各种错误情形。例如，会验证用户提供的JSON输入。且输入数据的格式应当和原数据相匹配。
+
+---
+
+最后一个callback定义了选中显示器的一部分、且对话框唤起时的行为：
+
+```python showLineNumbers
+@app.callback(
+    Output("editor-text", "value"),
+    Input("viewer", "selected_path"),
+    State("viewer", "data"),
+    prevent_initial_call=True,
+)
+def configure_current_editor_data(route: djg.mixins.Route, data: Any):
+    if not route:
+        return dash.no_update
+
+    # 这一try-except块用来捕获选中了"undefined"的特殊情况。若一个单元标记为"undefined"，
+    # 这表明指向它的路径，实际没有指向任何值，因此此处返回的原始数据也应当为空。
+    try:
+        sel_data = djg.DashJsonGrid.get_data_by_route(data, route)
+    except (KeyError, IndexError):  # Select an undefined cell.
+        return ""
+
+    selected_data = {"selected_data": sel_data}
+
+    return json.dumps(selected_data, ensure_ascii=False, indent=2)
+```
+
+当用户选中`viewer`的一部分时，`selected_path`属性就会触发这一callback。该属性提供的路径、用来定位所点击的值，并将值转化为JSON字符串，最后令编辑器的内容格式化为以下形式：
+
+```json
+{"selected_data": ...}
+```
+
+其中`...`是选中的数据。
+
+[link-dbc]: https://dash-bootstrap-components.opensource.faculty.ai
+[link-dace]: https://github.com/reasoned-ai/dash-ace/tree/master
+[link-dbc-modal]: https://dash-bootstrap-components.opensource.faculty.ai/docs/components/modal
+[link-dbc-alert]: https://dash-bootstrap-components.opensource.faculty.ai/docs/components/alert

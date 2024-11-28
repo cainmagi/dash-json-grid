@@ -6,6 +6,9 @@ description: A demo of a JSON editor based on selecting a part of the JSON data 
 slug: /examples/editor
 ---
 
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 import IconExternalLink from "@theme/Icon/ExternalLink";
 import mdiLanguagePython from "@iconify-icons/mdi/language-python";
 
@@ -13,3 +16,346 @@ import DarkButton from "@site/src/components/DarkButton";
 import {rootURL} from "@site/src/envs/variables";
 
 # Create a JSON Editor with `dash-json-grid`
+
+This article explains the design of the following example script:
+
+<p>
+  <DarkButton to={rootURL("examples/editor.py")} icon={mdiLanguagePython}>
+    {"editor.py"}
+  </DarkButton>
+</p>
+
+This demo can be run independently. To run it, please install the extra dependencies by:
+
+```shell
+pip install dash-json-grid[example]
+```
+
+Running the above command will install the following packages:
+
+- [**Dash Bootstrap Components**<IconExternalLink/>][link-dbc]: Providing the global
+  styles and the modal (dialog) window in this demo.
+- [**Dash Ace**<IconExternalLink/>][link-dace]: Providing the code (JSON data) editor
+  in this demo.
+
+Then, this script can be downloaded and run directly.
+
+|                     A demo of a JSON editor based on `dash-json-grid`                     |
+| :---------------------------------------------------------------------------------------: |
+| <img alt="demo-editor" className="ondark-inv" src={useBaseUrl('/img/demo-editor.webp')}/> |
+
+This demo will provide the following features:
+
+- An application of modifying the JSON data with the usage of `dash-json-grid`.
+- Every time when the page is refreshed, the data is reset to the initial state.
+- Selecting a part of the JSON grid viewer will let a dialog window popping up.
+- In this dialog window, users can modify or deleting the selected data, and decide
+  whether to confirm the modifications. To delete the data, users only need to let
+  the editor empty.
+
+## Define the layout
+
+In this demo, the layout contains two parts:
+
+<Tabs
+  defaultValue="viewer"
+  values={[
+    { label: 'Part 1: Viewer', value: 'viewer', },
+    { label: 'Part 2: Editor', value: 'editor', },
+  ]
+}>
+
+<TabItem value="viewer">
+
+```python showLineNumbers
+dcc.Loading(
+    className="mb-2",
+    delay_show=500,
+    children=djg.DashJsonGrid(
+        id="viewer",
+        data=test_data,
+        # highlight-next-line
+        highlight_selected=True,
+        theme="defaultLight",
+    ),
+)
+```
+
+</TabItem>
+
+<TabItem value="editor">
+
+```python showLineNumbers
+dbc.Modal(
+    id="editor",
+    is_open=False,
+    size="xl",
+    children=(
+        dbc.ModalHeader(dbc.ModalTitle("Editor")),
+        dbc.ModalBody(
+            children=(
+                da.DashAceEditor(
+                    id="editor-text",
+                    className="mb-2",
+                    width="100%",
+                    height="400px",
+                    value="",
+                    theme="github",
+                    # highlight-next-line
+                    mode="json",
+                    tabSize=2,
+                    placeholder=(
+                        "Leave this editor blank if you want to delete the "
+                        "data."
+                    ),
+                    enableBasicAutocompletion=False,
+                    enableLiveAutocompletion=False,
+                ),
+                dbc.Alert(
+                    children="",
+                    id="editor-alert",
+                    color="danger",
+                    duration=5000,
+                    is_open=False,
+                ),
+            )
+        ),
+        dbc.ModalFooter(
+            children=(
+                dbc.Button(
+                    children="Confirm",
+                    id="editor-confirm-btn",
+                    color="primary",
+                    className="ms-auto",
+                    n_clicks=0,
+                ),
+                dbc.Button(
+                    children="Cancel",
+                    id="editor-cancel-btn",
+                    color="danger",
+                    n_clicks=0,
+                ),
+            )
+        ),
+    ),
+),
+```
+
+</TabItem>
+
+</Tabs>
+
+where we define the following components:
+
+- [`djg.DashJsonGrid`](../../apis/DashJsonGrid.mdx): The viewer provided by this
+  package.
+- [`dbc.Modal`<IconExternalLink/>][link-dbc-modal]: The dialog that is shown only when
+  a part of the JSON viewer is selected by users.
+- [`da.DashAceEditor`<IconExternalLink/>][link-dace]: The code editor used for
+  modifying the JSON data.
+- [`dbc.Alert`<IconExternalLink/>][link-dbc-alert]: An alert box that appears only when
+  an error happens during the attempt of modifying the JSON data.
+
+## Define the callbacks
+
+We define three callbacks for this demo:
+
+```python showLineNumbers
+@app.callback(
+    Output("editor", "is_open"),
+    # Need the following output because we want to trigger the dialog every time.
+    Output("viewer", "selected_path"),
+    Input("viewer", "selected_path"),
+    # Use "editor-alert" to replace "editor-confirm-btn" because we do not want to
+    # close the window if the error is detected.
+    Input("editor-alert", "children"),
+    Input("editor-cancel-btn", "n_clicks"),
+    prevent_initial_call=True,
+)
+def toggle_editor(
+    route: djg.mixins.Route, altert_text: Optional[str], n_clicks_cancel: int
+):
+    trigger_id = dash.ctx.triggered_id
+    if trigger_id == "viewer":
+        if route and not djg.DashJsonGrid.compare_routes(route, []):
+            return True, dash.no_update
+    elif trigger_id == "editor-alert":
+        if not altert_text:
+            return False, []
+    elif trigger_id == "editor-cancel-btn":
+        if n_clicks_cancel:
+            return False, []
+
+    return dash.no_update, dash.no_update
+```
+
+The first callback is used for controlling the display of the dialog. It can be fired
+by three callback inputs:
+
+- `viewer`: When a part of the viewer is selected, turn on the dialog.
+- `editor-alert`: When the alert text is configured but not alert is provided, it means
+  that the modification is successful. Turn off the dialog. If there is an alert, do
+  not close the dialog.
+- `editor-cancel-btn`: When the <kbd>Cancel</kbd> button is clicked, turn off the
+  dialog.
+
+Note that this callback has a second output. This output `selected_path` is used for
+ensuring that the selected path of the viewer is reset when the dialog is closed.
+By default, the callback `selected_path` will be fired only when its value is changed.
+Therefore, providing this "reset" behavior can ensure that `selected_path` can fire
+a callback even if the same part of the viewer is clicked again.
+
+---
+
+The second callback determines the behavior of modifying the data.
+
+```python showLineNumbers
+@app.callback(
+    Output("viewer", "data"),
+    Output("editor-alert", "is_open"),
+    Output("editor-alert", "children"),
+    Input("editor-confirm-btn", "n_clicks"),
+    State("editor-text", "value"),
+    State("viewer", "selected_path"),
+    State("viewer", "data"),
+    prevent_initial_call=True,
+)
+def confirm_data_change(
+    n_clicks_confirm: int, modified_data: str, route: djg.mixins.Route, data: Any
+):
+    if not n_clicks_confirm:
+        return dash.no_update, dash.no_update, dash.no_update
+
+    if not route:
+        return dash.no_update, dash.no_update, dash.no_update
+
+    if not modified_data:
+        # This try-except block suppresses the error when deleting an "undefined"
+        # value.
+        try:
+            djg.DashJsonGrid.delete_data_by_route(data, route)
+        except (KeyError, IndexError):
+            pass
+        # If the entire data is deleted, the viewer will be not selectable. Therefore,
+        # disallow this case.
+        if not data:
+            return dash.no_update, True, "Error: It is not allowed to delete all data."
+        return data, "", False
+
+    # This try-except block display the error if the user-specified json text is
+    # invalid.
+    try:
+        decoded_modified_data = json.loads(modified_data)
+    except json.JSONDecodeError as exc:
+        logging.error(exc, stack_info=True)
+        return (
+            dash.no_update,
+            True,
+            "{0}: {1}.".format(exc.__class__.__name__, str(exc)),
+        )
+
+    if "selected_data" not in decoded_modified_data:
+        # This try-except block suppresses the error when deleting an "undefined"
+        # value.
+        try:
+            djg.DashJsonGrid.delete_data_by_route(data, route)
+        except (KeyError, IndexError):
+            pass
+        # If the entire data is deleted, the viewer will be not selectable. Therefore,
+        # disallow this case.
+        if not data:
+            return dash.no_update, True, "Error: It is not allowed to delete all data."
+        return data, "", False
+
+    # Display the error when the modified data does not fit the original data format.
+    # For example, if a table column is selected, and the number of rows provided by
+    # the user does not match the row number of the original data, this error will
+    # be raised.
+    try:
+        djg.DashJsonGrid.update_data_by_route(
+            data, route, decoded_modified_data["selected_data"]
+        )
+    except (KeyError, IndexError, TypeError, ValueError) as exc:
+        logging.error(exc, stack_info=True)
+        return (
+            dash.no_update,
+            True,
+            "{0}: {1}.".format(exc.__class__.__name__, str(exc)),
+        )
+
+    # If the entire data is deleted, the viewer will be not selectable. Therefore,
+    # disallow this case.
+    if not data:
+        return dash.no_update, True, "Error: It is not allowed to delete all data."
+
+    return data, "", False
+```
+
+It is only fired when the <kbd>Confirm</kbd> button is clicked and the dialog is open.
+Its outputs contain two components: When the modification is successful, use the
+updated data to replace the original data of the `viewer`. When there is an error
+raised by this callback, display the error message in the alert component
+`editor-alert`.
+
+This modification callback has covered all special cases during the modification, its
+behavior can be summarized as follows:
+
+- When the dialog is open, the data should be formatted as a JSON dictionary like:
+  <div className="child-mb-0">
+  ```json
+  {"selected_data": ...}
+  ```
+  </div>
+  where `...` is the value that is selected.
+- When the text box is left empty or the keyword `selected_data` is removed from the
+  dictionary, attempt to delete the selected part.
+- If the entire data becomes empty after the deleting, will show an error message and
+  cancel the modification because the empty data will make the `viewer` not selectable
+  anymore.
+- Several kinds of errors are covered. For example, the JSON data provided by the user
+  input will be validated, and the format of the data should fit the format of the
+  original data.
+
+---
+
+The final callback defines the behavior when a part of the viewer is selected and the
+dialog is open.
+
+```python showLineNumbers
+@app.callback(
+    Output("editor-text", "value"),
+    Input("viewer", "selected_path"),
+    State("viewer", "data"),
+    prevent_initial_call=True,
+)
+def configure_current_editor_data(route: djg.mixins.Route, data: Any):
+    if not route:
+        return dash.no_update
+
+    # This try-except block catch the case when a cell tagged by "undefined" is
+    # selected. An "undefined" cell means that there is no value in this path, so
+    # the original data should be empty, too.
+    try:
+        sel_data = djg.DashJsonGrid.get_data_by_route(data, route)
+    except (KeyError, IndexError):  # Select an undefined cell.
+        return ""
+
+    selected_data = {"selected_data": sel_data}
+
+    return json.dumps(selected_data, ensure_ascii=False, indent=2)
+```
+
+When the user click a part of the `viewer`, the `selected_path` property will fire this
+callback. This path will be used for locating the value that is clicked, serialize the
+value as JSON text, and format the input box as
+
+```json
+{"selected_data": ...}
+```
+
+where `...` is the selected value.
+
+[link-dbc]: https://dash-bootstrap-components.opensource.faculty.ai
+[link-dace]: https://github.com/reasoned-ai/dash-ace/tree/master
+[link-dbc-modal]: https://dash-bootstrap-components.opensource.faculty.ai/docs/components/modal
+[link-dbc-alert]: https://dash-bootstrap-components.opensource.faculty.ai/docs/components/alert
