@@ -4,6 +4,10 @@
 
 ## CHANGELOG
 
+### 0.5.0 @ 11/27/2024
+
+1. Add an example folder showing the usage with other vendor packages.
+
 ### 0.4.3 @ 11/22/2024
 
 #### :wrench: Fix

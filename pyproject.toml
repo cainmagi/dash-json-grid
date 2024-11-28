@@ -50,6 +50,7 @@ dependencies = { file = ["requirements.txt"] }
 [tool.setuptools.dynamic.optional-dependencies]
 dev = { file = ["requirements-dev.txt"] }
 test = { file = ["tests/requirements.txt"] }
+example = { file = ["examples/requirements.txt"] }
 
 [tool.setuptools.packages.find]
 where = ["."]
