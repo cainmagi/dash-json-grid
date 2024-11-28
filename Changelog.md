@@ -11,6 +11,10 @@
 1. Add an example folder showing the usage with other vendor packages.
 2. Add functionalities of using examples with the developers' docker image (the contributing guide is also updated).
 
+#### :wrench: Fix
+
+1. Fix: Correct the ToC numbers in the readme file.
+
 #### :floppy_disk: Change
 
 1. Bump `Yarn` version from `4.5.2` to `4.5.3`.

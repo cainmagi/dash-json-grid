@@ -88,15 +88,15 @@ Check the documentation to find more details about the examples and APIs.
 
 https://cainmagi.github.io/dash-json-grid/
 
-## 6. Contributing
+## 4. Contributing
 
 See [CONTRIBUTING.md :book:][link-contributing]
 
-## 7. Changelog
+## 5. Changelog
 
 See [Changelog.md :book:][link-changelog]
 
-## 8. Acknowledgements
+## 6. Acknowledgements
 
 - [RedHeadphone/react-json-grid :link:][git-react-json-grid]: The original React component implementation of this project.
 - [jsongrid.com :link:][link-json-grid]: Grid design and styles.
