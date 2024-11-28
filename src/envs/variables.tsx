@@ -5,7 +5,7 @@
 
 import React from "react";
 import Link from "@docusaurus/Link";
-import {useDocsPreferredVersion} from "@docusaurus/theme-common";
+import {useDocsVersion} from "@docusaurus/plugin-content-docs/client";
 import IconExternalLink from "@theme/Icon/ExternalLink";
 
 import InlineIcon from "../components/InlineIcon";
@@ -62,8 +62,8 @@ const variables = {
 };
 
 const useCurrentSourceVersion = (): string => {
-  const versionHook: any = useDocsPreferredVersion(docsPluginId);
-  const versionLabel = versionHook?.preferredVersion?.label;
+  const versionHook = useDocsVersion();
+  const versionLabel = versionHook?.label;
   return (
     variables.sourceVersion[versionLabel] || variables.sourceVersion["main"]
   );
