@@ -7,12 +7,12 @@ the version of the corresponding core dependency (React JSON Grid) is also speci
 We will try to make dash-json-grid always synchronized to the version of
 React-JSON-Grid.
 
-| Version | Supported          | Available on [PyPI :link:][link-pypi] | React-JSON-Grid  |
-| ------- | ------------------ | ------------------ | ------------------ |
-| `0.5.x`   | :white_check_mark: | :white_check_mark: | [`0.9.2` :link:][link-rjg-092] |
-| `0.4.x`   | :white_check_mark: | :white_check_mark: | [`0.9.2` :link:][link-rjg-092] |
-| `0.3.x`   | :x:                | :white_check_mark: | [`0.7.0` :link:][link-rjg-070] |
-| < `0.3`   | :x:                | :x:                | -                  |
+| Version | Supported          | Available on [PyPI :link:][link-pypi] | React-JSON-Grid                |
+| ------- | ------------------ | ------------------------------------- | ------------------------------ |
+| `0.5.x` | :white_check_mark: | :white_check_mark:                    | [`0.9.2` :link:][link-rjg-092] |
+| `0.4.x` | :x:                | :white_check_mark:                    | [`0.9.2` :link:][link-rjg-092] |
+| `0.3.x` | :x:                | :white_check_mark:                    | [`0.7.0` :link:][link-rjg-070] |
+| < `0.3` | :x:                | :x:                                   | -                              |
 
 ## Reporting a Vulnerability
 
