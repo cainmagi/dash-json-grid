@@ -92,7 +92,24 @@ When the demo is running, you should be able to access the demo by
 
 http://localhost:8080/
 
-#### 2.4. Develop the project
+#### 2.4. Run more examples
+
+We provide some extra examples in the [examples folder :link:](https://github.com/cainmagi/dash-json-grid/tree/main/examples).
+To run these examples with the docker image, use the following command:
+
+``` sh
+docker run -it --rm -p 8080:8080 dash-json-grid:latest --demo demo=editor
+```
+
+where `demo=` specifies the name of the example script. The postfix `.py` should not be included.
+
+Currently, the available examples are:
+
+|                                       `demo=`                                       | Description                                            |
+| :---------------------------------------------------------------------------------: | :----------------------------------------------------- |
+| [`editor`](https://github.com/cainmagi/dash-json-grid/blob/main/examples/editor.py) | A demo for making a JSON editor with `dash-json-grid`. |
+
+#### 2.5. Develop the project
 
 To modify the scripts, you may want to clone an Git repository by yourself:
 
@@ -135,6 +152,12 @@ Now you will be able to start the development. You can do the following things t
 
     ``` sh
     python usage.py
+    ```
+
+* Run a different demo:
+
+    ``` sh
+    python examples/editor.py
     ```
 
 * Run the React demo
@@ -212,7 +235,7 @@ The following steps will help you configure the environment with `conda`:
 3. Install the Python dependencies
 
     ``` sh
-    pip install -r requirements-dev.txt -r tests/requirements.txt
+    pip install -r requirements-dev.txt -r tests/requirements.txt -r examples/requirements.txt
     ```
 
 4. Install the Node.js dependencies and build the first version.
@@ -251,6 +274,12 @@ You can do the following things to test the codes.
 
     ``` sh
     python usage.py
+    ```
+
+* Run a different demo:
+
+    ``` sh
+    python examples/editor.py
     ```
 
 * Run the React demo

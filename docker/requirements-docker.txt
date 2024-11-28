@@ -2,6 +2,10 @@
 dash[dev,testing]>=2.18.0
 werkzeug
 
+# Optional for running examples
+dash-bootstrap-components
+dash-ace
+
 # Required by testing
 chromedriver-binary-auto  # Needs to be installed after installing the browser.
 pytest

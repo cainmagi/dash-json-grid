@@ -25,6 +25,7 @@ RUN bash /app/install.sh $INSTALL_MODE
 # Copy codes
 COPY ./dash_json_grid /app/dash_json_grid
 COPY ./src /app/src
+COPY ./examples /app/examples
 COPY ./tests /app/tests
 COPY ./version /app/version
 COPY ./*.* /app/

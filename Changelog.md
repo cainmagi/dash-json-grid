@@ -9,6 +9,7 @@
 #### :mega: New
 
 1. Add an example folder showing the usage with other vendor packages.
+2. Add functionalities of using examples with the developers' docker image (the contributing guide is also updated).
 
 #### :floppy_disk: Change
 
