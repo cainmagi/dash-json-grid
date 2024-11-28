@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 """
-Usage
-=====
+Editor
+======
 @ Dash JSON Grid Viewer
 
 Author
@@ -11,9 +11,10 @@ cainmagi@gmail.com
 
 Description
 -----------
-A demo for the project. Run the following command to view the performance:
+A demo for making a JSON editor with `dash-json-grid`, run the following command to
+see the performance.
 ``` shell
-python usage.py
+python example/editor.py
 ```
 """
 
@@ -236,7 +237,7 @@ def configure_current_editor_data(route: djg.mixins.Route, data: Any):
 
     try:
         sel_data = djg.DashJsonGrid.get_data_by_route(data, route)
-    except (KeyError, IndexError):
+    except (KeyError, IndexError):  # Select an undefined cell.
         return ""
 
     selected_data = {"selected_data": sel_data}
@@ -268,4 +269,4 @@ if __name__ == "__main__":
             s_socket.close()
         return ip_value
 
-    app.run(host=get_ip(), port="8080", debug=False)
+    app.run(host=get_ip(), port="8080", debug=True)
