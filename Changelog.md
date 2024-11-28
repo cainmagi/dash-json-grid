@@ -18,6 +18,7 @@
 #### :floppy_disk: Change
 
 1. Bump `Yarn` version from `4.5.2` to `4.5.3`.
+2. Update the security policy to match the current version.
 
 ### 0.4.3 @ 11/22/2024
 
