@@ -6,7 +6,13 @@
 
 ### 0.5.0 @ 11/27/2024
 
+#### :mega: New
+
 1. Add an example folder showing the usage with other vendor packages.
+
+#### :floppy_disk: Change
+
+1. Bump `Yarn` version from `4.5.2` to `4.5.3`.
 
 ### 0.4.3 @ 11/22/2024
 
