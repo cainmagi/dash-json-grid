@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.5.0 @ 11/29/2024
+
+#### :wrench: Fix
+
+1. Fix: Correct the version numbers of the legacy document `v0.4.x`.
+
 ### 0.5.0 @ 11/27/2024
 
 #### :mega: New
@@ -12,7 +18,7 @@
 
 #### :wrench: Fix
 
-1. Switch from the hook `useDocsPreferredVersion` to `useDocsVersion`. This change fix the issue caused on the change of the browser navigation.
+1. Fix: Switch from the hook `useDocsPreferredVersion` to `useDocsVersion`. This change fix the issue caused on the change of the browser navigation.
 
 #### :floppy_disk: Change
 
