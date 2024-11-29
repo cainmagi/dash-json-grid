@@ -11,7 +11,8 @@ import octInfo16 from "@iconify-icons/octicon/info-16";
 import octLogoGist16 from "@iconify-icons/octicon/logo-gist-16";
 import IconExternalLink from "@theme/Icon/ExternalLink";
 
-import {repoURL} from "@site/src/envs/variables";
+import IconLink from "@site/src/components/IconLink";
+import {repoURL, rootURL} from "@site/src/envs/variables";
 
 # Install the Python package
 
@@ -29,10 +30,11 @@ Specify the optional dependencies to enable more features:
 pip install dash-json-grid[option1,option2...]
 ```
 
-| Option | <center>Supports</center>                                                                                               |
-| :----: | :---------------------------------------------------------------------------------------------------------------------- |
-| `test` | Install the dependencies related to `pytest`. These dependencies are not used by the package but used by the unittests. |
-| `dev`  | Install the developer's dependencies. These dependencies may be used for building the package.                          |
+|  Option   | <center>Supports</center>                                                                                                                                                         |
+| :-------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  `test`   | Install the dependencies related to `pytest`. These dependencies are not used by the package but used by the unittests.                                                           |
+| `example` | Install the extra depedencies for running the demos in the <IconLink text="examples" href={rootURL("examples")}/>. These packages are used by demos but not used by this project. |
+|   `dev`   | Install the developer's dependencies. These dependencies may be used for building the package.                                                                                    |
 
 ## Install the GitHub version
 
@@ -120,6 +122,6 @@ pass the tests, please
 [link-git]: https://git-scm.com/downloads
 [link-nodejs]: https://nodejs.org/en/download/package-manager
 [link-yarn]: https://yarnpkg.com/getting-started/install
-[link-chrome]:https://www.google.com/chrome/dr/download
-[link-chromium]:https://www.chromium.org/getting-involved/download-chromium
-[link-dash-duo]:https://dash.plotly.com/testing
+[link-chrome]: https://www.google.com/chrome/dr/download
+[link-chromium]: https://www.chromium.org/getting-involved/download-chromium
+[link-dash-duo]: https://dash.plotly.com/testing

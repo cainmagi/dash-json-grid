@@ -11,7 +11,8 @@ import octInfo16 from "@iconify-icons/octicon/info-16";
 import octLogoGist16 from "@iconify-icons/octicon/logo-gist-16";
 import IconExternalLink from "@theme/Icon/ExternalLink";
 
-import {repoURL} from "@site/src/envs/variables";
+import IconLink from "@site/src/components/IconLink";
+import {repoURL, rootURL} from "@site/src/envs/variables";
 
 # 安装本项目的 Python 包
 
@@ -29,10 +30,11 @@ pip install dash-json-grid
 pip install dash-json-grid[option1,option2...]
 ```
 
-| Option | <center>Supports</center>                                                                                              |
-| :----: | :--------------------------------------------------------------------------------------------------------------------- |
-| `test` | 安装用于进行[`pytest`<IconExternalLink/>][link-pytest]测试的依赖项。这些依赖项只用于单元测试，不用于提供任何实际功能。 |
-| `dev`  | 安装开发者依赖项。构建模块包的时候才有可能需要这些依赖项。                                                             |
+|  Option   | <center>Supports</center>                                                                                                               |
+| :-------: | :-------------------------------------------------------------------------------------------------------------------------------------- |
+|  `test`   | 安装用于进行[`pytest`<IconExternalLink/>][link-pytest]测试的依赖项。这些依赖项只用于单元测试，不用于提供任何实际功能。                  |
+| `example` | 安装用于运行位于<IconLink text="examples （范例）" href={rootURL("examples")}/>目录下的范例的依赖项。其只用于范例，而未用于本项目自身。 |
+|   `dev`   | 安装开发者依赖项。构建模块包的时候才有可能需要这些依赖项。                                                                              |
 
 ## 安装GitHub版本 {#install-the-github-version}
 
