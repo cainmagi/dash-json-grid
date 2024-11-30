@@ -10,6 +10,7 @@
 
 1. Fix: Correct the version numbers of the legacy document `v0.4.x`.
 2. Fix: Add the missing explanations for the new optional dependency collection `example`.
+3. Fix: The component `IconLink` should be replaced by `IconLinkInline` in `/docs/install`.
 
 ### 0.5.0 @ 11/27/2024
 
