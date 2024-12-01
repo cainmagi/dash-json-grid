@@ -12,6 +12,7 @@
 2. Fix: Add the broken link `dash-pmcallback` for the page `/docs/apis/DashJsonGrid`.
 3. Fix: Add the missing translation for the table head in `/docs/install`.
 4. Fix: Correct the punctuations in the page `/docs/apis/DashJsonGrid`.
+5. Fix: Correct the icons in the page `/docs/apis/DashJsonGrid`.
 
 ### 0.5.0 @ 11/29/2024
 
