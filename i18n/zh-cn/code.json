@@ -382,6 +382,10 @@
     "message": "查看所有作者",
     "description": "The label of the link targeting the blog authors page"
   },
+  "theme.blog.author.noPosts": {
+    "message": "该作者尚未发布任何内容。",
+    "description": "The text for authors with 0 blog post"
+  },
   "theme.contentVisibility.unlistedBanner.title": {
     "message": "未列出页",
     "description": "The unlisted content banner title"

@@ -4,6 +4,12 @@
 
 ## CHANGELOG
 
+### 0.5.0 @ 11/30/2024
+
+#### :wrench: Fix
+
+1. Fix: Add more translations for the new docusaurus version `3.6.3`.
+
 ### 0.5.0 @ 11/29/2024
 
 #### :wrench: Fix
