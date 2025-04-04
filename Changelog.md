@@ -10,6 +10,7 @@
 
 1. Bump the `docusaurus` version from `3.6.3` to `3.7.0`.
 2. Bump the `yarn` version from `4.5.2` to `4.8.1`.
+3. Update the `yarn` lock file.
 
 ### 0.5.0 @ 11/30/2024
 
