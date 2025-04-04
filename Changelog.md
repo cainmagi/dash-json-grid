@@ -4,6 +4,13 @@
 
 ## CHANGELOG
 
+### 0.5.0 @ 04/04/2025
+
+#### :floppy_disk: Change
+
+1. Bump the `docusaurus` version from `3.6.3` to `3.7.0`.
+2. Bump the `yarn` version from `4.5.2` to `4.8.1`.
+
 ### 0.5.0 @ 11/30/2024
 
 #### :wrench: Fix
