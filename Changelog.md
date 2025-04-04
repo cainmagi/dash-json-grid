@@ -6,6 +6,10 @@
 
 ### 0.5.0 @ 04/04/2025
 
+#### :mega: New
+
+1. Configure DocSearch and GTag.
+
 #### :floppy_disk: Change
 
 1. Bump the `docusaurus` version from `3.6.3` to `3.7.0`.
